@@ -10,11 +10,13 @@ import Foundation
 import AppKit
 
 internal class MacOSPlatform: Platform {
+    // MARK: Platform protocol
     internal func startApp(with game: Game) {
         let app = PixlrApplication.shared as! PixlrApplication
         let delegate = PixlrAppDelegate()
         
         app.createMainMenu()
+        app.createMainWindow(title: self.appName)
         
         app.delegate = delegate
         app.run()

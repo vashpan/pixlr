@@ -54,4 +54,19 @@ internal class PixlrApplication: NSApplication {
         self.addToMainMenu(title: "Window", menu: windowMenu)
         self.windowsMenu = windowMenu
     }
+    
+    // MARK: Creating window
+    internal func createMainWindow(title: String) {
+        // FIXME: Center & load according to config, including fullscreen
+        let size = CGSize(width: 640.0, height: 480.0)
+        let position = CGPoint(x: 100.0, y: 100.0)
+        let rect = NSRect(origin: position, size: size)
+        
+        let view = NSView(frame: rect)
+        
+        let window = NSWindow(contentRect: rect, styleMask: [.titled, .closable, .miniaturizable, .resizable], backing: .buffered, defer: true)
+        window.title = title
+        window.contentView = view
+        window.makeKeyAndOrderFront(nil)
+    }
 }
