@@ -9,6 +9,9 @@
 import Foundation
 
 internal protocol Platform {
-    // MARK: Handle app lifecycle
+    // MARK: App lifecycle
     func startApp(with game: Game)
+    
+    // MARK: Informations & configuration
+    var appName: String {get}
 }

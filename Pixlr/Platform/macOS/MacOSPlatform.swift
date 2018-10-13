@@ -17,6 +17,25 @@ internal class MacOSPlatform: Platform {
         app.delegate = delegate
         app.run()
     }
+    
+    internal var appName: String {
+        var result: String? = nil
+        
+        // first bundle display name
+        result = Bundle.main.object(forInfoDictionaryKey: "CFBundleDisplayName") as? String
+        
+        // bundle name
+        if result == nil {
+            result = Bundle.main.object(forInfoDictionaryKey: "CFBundleName") as? String
+        }
+        
+        // process name
+        if result == nil {
+            result = ProcessInfo.processInfo.processName
+        }
+        
+        return result ?? ""
+    }
 }
 
 internal extension Pixlr {
