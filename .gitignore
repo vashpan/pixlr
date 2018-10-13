@@ -1,0 +1,13 @@
+# macOS noise
+.DS_Store
+profile
+
+# XCode noise
+*.pbxuser
+*.mode1v3
+*.mode2v3
+
+*.xcodeproj/xcuserdata/*
+*.xcodeproj/project.xcworkspace/*
+*.xcuserstate
+**/xcschemes/*

@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		71375093216FD7E000AE9F75 /* Pixlr.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71375092216FD7E000AE9F75 /* Pixlr.swift */; };
+		715FECD321713BEE009AE9B1 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715FECD221713BEE009AE9B1 /* Game.swift */; };
+		715FECD721713D6E009AE9B1 /* PixlrAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715FECD621713D6E009AE9B1 /* PixlrAppDelegate.swift */; };
+		715FECE521714A8F009AE9B1 /* Platform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715FECE421714A8F009AE9B1 /* Platform.swift */; };
+		715FECE721714B12009AE9B1 /* MacOSPlatform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715FECE621714B12009AE9B1 /* MacOSPlatform.swift */; };
+		715FECED21720797009AE9B1 /* PixlrApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715FECEC21720797009AE9B1 /* PixlrApplication.swift */; };
 		7189BCAC216E8BFC0078034A /* Pixlr.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7189BCA2216E8BFC0078034A /* Pixlr.framework */; };
 		7189BCB1216E8BFC0078034A /* PixlrTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7189BCB0216E8BFC0078034A /* PixlrTests.swift */; };
 		7189BCB3216E8BFC0078034A /* Pixlr.h in Headers */ = {isa = PBXBuildFile; fileRef = 7189BCA5216E8BFC0078034A /* Pixlr.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -23,6 +29,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		71375092216FD7E000AE9F75 /* Pixlr.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pixlr.swift; sourceTree = "<group>"; };
+		715FECD221713BEE009AE9B1 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
+		715FECD621713D6E009AE9B1 /* PixlrAppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PixlrAppDelegate.swift; path = ../../../PixlrExample/PixlrAppDelegate.swift; sourceTree = "<group>"; };
+		715FECE421714A8F009AE9B1 /* Platform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Platform.swift; sourceTree = "<group>"; };
+		715FECE621714B12009AE9B1 /* MacOSPlatform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacOSPlatform.swift; sourceTree = "<group>"; };
+		715FECEC21720797009AE9B1 /* PixlrApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PixlrApplication.swift; sourceTree = "<group>"; };
 		7189BCA2216E8BFC0078034A /* Pixlr.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pixlr.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7189BCA5216E8BFC0078034A /* Pixlr.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Pixlr.h; sourceTree = "<group>"; };
 		7189BCA6216E8BFC0078034A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -50,6 +62,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		715FECD421713D59009AE9B1 /* Platform */ = {
+			isa = PBXGroup;
+			children = (
+				715FECD521713D64009AE9B1 /* macOS */,
+				715FECE421714A8F009AE9B1 /* Platform.swift */,
+			);
+			path = Platform;
+			sourceTree = "<group>";
+		};
+		715FECD521713D64009AE9B1 /* macOS */ = {
+			isa = PBXGroup;
+			children = (
+				715FECEC21720797009AE9B1 /* PixlrApplication.swift */,
+				715FECD621713D6E009AE9B1 /* PixlrAppDelegate.swift */,
+				715FECE621714B12009AE9B1 /* MacOSPlatform.swift */,
+			);
+			path = macOS;
+			sourceTree = "<group>";
+		};
+		715FECD821713D7E009AE9B1 /* Renderer */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Renderer;
+			sourceTree = "<group>";
+		};
 		7189BC98216E8BFC0078034A = {
 			isa = PBXGroup;
 			children = (
@@ -71,10 +109,15 @@
 		7189BCA4216E8BFC0078034A /* Pixlr */ = {
 			isa = PBXGroup;
 			children = (
+				715FECD821713D7E009AE9B1 /* Renderer */,
+				715FECD421713D59009AE9B1 /* Platform */,
+				71375092216FD7E000AE9F75 /* Pixlr.swift */,
+				715FECD221713BEE009AE9B1 /* Game.swift */,
 				7189BCA5216E8BFC0078034A /* Pixlr.h */,
 				7189BCA6216E8BFC0078034A /* Info.plist */,
 			);
-			path = Pixlr;
+			name = Pixlr;
+			path = ../../Pixlr;
 			sourceTree = "<group>";
 		};
 		7189BCAF216E8BFC0078034A /* PixlrTests */ = {
@@ -83,7 +126,8 @@
 				7189BCB0216E8BFC0078034A /* PixlrTests.swift */,
 				7189BCB2216E8BFC0078034A /* Info.plist */,
 			);
-			path = PixlrTests;
+			name = PixlrTests;
+			path = ../../PixlrTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -148,6 +192,7 @@
 				TargetAttributes = {
 					7189BCA1216E8BFC0078034A = {
 						CreatedOnToolsVersion = 10.0;
+						LastSwiftMigration = 1000;
 					};
 					7189BCAA216E8BFC0078034A = {
 						CreatedOnToolsVersion = 10.0;
@@ -194,6 +239,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				715FECED21720797009AE9B1 /* PixlrApplication.swift in Sources */,
+				715FECD721713D6E009AE9B1 /* PixlrAppDelegate.swift in Sources */,
+				71375093216FD7E000AE9F75 /* Pixlr.swift in Sources */,
+				715FECE721714B12009AE9B1 /* MacOSPlatform.swift in Sources */,
+				715FECE521714A8F009AE9B1 /* Platform.swift in Sources */,
+				715FECD321713BEE009AE9B1 /* Game.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -340,6 +391,7 @@
 		7189BCB7216E8BFC0078034A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -349,7 +401,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_VERSION = A;
-				INFOPLIST_FILE = Pixlr/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/../../Pixlr/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -359,6 +411,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.oneminutegames.Pixlr;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
@@ -366,6 +419,7 @@
 		7189BCB8216E8BFC0078034A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -375,7 +429,7 @@
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				FRAMEWORK_VERSION = A;
-				INFOPLIST_FILE = Pixlr/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/../../Pixlr/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -392,6 +446,7 @@
 		7189BCBA216E8BFC0078034A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 3DS5SGYDG6;
@@ -410,6 +465,7 @@
 		7189BCBB216E8BFC0078034A /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 3DS5SGYDG6;
