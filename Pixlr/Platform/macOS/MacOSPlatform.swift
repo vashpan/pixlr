@@ -11,8 +11,10 @@ import AppKit
 
 internal class MacOSPlatform: Platform {
     internal func startApp(with game: Game) {
-        let app = PixlrApplication.shared
+        let app = PixlrApplication.shared as! PixlrApplication
         let delegate = PixlrAppDelegate()
+        
+        app.createMainMenu()
         
         app.delegate = delegate
         app.run()
