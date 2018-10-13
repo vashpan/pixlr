@@ -9,8 +9,15 @@
 import Cocoa
 
 internal class PixlrAppDelegate: NSObject, NSApplicationDelegate {
+    private var window: NSWindow!
+    
     public func applicationDidFinishLaunching(_ aNotification: Notification) {
+        self.window = NSApp.mainWindow
         
+        // setup our view controller, depending on renderer
+        // FIXME: Get renderer from config
+        let metalViewController = MetalViewController()
+        self.window.contentViewController = metalViewController
     }
 
     public func applicationWillTerminate(_ aNotification: Notification) {

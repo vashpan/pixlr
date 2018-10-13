@@ -13,6 +13,7 @@
 		715FECE521714A8F009AE9B1 /* Platform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715FECE421714A8F009AE9B1 /* Platform.swift */; };
 		715FECE721714B12009AE9B1 /* MacOSPlatform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715FECE621714B12009AE9B1 /* MacOSPlatform.swift */; };
 		715FECED21720797009AE9B1 /* PixlrApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715FECEC21720797009AE9B1 /* PixlrApplication.swift */; };
+		715FED1221728E6B009AE9B1 /* MetalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715FED1121728E6B009AE9B1 /* MetalViewController.swift */; };
 		7189BCAC216E8BFC0078034A /* Pixlr.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7189BCA2216E8BFC0078034A /* Pixlr.framework */; };
 		7189BCB1216E8BFC0078034A /* PixlrTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7189BCB0216E8BFC0078034A /* PixlrTests.swift */; };
 		7189BCB3216E8BFC0078034A /* Pixlr.h in Headers */ = {isa = PBXBuildFile; fileRef = 7189BCA5216E8BFC0078034A /* Pixlr.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -35,6 +36,7 @@
 		715FECE421714A8F009AE9B1 /* Platform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Platform.swift; sourceTree = "<group>"; };
 		715FECE621714B12009AE9B1 /* MacOSPlatform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacOSPlatform.swift; sourceTree = "<group>"; };
 		715FECEC21720797009AE9B1 /* PixlrApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PixlrApplication.swift; sourceTree = "<group>"; };
+		715FED1121728E6B009AE9B1 /* MetalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetalViewController.swift; sourceTree = "<group>"; };
 		7189BCA2216E8BFC0078034A /* Pixlr.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pixlr.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7189BCA5216E8BFC0078034A /* Pixlr.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Pixlr.h; sourceTree = "<group>"; };
 		7189BCA6216E8BFC0078034A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -84,8 +86,17 @@
 		715FECD821713D7E009AE9B1 /* Renderer */ = {
 			isa = PBXGroup;
 			children = (
+				715FED1021728E18009AE9B1 /* Metal */,
 			);
 			path = Renderer;
+			sourceTree = "<group>";
+		};
+		715FED1021728E18009AE9B1 /* Metal */ = {
+			isa = PBXGroup;
+			children = (
+				715FED1121728E6B009AE9B1 /* MetalViewController.swift */,
+			);
+			path = Metal;
 			sourceTree = "<group>";
 		};
 		7189BC98216E8BFC0078034A = {
@@ -244,6 +255,7 @@
 				71375093216FD7E000AE9F75 /* Pixlr.swift in Sources */,
 				715FECE721714B12009AE9B1 /* MacOSPlatform.swift in Sources */,
 				715FECE521714A8F009AE9B1 /* Platform.swift in Sources */,
+				715FED1221728E6B009AE9B1 /* MetalViewController.swift in Sources */,
 				715FECD321713BEE009AE9B1 /* Game.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
