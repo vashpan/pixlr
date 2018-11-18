@@ -29,7 +29,7 @@ internal class MetalViewController: NSViewController {
         }
         
         guard let defaultMetalDevice = MTLCreateSystemDefaultDevice() else {
-            print("Metal is not supported!")
+            Log.graphics.error("Metal is not supported!")
             return
         }
         
