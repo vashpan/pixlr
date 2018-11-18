@@ -19,6 +19,11 @@
 		7189BCB3216E8BFC0078034A /* Pixlr.h in Headers */ = {isa = PBXBuildFile; fileRef = 7189BCA5216E8BFC0078034A /* Pixlr.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		71CD213321A1A6ED0082E5B7 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71CD213221A1A6ED0082E5B7 /* Logger.swift */; };
 		71CD213521A1AC000082E5B7 /* MetalRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71CD213421A1AC000082E5B7 /* MetalRenderer.swift */; };
+		71CD213821A1BB160082E5B7 /* Graphics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71CD213721A1BB160082E5B7 /* Graphics.swift */; };
+		71CD213A21A1C0A20082E5B7 /* Point.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71CD213921A1C0A20082E5B7 /* Point.swift */; };
+		71CD213C21A1C49A0082E5B7 /* Pixel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71CD213B21A1C49A0082E5B7 /* Pixel.swift */; };
+		71CD213E21A1C4C50082E5B7 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71CD213D21A1C4C50082E5B7 /* Color.swift */; };
+		71CD214021A1CED80082E5B7 /* Renderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71CD213F21A1CED80082E5B7 /* Renderer.swift */; };
 		71CD214221A1E3FD0082E5B7 /* Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71CD214121A1E3FC0082E5B7 /* Size.swift */; };
 		71CD214421A20EBD0082E5B7 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71CD214321A20EBD0082E5B7 /* Config.swift */; };
 /* End PBXBuildFile section */
@@ -49,6 +54,11 @@
 		7189BCB2216E8BFC0078034A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		71CD213221A1A6ED0082E5B7 /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		71CD213421A1AC000082E5B7 /* MetalRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetalRenderer.swift; sourceTree = "<group>"; };
+		71CD213721A1BB160082E5B7 /* Graphics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Graphics.swift; sourceTree = "<group>"; };
+		71CD213921A1C0A20082E5B7 /* Point.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Point.swift; sourceTree = "<group>"; };
+		71CD213B21A1C49A0082E5B7 /* Pixel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pixel.swift; sourceTree = "<group>"; };
+		71CD213D21A1C4C50082E5B7 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		71CD213F21A1CED80082E5B7 /* Renderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Renderer.swift; sourceTree = "<group>"; };
 		71CD214121A1E3FC0082E5B7 /* Size.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Size.swift; sourceTree = "<group>"; };
 		71CD214321A20EBD0082E5B7 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -131,6 +141,7 @@
 			children = (
 				715FECD821713D7E009AE9B1 /* Renderer */,
 				715FECD421713D59009AE9B1 /* Platform */,
+				71CD213621A1BAFD0082E5B7 /* Graphics */,
 				71CD213121A1A6C30082E5B7 /* Utilities */,
 				71375092216FD7E000AE9F75 /* Pixlr.swift */,
 				71CD214321A20EBD0082E5B7 /* Config.swift */,
@@ -158,6 +169,19 @@
 				71CD213221A1A6ED0082E5B7 /* Logger.swift */,
 			);
 			path = Utilities;
+			sourceTree = "<group>";
+		};
+		71CD213621A1BAFD0082E5B7 /* Graphics */ = {
+			isa = PBXGroup;
+			children = (
+				71CD213721A1BB160082E5B7 /* Graphics.swift */,
+				71CD213F21A1CED80082E5B7 /* Renderer.swift */,
+				71CD213921A1C0A20082E5B7 /* Point.swift */,
+				71CD214121A1E3FC0082E5B7 /* Size.swift */,
+				71CD213D21A1C4C50082E5B7 /* Color.swift */,
+				71CD213B21A1C49A0082E5B7 /* Pixel.swift */,
+			);
+			path = Graphics;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -272,10 +296,15 @@
 				715FECED21720797009AE9B1 /* PixlrApplication.swift in Sources */,
 				71CD214221A1E3FD0082E5B7 /* Size.swift in Sources */,
 				715FECD721713D6E009AE9B1 /* PixlrAppDelegate.swift in Sources */,
+				71CD214021A1CED80082E5B7 /* Renderer.swift in Sources */,
 				71375093216FD7E000AE9F75 /* Pixlr.swift in Sources */,
 				715FECE721714B12009AE9B1 /* MacOSPlatform.swift in Sources */,
+				71CD213E21A1C4C50082E5B7 /* Color.swift in Sources */,
+				71CD213C21A1C49A0082E5B7 /* Pixel.swift in Sources */,
 				715FECE521714A8F009AE9B1 /* Platform.swift in Sources */,
 				71CD213521A1AC000082E5B7 /* MetalRenderer.swift in Sources */,
+				71CD213821A1BB160082E5B7 /* Graphics.swift in Sources */,
+				71CD213A21A1C0A20082E5B7 /* Point.swift in Sources */,
 				715FED1221728E6B009AE9B1 /* MetalViewController.swift in Sources */,
 				71CD214421A20EBD0082E5B7 /* Config.swift in Sources */,
 				715FECD321713BEE009AE9B1 /* Game.swift in Sources */,

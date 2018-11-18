@@ -9,6 +9,7 @@
 import Foundation
 import AppKit
 
+// MARK: - macOS platform
 internal class MacOSPlatform: Platform {
     // MARK: Platform protocol
     internal func startApp(with game: Game) {
@@ -42,6 +43,8 @@ internal class MacOSPlatform: Platform {
     }
 }
 
+// MARK: - Pixlr extension for macOS platform
 internal extension Pixlr {
     internal static var currentPlatform: Platform = MacOSPlatform()
+    internal static var renderer: Renderer = MetalRenderer()
 }
