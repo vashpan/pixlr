@@ -58,7 +58,8 @@ internal class PixlrApplication: NSApplication {
     // MARK: Creating window
     internal func createMainWindow(title: String) {
         // FIXME: Center & load according to config, including fullscreen
-        let size = CGSize(width: 640.0, height: 480.0)
+        let pixrlScreenSize = Pixlr.config.screenSize
+        let size = CGSize(width: CGFloat(pixrlScreenSize.width * 2), height: CGFloat(pixrlScreenSize.height * 2))
         let position = CGPoint(x: 100.0, y: 100.0)
         let rect = NSRect(origin: position, size: size)
         

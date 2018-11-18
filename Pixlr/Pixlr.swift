@@ -31,7 +31,13 @@ public class Log {
 
 // MARK: - Main Pixlr framework class
 public class Pixlr {
-    public static func run(game: Game) {
+    // MARK: Properties
+    public private(set) static var config: Config!
+    
+    // MARK: Starting game
+    public static func run(game: Game, with config: Config = Config()) {
+        Pixlr.config = config
+        
         Pixlr.currentPlatform.startApp(with: game)
     }
 }
