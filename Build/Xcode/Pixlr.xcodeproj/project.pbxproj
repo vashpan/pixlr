@@ -18,6 +18,7 @@
 		7189BCB1216E8BFC0078034A /* PixlrTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7189BCB0216E8BFC0078034A /* PixlrTests.swift */; };
 		7189BCB3216E8BFC0078034A /* Pixlr.h in Headers */ = {isa = PBXBuildFile; fileRef = 7189BCA5216E8BFC0078034A /* Pixlr.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		71CD213321A1A6ED0082E5B7 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71CD213221A1A6ED0082E5B7 /* Logger.swift */; };
+		71CD213521A1AC000082E5B7 /* MetalRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71CD213421A1AC000082E5B7 /* MetalRenderer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +46,7 @@
 		7189BCB0216E8BFC0078034A /* PixlrTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PixlrTests.swift; sourceTree = "<group>"; };
 		7189BCB2216E8BFC0078034A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		71CD213221A1A6ED0082E5B7 /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
+		71CD213421A1AC000082E5B7 /* MetalRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetalRenderer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +99,7 @@
 			isa = PBXGroup;
 			children = (
 				715FED1121728E6B009AE9B1 /* MetalViewController.swift */,
+				71CD213421A1AC000082E5B7 /* MetalRenderer.swift */,
 			);
 			path = Metal;
 			sourceTree = "<group>";
@@ -266,6 +269,7 @@
 				71375093216FD7E000AE9F75 /* Pixlr.swift in Sources */,
 				715FECE721714B12009AE9B1 /* MacOSPlatform.swift in Sources */,
 				715FECE521714A8F009AE9B1 /* Platform.swift in Sources */,
+				71CD213521A1AC000082E5B7 /* MetalRenderer.swift in Sources */,
 				715FED1221728E6B009AE9B1 /* MetalViewController.swift in Sources */,
 				715FECD321713BEE009AE9B1 /* Game.swift in Sources */,
 				71CD213321A1A6ED0082E5B7 /* Logger.swift in Sources */,

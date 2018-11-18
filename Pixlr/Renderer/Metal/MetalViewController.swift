@@ -9,9 +9,9 @@
 import Cocoa
 import MetalKit
 
-// MARK: MetalViewController
 internal class MetalViewController: NSViewController {
     // MARK: Properties
+    private var renderer: MetalRenderer!
     private var metalView: MTKView!
     
     // MARK: Initialization & overrides
@@ -36,23 +36,18 @@ internal class MetalViewController: NSViewController {
         let frame = NSRect(origin: .zero, size: mainWindow.frame.size)
         self.metalView = MTKView(frame: frame, device: defaultMetalDevice)
         
+        guard let renderer = MetalRenderer(metalKitView: self.metalView) else {
+            Log.graphics.error("Cannot create Metal renderer!")
+            return
+        }
+        
         self.view = self.metalView
+        self.renderer = renderer
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.metalView.delegate = self
-    }
-}
-
-// MARK: - MTKViewDelegate implementation
-extension MetalViewController: MTKViewDelegate {
-    func mtkView(_ view: MTKView, drawableSizeWillChange size: CGSize) {
-        
-    }
-    
-    func draw(in view: MTKView) {
-
+        self.metalView.delegate = self.renderer
     }
 }

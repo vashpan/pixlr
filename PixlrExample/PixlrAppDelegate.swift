@@ -15,7 +15,7 @@ internal class PixlrAppDelegate: NSObject, NSApplicationDelegate {
         self.window = NSApp.mainWindow
         
         // setup our view controller, depending on renderer
-        // FIXME: Get renderer from config
+        // in the future we could get renderers from config
         let metalViewController = MetalViewController()
         self.window.contentViewController = metalViewController
     }
