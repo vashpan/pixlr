@@ -26,6 +26,7 @@
 		71CD214021A1CED80082E5B7 /* Renderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71CD213F21A1CED80082E5B7 /* Renderer.swift */; };
 		71CD214221A1E3FD0082E5B7 /* Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71CD214121A1E3FC0082E5B7 /* Size.swift */; };
 		71CD214421A20EBD0082E5B7 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71CD214321A20EBD0082E5B7 /* Config.swift */; };
+		71CD214721A2162D0082E5B7 /* Size+macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71CD214621A2162D0082E5B7 /* Size+macOS.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +62,7 @@
 		71CD213F21A1CED80082E5B7 /* Renderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Renderer.swift; sourceTree = "<group>"; };
 		71CD214121A1E3FC0082E5B7 /* Size.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Size.swift; sourceTree = "<group>"; };
 		71CD214321A20EBD0082E5B7 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
+		71CD214621A2162D0082E5B7 /* Size+macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Size+macOS.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -94,6 +96,7 @@
 		715FECD521713D64009AE9B1 /* macOS */ = {
 			isa = PBXGroup;
 			children = (
+				71CD214521A215FF0082E5B7 /* Helpers */,
 				715FECEC21720797009AE9B1 /* PixlrApplication.swift */,
 				715FECD621713D6E009AE9B1 /* PixlrAppDelegate.swift */,
 				715FECE621714B12009AE9B1 /* MacOSPlatform.swift */,
@@ -182,6 +185,14 @@
 				71CD213B21A1C49A0082E5B7 /* Pixel.swift */,
 			);
 			path = Graphics;
+			sourceTree = "<group>";
+		};
+		71CD214521A215FF0082E5B7 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				71CD214621A2162D0082E5B7 /* Size+macOS.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -298,6 +309,7 @@
 				715FECD721713D6E009AE9B1 /* PixlrAppDelegate.swift in Sources */,
 				71CD214021A1CED80082E5B7 /* Renderer.swift in Sources */,
 				71375093216FD7E000AE9F75 /* Pixlr.swift in Sources */,
+				71CD214721A2162D0082E5B7 /* Size+macOS.swift in Sources */,
 				715FECE721714B12009AE9B1 /* MacOSPlatform.swift in Sources */,
 				71CD213E21A1C4C50082E5B7 /* Color.swift in Sources */,
 				71CD213C21A1C49A0082E5B7 /* Pixel.swift in Sources */,
