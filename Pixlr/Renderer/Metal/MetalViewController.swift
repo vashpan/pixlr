@@ -56,10 +56,12 @@ internal class MetalViewController: NSViewController {
 // MARK: - MTKViewDelegate functions
 extension MetalViewController: MTKViewDelegate {
     func mtkView(_ view: MTKView, drawableSizeWillChange size: CGSize) {
-        
+        Pixlr.renderer.viewportWillChange(to: Size(cgSize: size))
     }
     
     func draw(in view: MTKView) {
-        
+        Pixlr.graphics.beginFrame()
+        Pixlr.game.draw(on: Pixlr.graphics)
+        Pixlr.graphics.endFrame()
     }
 }
