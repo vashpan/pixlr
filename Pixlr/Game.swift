@@ -9,6 +9,32 @@
 import Foundation
 
 open class Game: NSObject {
+    // MARK: Game lifecycle
+    open func start() {
+        
+    }
+    
+    open func onAppResume() {
+        
+    }
+    
+    open func onAppPause() {
+        
+    }
+    
+    // MARK: Drawing & updating
+    open func draw(on gfx: Graphics) {
+        
+    }
+    
+    open func update(dt: TimeInterval) {
+        
+    }
+    
+    // MARK: Input
+    
+    // FIXME: Add input handling
+    
     public override init() {
         
     }
