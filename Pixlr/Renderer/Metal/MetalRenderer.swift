@@ -12,20 +12,26 @@ import simd
 
 // MARK: Metal renderer
 internal class MetalRenderer: NSObject {
+    // MARK: Properties
+    internal var metalKitView: MTKView?
+    
     // MARK: Initialization
-    init?(metalKitView: MTKView) {
+}
+
+// MARK: Pixlr Renderer conformance
+extension MetalRenderer: Renderer {
+    func setupRenderer() {
+        guard let mtkView = self.metalKitView else {
+            Log.graphics.error("Metal renderer requires MTKView!")
+            return
+        }
+    }
+    
+    func viewportWillChange(to size: Size) {
+        
+    }
+    
+    func performDrawCommands(commands: [Graphics.DrawCommand]) {
         
     }
 }
-
-// MARK: - MTKViewDelegate functions
-extension MetalRenderer: MTKViewDelegate {
-    func mtkView(_ view: MTKView, drawableSizeWillChange size: CGSize) {
-        Log.graphics.info("Drawable size changed: \(size)")
-    }
-    
-    func draw(in view: MTKView) {
-        Log.graphics.info("Metal drawing here!")
-    }
-}
-

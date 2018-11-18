@@ -11,7 +11,6 @@ import MetalKit
 
 internal class MetalViewController: NSViewController {
     // MARK: Properties
-    private var renderer: MetalRenderer!
     private var metalView: MTKView!
     
     // MARK: Initialization & overrides
@@ -33,21 +32,34 @@ internal class MetalViewController: NSViewController {
             return
         }
         
-        let frame = NSRect(origin: .zero, size: mainWindow.frame.size)
-        self.metalView = MTKView(frame: frame, device: defaultMetalDevice)
-        
-        guard let renderer = MetalRenderer(metalKitView: self.metalView) else {
-            Log.graphics.error("Cannot create Metal renderer!")
+        guard let renderer = Pixlr.renderer as? MetalRenderer else {
+            Log.graphics.error("macOS platform can use only Metal renderer!")
             return
         }
         
+        let frame = NSRect(origin: .zero, size: mainWindow.frame.size)
+        self.metalView = MTKView(frame: frame, device: defaultMetalDevice)
+        
+        renderer.metalKitView = self.metalView
+        renderer.setupRenderer()
+        
         self.view = self.metalView
-        self.renderer = renderer
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.metalView.delegate = self.renderer
+        self.metalView.delegate = self
+    }
+}
+
+// MARK: - MTKViewDelegate functions
+extension MetalViewController: MTKViewDelegate {
+    func mtkView(_ view: MTKView, drawableSizeWillChange size: CGSize) {
+        
+    }
+    
+    func draw(in view: MTKView) {
+        
     }
 }
