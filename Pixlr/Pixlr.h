@@ -15,5 +15,5 @@ FOUNDATION_EXPORT double PixlrVersionNumber;
 FOUNDATION_EXPORT const unsigned char PixlrVersionString[];
 
 // In this header, you should import all the public headers of your framework using statements like #import <Pixlr/PublicHeader.h>
-
+#import <Pixlr/ShaderTypes.h>
 

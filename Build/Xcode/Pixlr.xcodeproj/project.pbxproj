@@ -27,6 +27,9 @@
 		71CD214221A1E3FD0082E5B7 /* Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71CD214121A1E3FC0082E5B7 /* Size.swift */; };
 		71CD214421A20EBD0082E5B7 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71CD214321A20EBD0082E5B7 /* Config.swift */; };
 		71CD214721A2162D0082E5B7 /* Size+macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71CD214621A2162D0082E5B7 /* Size+macOS.swift */; };
+		71CD214921A4B3D20082E5B7 /* ShaderTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = 71CD214821A4B3D20082E5B7 /* ShaderTypes.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		71CD214C21AB5B860082E5B7 /* FramebufferShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 71CD214A21AB5B860082E5B7 /* FramebufferShaders.metal */; };
+		71CD214D21AB5B860082E5B7 /* SpritesShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 71CD214B21AB5B860082E5B7 /* SpritesShaders.metal */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +66,9 @@
 		71CD214121A1E3FC0082E5B7 /* Size.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Size.swift; sourceTree = "<group>"; };
 		71CD214321A20EBD0082E5B7 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		71CD214621A2162D0082E5B7 /* Size+macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Size+macOS.swift"; sourceTree = "<group>"; };
+		71CD214821A4B3D20082E5B7 /* ShaderTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShaderTypes.h; sourceTree = "<group>"; };
+		71CD214A21AB5B860082E5B7 /* FramebufferShaders.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = FramebufferShaders.metal; sourceTree = "<group>"; };
+		71CD214B21AB5B860082E5B7 /* SpritesShaders.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = SpritesShaders.metal; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +124,9 @@
 			children = (
 				715FED1121728E6B009AE9B1 /* MetalViewController.swift */,
 				71CD213421A1AC000082E5B7 /* MetalRenderer.swift */,
+				71CD214821A4B3D20082E5B7 /* ShaderTypes.h */,
+				71CD214A21AB5B860082E5B7 /* FramebufferShaders.metal */,
+				71CD214B21AB5B860082E5B7 /* SpritesShaders.metal */,
 			);
 			path = Metal;
 			sourceTree = "<group>";
@@ -203,6 +212,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7189BCB3216E8BFC0078034A /* Pixlr.h in Headers */,
+				71CD214921A4B3D20082E5B7 /* ShaderTypes.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -306,8 +316,10 @@
 			files = (
 				715FECED21720797009AE9B1 /* PixlrApplication.swift in Sources */,
 				71CD214221A1E3FD0082E5B7 /* Size.swift in Sources */,
+				71CD214D21AB5B860082E5B7 /* SpritesShaders.metal in Sources */,
 				715FECD721713D6E009AE9B1 /* PixlrAppDelegate.swift in Sources */,
 				71CD214021A1CED80082E5B7 /* Renderer.swift in Sources */,
+				71CD214C21AB5B860082E5B7 /* FramebufferShaders.metal in Sources */,
 				71375093216FD7E000AE9F75 /* Pixlr.swift in Sources */,
 				71CD214721A2162D0082E5B7 /* Size+macOS.swift in Sources */,
 				715FECE721714B12009AE9B1 /* MacOSPlatform.swift in Sources */,
