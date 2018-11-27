@@ -46,5 +46,4 @@ internal class MacOSPlatform: Platform {
 // MARK: - Pixlr extension for macOS platform
 internal extension Pixlr {
     internal static var currentPlatform: Platform = MacOSPlatform()
-    internal static var renderer: Renderer = MetalRenderer()
 }

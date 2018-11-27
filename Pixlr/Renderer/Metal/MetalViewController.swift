@@ -13,8 +13,17 @@ internal class MetalViewController: NSViewController {
     // MARK: Properties
     private var metalView: MTKView!
     
+    private let currentGame: Game
+    private var graphics: Graphics!
+    private var renderer: MetalRenderer!
+    
+    private let targetGameScreenSize: Size
+    
     // MARK: Initialization & overrides
-    internal init() {
+    internal init(game: Game, targetGameScreenSize: Size) {
+        self.currentGame = game
+        self.targetGameScreenSize = targetGameScreenSize
+        
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -32,18 +41,19 @@ internal class MetalViewController: NSViewController {
             return
         }
         
-        guard let renderer = Pixlr.renderer as? MetalRenderer else {
-            Log.graphics.error("macOS platform can use only Metal renderer!")
+        let frame = NSRect(origin: .zero, size: mainWindow.frame.size)
+        self.metalView = MTKView(frame: frame, device: defaultMetalDevice)
+        self.view = self.metalView
+        
+        guard let newRenderer = MetalRenderer(metalKitView: self.metalView, targetGameScreenSize: self.targetGameScreenSize) else {
+            Log.graphics.error("Cannot create Metal renderer!")
             return
         }
         
-        let frame = NSRect(origin: .zero, size: mainWindow.frame.size)
-        self.metalView = MTKView(frame: frame, device: defaultMetalDevice)
+        self.renderer = newRenderer
+        self.graphics = Graphics(renderer: self.renderer, screenSize: self.targetGameScreenSize)
         
-        renderer.metalKitView = self.metalView
-        renderer.setupRenderer()
-        
-        self.view = self.metalView
+        self.mtkView(self.metalView, drawableSizeWillChange: self.metalView.drawableSize)
     }
     
     override func viewDidLoad() {
@@ -56,12 +66,12 @@ internal class MetalViewController: NSViewController {
 // MARK: - MTKViewDelegate functions
 extension MetalViewController: MTKViewDelegate {
     func mtkView(_ view: MTKView, drawableSizeWillChange size: CGSize) {
-        Pixlr.renderer.viewportWillChange(to: Size(cgSize: size))
+        self.renderer.viewportWillChange(to: Size(cgSize: size))
     }
     
     func draw(in view: MTKView) {
-        Pixlr.graphics.beginFrame()
-        Pixlr.game.draw(on: Pixlr.graphics)
-        Pixlr.graphics.endFrame()
+        self.graphics.beginFrame()
+        Pixlr.game.draw(on: self.graphics)
+        self.graphics.endFrame()
     }
 }

@@ -33,16 +33,12 @@ public class Log {
 public class Pixlr {
     // MARK: Properties
     internal private(set) static var game: Game!
-    
-    public private(set) static var graphics: Graphics!
     public private(set) static var config: Config!
     
     // MARK: Starting game
     public static func run(game: Game, with config: Config = Config()) {
-        Pixlr.game = game
-        
         Pixlr.config = config
-        Pixlr.graphics = Graphics(renderer: Pixlr.renderer, screenSize: config.screenSize)
+        Pixlr.game = game
         
         Pixlr.currentPlatform.startApp(with: game)
     }

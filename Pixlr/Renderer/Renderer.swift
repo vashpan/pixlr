@@ -9,8 +9,6 @@
 import Foundation
 
 internal protocol Renderer {
-    func setupRenderer()
-    
     func viewportWillChange(to size: Size)
     func performDrawCommands(commands: [Graphics.DrawCommand])
 }

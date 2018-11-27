@@ -16,7 +16,7 @@ internal class PixlrAppDelegate: NSObject, NSApplicationDelegate {
         
         // setup our view controller, depending on renderer
         // in the future we could get renderers from config
-        let metalViewController = MetalViewController()
+        let metalViewController = MetalViewController(game: Pixlr.game, targetGameScreenSize: Pixlr.config.screenSize)
         self.window.contentViewController = metalViewController
     }
 

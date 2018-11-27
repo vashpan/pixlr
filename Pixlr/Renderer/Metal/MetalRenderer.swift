@@ -16,17 +16,13 @@ internal class MetalRenderer: NSObject {
     internal var metalKitView: MTKView?
     
     // MARK: Initialization
-}
-
-// MARK: Pixlr Renderer conformance
-extension MetalRenderer: Renderer {
-    func setupRenderer() {
-        guard let mtkView = self.metalKitView else {
-            Log.graphics.error("Metal renderer requires MTKView!")
-            return
+    internal init?(metalKitView: MTKView, targetGameScreenSize: Size) {
         }
     }
     
+
+// MARK: Pixlr Renderer conformance
+extension MetalRenderer: Renderer {    
     func viewportWillChange(to size: Size) {
         
     }
