@@ -26,6 +26,8 @@ public class Log {
     
     public static let graphics = Logger(subsystem: "🎨", level: Log.logLevel)
     
+    public static let resources = Logger(subsystem: "💾", level: Log.logLevel)
+    
     public static let sound = Logger(subsystem: "🔊", level: Log.logLevel)
 }
 
