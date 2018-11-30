@@ -30,6 +30,10 @@
 		71CD214921A4B3D20082E5B7 /* ShaderTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = 71CD214821A4B3D20082E5B7 /* ShaderTypes.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		71CD214C21AB5B860082E5B7 /* FramebufferShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 71CD214A21AB5B860082E5B7 /* FramebufferShaders.metal */; };
 		71CD214D21AB5B860082E5B7 /* SpritesShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 71CD214B21AB5B860082E5B7 /* SpritesShaders.metal */; };
+		71CD215121B1A38A0082E5B7 /* Resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71CD215021B1A38A0082E5B7 /* Resources.swift */; };
+		71CD215321B1A4540082E5B7 /* SpritesSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71CD215221B1A4540082E5B7 /* SpritesSheet.swift */; };
+		71CD215521B1A5310082E5B7 /* Texture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71CD215421B1A5310082E5B7 /* Texture.swift */; };
+		71CD215721B1A8610082E5B7 /* Sprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71CD215621B1A8610082E5B7 /* Sprite.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +73,10 @@
 		71CD214821A4B3D20082E5B7 /* ShaderTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShaderTypes.h; sourceTree = "<group>"; };
 		71CD214A21AB5B860082E5B7 /* FramebufferShaders.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = FramebufferShaders.metal; sourceTree = "<group>"; };
 		71CD214B21AB5B860082E5B7 /* SpritesShaders.metal */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.metal; path = SpritesShaders.metal; sourceTree = "<group>"; };
+		71CD215021B1A38A0082E5B7 /* Resources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resources.swift; sourceTree = "<group>"; };
+		71CD215221B1A4540082E5B7 /* SpritesSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpritesSheet.swift; sourceTree = "<group>"; };
+		71CD215421B1A5310082E5B7 /* Texture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Texture.swift; sourceTree = "<group>"; };
+		71CD215621B1A8610082E5B7 /* Sprite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sprite.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,6 +162,7 @@
 			children = (
 				715FECD821713D7E009AE9B1 /* Renderer */,
 				715FECD421713D59009AE9B1 /* Platform */,
+				71CD214F21B1A36D0082E5B7 /* Resources */,
 				71CD213621A1BAFD0082E5B7 /* Graphics */,
 				71CD213121A1A6C30082E5B7 /* Utilities */,
 				71375092216FD7E000AE9F75 /* Pixlr.swift */,
@@ -188,10 +197,11 @@
 			isa = PBXGroup;
 			children = (
 				71CD213721A1BB160082E5B7 /* Graphics.swift */,
+				71CD215621B1A8610082E5B7 /* Sprite.swift */,
+				71CD213B21A1C49A0082E5B7 /* Pixel.swift */,
 				71CD213921A1C0A20082E5B7 /* Point.swift */,
 				71CD214121A1E3FC0082E5B7 /* Size.swift */,
 				71CD213D21A1C4C50082E5B7 /* Color.swift */,
-				71CD213B21A1C49A0082E5B7 /* Pixel.swift */,
 			);
 			path = Graphics;
 			sourceTree = "<group>";
@@ -202,6 +212,16 @@
 				71CD214621A2162D0082E5B7 /* Size+macOS.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		71CD214F21B1A36D0082E5B7 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				71CD215021B1A38A0082E5B7 /* Resources.swift */,
+				71CD215221B1A4540082E5B7 /* SpritesSheet.swift */,
+				71CD215421B1A5310082E5B7 /* Texture.swift */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -318,17 +338,21 @@
 				71CD214221A1E3FD0082E5B7 /* Size.swift in Sources */,
 				71CD214D21AB5B860082E5B7 /* SpritesShaders.metal in Sources */,
 				715FECD721713D6E009AE9B1 /* PixlrAppDelegate.swift in Sources */,
+				71CD215721B1A8610082E5B7 /* Sprite.swift in Sources */,
 				71CD214021A1CED80082E5B7 /* Renderer.swift in Sources */,
 				71CD214C21AB5B860082E5B7 /* FramebufferShaders.metal in Sources */,
 				71375093216FD7E000AE9F75 /* Pixlr.swift in Sources */,
 				71CD214721A2162D0082E5B7 /* Size+macOS.swift in Sources */,
 				715FECE721714B12009AE9B1 /* MacOSPlatform.swift in Sources */,
 				71CD213E21A1C4C50082E5B7 /* Color.swift in Sources */,
+				71CD215321B1A4540082E5B7 /* SpritesSheet.swift in Sources */,
 				71CD213C21A1C49A0082E5B7 /* Pixel.swift in Sources */,
 				715FECE521714A8F009AE9B1 /* Platform.swift in Sources */,
 				71CD213521A1AC000082E5B7 /* MetalRenderer.swift in Sources */,
+				71CD215121B1A38A0082E5B7 /* Resources.swift in Sources */,
 				71CD213821A1BB160082E5B7 /* Graphics.swift in Sources */,
 				71CD213A21A1C0A20082E5B7 /* Point.swift in Sources */,
+				71CD215521B1A5310082E5B7 /* Texture.swift in Sources */,
 				715FED1221728E6B009AE9B1 /* MetalViewController.swift in Sources */,
 				71CD214421A20EBD0082E5B7 /* Config.swift in Sources */,
 				715FECD321713BEE009AE9B1 /* Game.swift in Sources */,

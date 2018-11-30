@@ -9,21 +9,11 @@
 import Foundation
 
 // MARK: Helper types
-public typealias SpriteId = Int
 public typealias Angle = Float
 
 // MARK: - Graphics interface
 public class Graphics {
     // MARK: Types
-    internal struct Sprite {
-        internal let id: SpriteId
-        internal let scale: Float
-        internal let flip: Bool
-        internal let rotation: Angle
-        
-        // FIXME: Add support for sprite atlas and its UV
-    }
-    
     internal enum DrawCommand {
         case drawSprite(sprite: Sprite, point: Point)
         case drawPixels(pixels: [Pixel])
@@ -61,18 +51,19 @@ public class Graphics {
     }
     
     // MARK: Drawing
-    public func draw(sprite: SpriteId, x: Float, y: Float, scale: Float = 1.0, rotation: Angle = 0.0, flip: Bool = false) {
+    public func draw(sprite: SpriteId, from spriteSheet: SpriteSheetId, x: Float, y: Float, scale: Float = 1.0, rotation: Angle = 0.0, flip: Bool = false) {
         guard self.drawingPossible else {
             Log.graphics.warning("Drawing is not possible in this scope!")
             return
         }
         
-        let sprite = Sprite(id: sprite, scale: scale, flip: flip, rotation: rotation)
-        self.drawingCommands.append(.drawSprite(sprite: sprite, point: Point(x: x, y: y)))
+        if let sprite = Resources.shared.sprite(from: spriteSheet, id: sprite) {
+            self.drawingCommands.append(.drawSprite(sprite: sprite, point: Point(x: x, y: y)))
+        }
     }
     
-    public func draw(sprite: SpriteId, at position: Point, scale: Float = 1.0, rotation: Angle = 0.0, flip: Bool = false) {
-        self.draw(sprite: sprite, x: position.x, y: position.y, scale: scale, rotation: rotation, flip: flip)
+    public func draw(sprite: SpriteId, from spriteSheet: SpriteSheetId, at position: Point, scale: Float = 1.0, rotation: Angle = 0.0, flip: Bool = false) {
+        self.draw(sprite: sprite, from: spriteSheet, x: position.x, y: position.y, scale: scale, rotation: rotation, flip: flip)
     }
     
     public func draw(pixels: [Pixel]) {
