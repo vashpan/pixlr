@@ -197,7 +197,6 @@
 			isa = PBXGroup;
 			children = (
 				71CD213721A1BB160082E5B7 /* Graphics.swift */,
-				71CD215621B1A8610082E5B7 /* Sprite.swift */,
 				71CD213B21A1C49A0082E5B7 /* Pixel.swift */,
 				71CD213921A1C0A20082E5B7 /* Point.swift */,
 				71CD214121A1E3FC0082E5B7 /* Size.swift */,
@@ -219,6 +218,7 @@
 			children = (
 				71CD215021B1A38A0082E5B7 /* Resources.swift */,
 				71CD215221B1A4540082E5B7 /* SpritesSheet.swift */,
+				71CD215621B1A8610082E5B7 /* Sprite.swift */,
 				71CD215421B1A5310082E5B7 /* Texture.swift */,
 			);
 			path = Resources;
