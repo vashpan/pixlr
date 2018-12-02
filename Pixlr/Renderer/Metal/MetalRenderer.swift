@@ -73,7 +73,7 @@ internal class MetalRenderer: NSObject {
         self.textureLoader = MTKTextureLoader(device: device)
         
         // load all needed shader files with .metal extension and get some shaders
-        let defaultLibrary = self.device.makeDefaultLibrary()
+        let defaultLibrary = try? self.device.makeDefaultLibrary(bundle: Bundle(for: MetalRenderer.classForCoder()))
         let targetPixelFormat = metalKitView.colorPixelFormat
         
         // sprites drawing pipeline
