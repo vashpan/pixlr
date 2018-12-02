@@ -227,6 +227,7 @@ internal class MetalRenderer: NSObject {
     
     // MARK: Rendering
     private func commandsRenderPhase(commands: [Graphics.DrawCommand], commandBuffer: MTLCommandBuffer, in view: MTKView) {
+        // FIXME: Replace this with sorting commands due to possible state changes
         let metalSpritesToDraw: [MetalSprite] = commands.compactMap {
             switch $0 {
                 case .drawSprite(let sprite, let position):
