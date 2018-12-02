@@ -44,8 +44,8 @@ internal class MetalRenderer: NSObject {
     private var spritesPipeline: MTLRenderPipelineState
     private var renderPipeline: MTLRenderPipelineState
     
-    private var viewportSize: vector_uint2 = vector_uint2()
-    private var gameViewportSize: vector_uint2 = vector_uint2()
+    private var viewportSize: vector_uint2
+    private var gameViewportSize: vector_uint2
     
     private var sprites: [MetalSprite] = []
     private let spritesVerticesBuffer: MTLBuffer
@@ -112,7 +112,8 @@ internal class MetalRenderer: NSObject {
         // create vertices buffer
         self.spritesVerticesBuffer = verticesBuffer
         
-        // reset viewport
+        // reset viewports
+        self.gameViewportSize = targetGameScreenSize.simdSize
         self.viewportSize = vector_uint2()
         
         super.init()
