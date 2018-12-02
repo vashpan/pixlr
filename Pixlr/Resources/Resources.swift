@@ -27,7 +27,7 @@ public final class Resources {
         let dummyTexture = Texture(data: Data(), size: Size(width: 512, height: 512))
         var dummySprites: [SpriteId : Sprite] = [:]
         for n in 0...10 {
-            dummySprites[n] = Sprite(size: Size(width: 16.0, height: 16.0), uv: Point(x: 0, y: 0))
+            dummySprites[n] = Sprite(size: Size(width: 16.0, height: 16.0), uv: .zero)
         }
         
         self.spriteSheets[spriteSheetId] = SpriteSheet(sprites: dummySprites, texture: dummyTexture)

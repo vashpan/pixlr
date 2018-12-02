@@ -11,4 +11,8 @@ import Foundation
 public struct Point: Equatable {
     public let x: Float
     public let y: Float
+    
+    public static var zero: Point {
+        return Point(x: 0.0, y: 0.0)
+    }
 }

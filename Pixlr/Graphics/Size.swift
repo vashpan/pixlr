@@ -11,4 +11,8 @@ import Foundation
 public struct Size {
     public let width: Float
     public let height: Float
+    
+    public static var zero: Size {
+        return Size(width: 0.0, height: 0.0)
+    }
 }
