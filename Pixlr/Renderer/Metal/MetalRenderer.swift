@@ -90,9 +90,9 @@ internal class MetalRenderer: NSObject {
         if let renderPipeline = MetalRenderer.createRenderPipeline(on: device,
                                                                    library: defaultLibrary,
                                                                    pixelFormat: targetPixelFormat) {
-            Log.graphics.error("Cannot create Metal render pipeline!")
             self.renderPipeline = renderPipeline
         } else {
+            Log.graphics.error("Cannot create Metal render pipeline!")
             return nil
         }
         
