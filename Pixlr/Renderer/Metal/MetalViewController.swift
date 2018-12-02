@@ -60,6 +60,9 @@ internal class MetalViewController: NSViewController {
         super.viewDidLoad()
 
         self.metalView.delegate = self
+        
+        // start game
+        self.currentGame.start()
     }
 }
 
@@ -71,7 +74,7 @@ extension MetalViewController: MTKViewDelegate {
     
     func draw(in view: MTKView) {
         self.graphics.beginFrame()
-        Pixlr.game.draw(on: self.graphics)
+        self.currentGame.draw(on: self.graphics)
         self.graphics.endFrame()
     }
 }

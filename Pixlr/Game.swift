@@ -9,6 +9,11 @@
 import Foundation
 
 open class Game: NSObject {
+    // MARK: Initialization
+    public override init() {
+        
+    }
+    
     // MARK: Game lifecycle
     open func start() {
         
@@ -34,8 +39,4 @@ open class Game: NSObject {
     // MARK: Input
     
     // FIXME: Add input handling
-    
-    public override init() {
-        
-    }
 }
