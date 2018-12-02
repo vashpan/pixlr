@@ -18,6 +18,7 @@ internal class MetalRenderer: NSObject {
         let y: Float
         
         let w: Float
+        let h: Float
         
         var vertices: [PIXSpriteVertex] {
             return [
@@ -29,6 +30,14 @@ internal class MetalRenderer: NSObject {
                 PIXSpriteVertex(position: vector_float2(x + w, y - w), uv: vector_float2(1.0, 0.0)),
                 PIXSpriteVertex(position: vector_float2(x,     y - w), uv: vector_float2(0.0, 0.0))
             ]
+        }
+        
+        init(pixlrSprite: Sprite, position: Point) {
+            self.x = position.x
+            self.y = position.y
+            
+            self.w = pixlrSprite.size.width
+            self.h = pixlrSprite.size.height
         }
     }
     
@@ -47,7 +56,6 @@ internal class MetalRenderer: NSObject {
     private var viewportSize: vector_uint2
     private var gameViewportSize: vector_uint2
     
-    private var sprites: [MetalSprite] = []
     private let spritesVerticesBuffer: MTLBuffer
     private var spriteSheet: MTLTexture? = nil
     
@@ -181,12 +189,12 @@ internal class MetalRenderer: NSObject {
     }
     
     // MARK: Utils
-    private func framebufferVertices(spritesScreenSize: CGSize, viewportSize: vector_uint2) -> [PIXFramebufferVertex] {
-        let heightRatio = Float(viewportSize.y) / Float(spritesScreenSize.height)
-        let widthRatio = Float(viewportSize.x) / Float(spritesScreenSize.width)
+    private func framebufferVertices(gameViewportSize: vector_uint2, viewportSize: vector_uint2) -> [PIXFramebufferVertex] {
+        let widthRatio = Float(viewportSize.x) / Float(gameViewportSize.x)
+        let heightRatio = Float(viewportSize.y) / Float(gameViewportSize.y)
         
-        let realWidth = Float(spritesScreenSize.width) * heightRatio
-        let realHeight = Float(spritesScreenSize.height) * widthRatio
+        let realWidth = Float(gameViewportSize.x) * heightRatio
+        let realHeight = Float(gameViewportSize.y) * widthRatio
         
         let xStart: Float, xStop: Float
         let yStart: Float, yStop: Float
@@ -216,6 +224,108 @@ internal class MetalRenderer: NSObject {
             PIXFramebufferVertex(position: vector_float2(xStart, yStop), uv: vector_float2(0.0, 0.0))
         ]
     }
+    
+    // MARK: Rendering
+    private func commandsRenderPhase(commands: [Graphics.DrawCommand], commandBuffer: MTLCommandBuffer, in view: MTKView) {
+        let metalSpritesToDraw: [MetalSprite] = commands.compactMap {
+            switch $0 {
+                case .drawSprite(let sprite, let position):
+                    return MetalSprite(pixlrSprite: sprite, position: position)
+                default:
+                    return nil
+            }
+            
+        }
+        let joinedSprites = metalSpritesToDraw.map { $0.vertices }.joined()
+        let spritesVertices = Array(joinedSprites)
+        
+        // custom render descriptor for rendering to texture
+        let spritesRenderPassDescriptor = MTLRenderPassDescriptor()
+        spritesRenderPassDescriptor.colorAttachments[0].texture = self.spritesFramebuffer
+        spritesRenderPassDescriptor.colorAttachments[0].clearColor = MTLClearColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 1.0)
+        spritesRenderPassDescriptor.colorAttachments[0].storeAction = .store
+        spritesRenderPassDescriptor.colorAttachments[0].loadAction = .clear
+        
+        // create a render command encoder so we can render into something
+        guard let renderEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: spritesRenderPassDescriptor) else {
+            return
+        }
+        
+        renderEncoder.label = "Sprites Render Encoder"
+        
+        // set the drawable region & state
+        renderEncoder.setViewport(MTLViewport(originX: 0.0, originY: 0.0,
+                                              width: Double(self.gameViewportSize.x),
+                                              height: Double(self.gameViewportSize.y),
+                                              znear: -1.0, zfar: 1.0))
+        renderEncoder.setRenderPipelineState(self.spritesPipeline)
+        
+        // send viewport data
+        renderEncoder.setVertexBytes(&self.gameViewportSize,
+                                     length: MemoryLayout<vector_uint2>.size,
+                                     index: Int(PIXFramebufferVertexInputIndexViewportSize.rawValue))
+        // send sprites data
+        let spritesVerticesCount = spritesVertices.count
+        self.spritesVerticesBuffer.contents().copyMemory(from: spritesVertices, byteCount: MemoryLayout<PIXSpriteVertex>.stride * spritesVerticesCount)
+        renderEncoder.setVertexBuffer(self.spritesVerticesBuffer,
+                                      offset: 0,
+                                      index: Int(PIXSpriteVertexInputIndexVertices.rawValue))
+        
+        // set texture
+        renderEncoder.setFragmentTexture(self.spriteSheet,
+                                         index: Int(PIXSpriteTextureIndexBaseColor.rawValue))
+        
+        renderEncoder.drawPrimitives(type: .triangle,
+                                     vertexStart: 0,
+                                     vertexCount: spritesVerticesCount)
+        
+        renderEncoder.endEncoding()
+    }
+    
+    private func scaleRenderPhase(commandBuffer: MTLCommandBuffer, in view: MTKView) {
+        let vertices = self.framebufferVertices(gameViewportSize: self.gameViewportSize, viewportSize: self.viewportSize)
+        let verticesCount = vertices.count
+        
+        // obtain a renderPassDescriptor generated fro view's drawable textures
+        guard let  scaleRenderPassDescriptor = view.currentRenderPassDescriptor else {
+            return
+        }
+        
+        scaleRenderPassDescriptor.colorAttachments[0].clearColor = MTLClearColor(red: 0.0, green: 1.0, blue: 0.0, alpha: 1.0)
+        
+        // create a render command encoder so we can render into something
+        guard let renderEncoder = commandBuffer.makeRenderCommandEncoder(descriptor: scaleRenderPassDescriptor) else {
+            return
+        }
+        
+        renderEncoder.label = "Scale Render Encoder"
+        
+        // set the drawable region & state
+        renderEncoder.setViewport(MTLViewport(originX: 0.0, originY: 0.0,
+                                              width: Double(self.viewportSize.x), height: Double(self.viewportSize.y),
+                                              znear: -1.0, zfar: 1.0))
+        renderEncoder.setRenderPipelineState(self.renderPipeline)
+        
+        // send viewport size
+        renderEncoder.setVertexBytes(&self.viewportSize,
+                                     length: MemoryLayout<vector_uint2>.size,
+                                     index: Int(PIXFramebufferVertexInputIndexViewportSize.rawValue))
+        
+        // send vertices
+        renderEncoder.setVertexBytes(vertices,
+                                     length: MemoryLayout<PIXFramebufferVertex>.stride * verticesCount,
+                                     index: Int(PIXFramebufferVertexInputIndexVertices.rawValue))
+        
+        // set texture
+        renderEncoder.setFragmentTexture(self.spritesFramebuffer,
+                                         index: Int(Float(PIXFramebufferTextureIndexBaseColor.rawValue)))
+        
+        renderEncoder.drawPrimitives(type: .triangle,
+                                     vertexStart: 0,
+                                     vertexCount: verticesCount)
+        
+        renderEncoder.endEncoding()
+    }
 }
 
 // MARK: Pixlr Renderer conformance
@@ -225,6 +335,27 @@ extension MetalRenderer: Renderer {
     }
     
     func performDrawCommands(commands: [Graphics.DrawCommand]) {
+        guard let view = self.metalKitView else {
+            return
+        }
         
+        guard let commandBuffer = self.commandQueue.makeCommandBuffer() else {
+            return
+        }
+        
+        guard let currentDrawable = view.currentDrawable else {
+            return
+        }
+        
+        commandBuffer.label = "Main Command Buffer"
+        
+        self.commandsRenderPhase(commands: commands, commandBuffer: commandBuffer, in: view)
+        self.scaleRenderPhase(commandBuffer: commandBuffer, in: view)
+        
+        // schedule command buffer view present
+        commandBuffer.present(currentDrawable)
+        
+        // finalize rendering for now & push the command buffer to the GPU
+        commandBuffer.commit()
     }
 }
