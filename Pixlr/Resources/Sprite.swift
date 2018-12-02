@@ -13,8 +13,6 @@ public typealias SpriteId = Int
 
 // MARK: Sprite definition
 internal struct Sprite {
-    internal let id: SpriteId
-    
     internal let size: Size
     internal let uv: Point
 }

@@ -15,8 +15,22 @@ public final class Resources {
     internal var spriteSheets: [SpriteSheetId : SpriteSheet] = [:]
     
     // MARK: Loading resources
-    public func loadSpriteSheet(named spriteSheetName: String, into id: SpriteSheetId) {
-        Log.resources.error("Loading sprite sheets not implemented yet!")
+    public func loadSpriteSheet(named spriteSheetName: String, into spriteSheetId: SpriteSheetId) {
+        guard !self.spriteSheets.keys.contains(spriteSheetId) else {
+            Log.resources.error("Sprite sheet of id: \(spriteSheetId) is already loaded!")
+            return
+        }
+        
+        Log.resources.warning("Loading sprite sheets not implemented yet! Dummy sprite sheet will be loaded!")
+        
+        // creating dummy sprite sheet (with 10 sprites)
+        let dummyTexture = Texture(data: Data(), size: Size(width: 512, height: 512))
+        var dummySprites: [SpriteId : Sprite] = [:]
+        for n in 0...10 {
+            dummySprites[n] = Sprite(size: Size(width: 16.0, height: 16.0), uv: Point(x: 0, y: 0))
+        }
+        
+        self.spriteSheets[spriteSheetId] = SpriteSheet(sprites: dummySprites, texture: dummyTexture)
     }
     
     // MARK: Accessing resources

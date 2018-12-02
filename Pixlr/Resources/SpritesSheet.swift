@@ -13,6 +13,7 @@ public typealias SpriteSheetId = Int
 
 // MARK: - SpriteSheet definition
 internal struct SpriteSheet {
-    internal let sprites: [SpriteId : Sprite] = [:]
+    // MARK: Properties
+    internal let sprites: [SpriteId : Sprite]
     internal let texture: Texture
 }
