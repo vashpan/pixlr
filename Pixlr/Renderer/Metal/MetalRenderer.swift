@@ -39,6 +39,14 @@ internal class MetalRenderer: NSObject {
             self.w = pixlrSprite.size.width
             self.h = pixlrSprite.size.height
         }
+        
+        init(pixlrImage: Image, position: Point) {
+            self.x = position.x
+            self.y = position.y
+            
+            self.w = pixlrImage.size.width
+            self.h = pixlrImage.size.height
+        }
     }
     
     // MARK: Properties
@@ -232,6 +240,8 @@ internal class MetalRenderer: NSObject {
             switch $0 {
                 case .drawSprite(let sprite, let position):
                     return MetalSprite(pixlrSprite: sprite, position: position)
+                case .drawImage(let image, let position):
+                    return MetalSprite(pixlrImage: image, position: position)
                 default:
                     return nil
             }

@@ -16,6 +16,7 @@ public class Graphics {
     // MARK: Types
     internal enum DrawCommand {
         case drawSprite(sprite: Sprite, position: Point)
+        case drawImage(image: Image, position: Point)
         case drawPixels(pixels: [Pixel])
     }
     
@@ -66,6 +67,21 @@ public class Graphics {
         self.draw(sprite: sprite, from: spriteSheet, x: position.x, y: position.y, scale: scale, rotation: rotation, flip: flip)
     }
     
+    public func draw(image: ImageId, x: Float, y: Float, scale: Float = 1.0, rotation: Angle = 0.0, flip: Bool = false) {
+        guard self.drawingPossible else {
+            Log.graphics.warning("Drawing is not possible in this scope!")
+            return
+        }
+        
+        if let image = Resources.shared.image(from: image) {
+            self.drawingCommands.append(.drawImage(image: image, position: Point(x: x, y: y)))
+        }
+    }
+    
+    public func draw(image: ImageId, at position: Point, scale: Float = 1.0, rotation: Angle = 0.0, flip: Bool = false) {
+        self.draw(image: image, x: position.x, y: position.y, scale: scale, rotation: rotation, flip: flip)
+    }
+    
     public func draw(pixels: [Pixel]) {
         guard self.drawingPossible else {
             Log.graphics.warning("Drawing is not possible in this scope!")
@@ -81,7 +97,7 @@ public class Graphics {
             return
         }
         
-        // FIXME: Implement
+        // FIXME: Implement text drawing
         Log.graphics.info("Drawing text not implemented yet!")
     }
     

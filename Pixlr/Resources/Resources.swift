@@ -12,7 +12,8 @@ public final class Resources {
     // MARK: Properties
     public static let shared = Resources()
     
-    internal var spriteSheets: [SpriteSheetId : SpriteSheet] = [:]
+    internal var spriteSheets: [SpriteSheetId: SpriteSheet] = [:]
+    internal var images: [ImageId: Image] = [:]
     
     // MARK: Loading resources
     public func loadSpriteSheet(named spriteSheetName: String, into spriteSheetId: SpriteSheetId) {
@@ -33,6 +34,21 @@ public final class Resources {
         self.spriteSheets[spriteSheetId] = SpriteSheet(sprites: dummySprites, texture: dummyTexture)
     }
     
+    public func loadImage(named imageName: String, into imageId: ImageId) {
+        guard !self.images.keys.contains(imageId) else {
+            Log.resources.error("Image of id: \(imageId) is already loaded!")
+            return
+        }
+        
+        Log.resources.warning("Loading images not implemented yet! Dummy image will be loaded!")
+        
+        let imageSize = Size(width: 64, height: 64)
+        
+        let dummyTexture = Texture(data: Data(), size: imageSize)
+        
+        self.images[imageId] = Image(size: imageSize, texture: dummyTexture)
+    }
+    
     // MARK: Accessing resources
     internal func sprite(from spriteSheetId: SpriteSheetId, id spriteId: SpriteId) -> Sprite? {
         guard let spriteSheet = self.spriteSheets[spriteSheetId] else {
@@ -46,5 +62,14 @@ public final class Resources {
         }
         
         return sprite
+    }
+    
+    internal func image(from imageId: ImageId) -> Image? {
+        guard let image = self.images[imageId] else {
+            Log.resources.warning("No image of id: \(imageId) loaded!")
+            return nil
+        }
+        
+        return image
     }
 }
