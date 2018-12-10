@@ -22,4 +22,8 @@ internal extension Size {
     init(cgSize: CGSize) {
         self.init(width: Float(cgSize.width), height: Float(cgSize.height))
     }
+    
+    init(cgWidth: CGFloat, cgHeight: CGFloat) {
+        self.init(cgSize: CGSize(width: cgWidth, height: cgHeight))
+    }
 }
