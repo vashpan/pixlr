@@ -9,9 +9,12 @@
 import Foundation
 
 internal protocol Platform {
+    // MARK: Properties
+    var appName: String {get}
+    
     // MARK: App lifecycle
     func startApp(with game: Game)
     
-    // MARK: Informations & configuration
-    var appName: String {get}
+    // MARK: Loading resources
+    func loadTexture(name: String) -> Texture?
 }
