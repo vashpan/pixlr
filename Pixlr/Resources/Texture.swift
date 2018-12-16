@@ -12,6 +12,20 @@ internal struct Texture {
     // MARK: Types
     internal enum Format {
         case rgba8, bgra8, argb8
+        
+        internal var bytesPerPixel: Int {
+            switch self {
+                case .rgba8, .bgra8, .argb8:
+                    return 4
+            }
+        }
+        
+        internal var bitsPerComponent: Int {
+            switch self {
+                case .rgba8, .bgra8, .argb8:
+                    return 8
+            }
+        }
     }
     
     // MARK: Properties
