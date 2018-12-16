@@ -11,6 +11,7 @@ import Foundation
 internal protocol Platform {
     // MARK: Properties
     var appName: String {get}
+    var renderer: Renderer? {get}
     
     // MARK: App lifecycle
     func startApp(with game: Game)

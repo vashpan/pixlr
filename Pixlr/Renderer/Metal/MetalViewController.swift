@@ -50,6 +50,12 @@ internal class MetalViewController: NSViewController {
             return
         }
         
+        guard let platform = Pixlr.currentPlatform as? MacOSPlatform else {
+            return
+        }
+        
+        platform.renderer = newRenderer
+        
         self.renderer = newRenderer
         self.graphics = Graphics(renderer: self.renderer, screenSize: self.targetGameScreenSize)
         

@@ -13,6 +13,8 @@ import AppKit
 // MARK: - macOS platform
 internal class MacOSPlatform: Platform {
     // MARK: Properties
+    internal var renderer: Renderer? = nil
+    
     internal var appName: String {
         var result: String? = nil
         
