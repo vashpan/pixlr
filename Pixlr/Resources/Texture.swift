@@ -34,6 +34,8 @@ internal struct Texture {
     
     internal let format: Format
     
+    internal var nativeTexture: NSObjectProtocol? = nil
+    
     // MARK: Initialization
     init(data: Data, size: Size, format: Format = .rgba8) {
         self.size = size
