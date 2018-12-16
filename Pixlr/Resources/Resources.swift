@@ -40,13 +40,12 @@ public final class Resources {
             return
         }
         
-        Log.resources.warning("Loading images not implemented yet! Dummy image will be loaded!")
+        guard let texture = Pixlr.currentPlatform.loadTexture(name: imageName) else {
+            Log.resources.error("Can't load texture: \(imageName) as image of id: \(imageId)!")
+            return
+        }
         
-        let imageSize = Size(width: 64, height: 64)
-        
-        let dummyTexture = Texture(data: Data(), size: imageSize)
-        
-        self.images[imageId] = Image(size: imageSize, texture: dummyTexture)
+        self.images[imageId] = Image(texture: texture)
     }
     
     // MARK: Accessing resources

@@ -15,4 +15,9 @@ public typealias ImageId = Int
 internal struct Image {
     internal let size: Size
     internal let texture: Texture
+    
+    internal init(texture: Texture) {
+        self.texture = texture
+        self.size = texture.size
+    }
 }
