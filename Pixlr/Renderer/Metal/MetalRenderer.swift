@@ -233,6 +233,33 @@ internal class MetalRenderer: NSObject {
         ]
     }
     
+    // MARK: Loading resources
+    internal func loadNativeTexture(from texture: Texture, label: String) -> MTLTexture? {
+        let width  = Int(texture.size.width)
+        let height = Int(texture.size.height)
+        let textureDescriptor = MTLTextureDescriptor.texture2DDescriptor(pixelFormat: .rgba8Unorm,
+                                                                         width: width, height: height,
+                                                                         mipmapped: false)
+        
+        textureDescriptor.usage = .shaderRead
+        
+        guard let metalTexture = self.device.makeTexture(descriptor: textureDescriptor) else {
+            Log.graphics.error("Cannot create Metal texture! \(label)")
+            return nil
+        }
+        
+        metalTexture.label = label
+        
+        let bytesPerRow = texture.format.bytesPerPixel * width
+        let region = MTLRegionMake2D(0, 0, width, height)
+        
+        texture.data.withUnsafeBytes { bytes in
+            metalTexture.replace(region: region, mipmapLevel: 0, withBytes: bytes, bytesPerRow: bytesPerRow)
+        }
+        
+        return metalTexture
+    }
+    
     // MARK: Rendering
     private func commandsRenderPhase(commands: [Graphics.DrawCommand], commandBuffer: MTLCommandBuffer, in view: MTKView) {
         // FIXME: Replace this with sorting commands due to possible state changes

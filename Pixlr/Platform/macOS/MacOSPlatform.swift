@@ -47,22 +47,21 @@ internal class MacOSPlatform: Platform {
     }
     
     // MARK: Loading resources
-    private func imageData(from image: NSImage) -> Data? {
+    private func imageData(from image: NSImage, textureFormat: Texture.Format = .rgba8) -> Data? {
         let imageWidth = Int(image.size.width)
         let imageHeight = Int(image.size.height)
         
         // create bitmap context
         let colorSpace = CGColorSpaceCreateDeviceRGB()
-        let bytesPerPixel = 4
+        let bytesPerPixel = textureFormat.bytesPerPixel
         let bytesPerRow = bytesPerPixel * imageWidth
         let bytesInImage = imageHeight * imageWidth * bytesPerPixel
-        let bitsPerComponent = 8
         let rawData = calloc(bytesInImage, MemoryLayout<UInt8>.size)!
         
         guard let context = CGContext(data: rawData,
                                       width: imageWidth,
                                       height: imageHeight,
-                                      bitsPerComponent: bitsPerComponent,
+                                      bitsPerComponent: textureFormat.bitsPerComponent,
                                       bytesPerRow: bytesPerRow,
                                       space: colorSpace,
                                       bitmapInfo: CGImageAlphaInfo.premultipliedLast.rawValue | CGBitmapInfo.byteOrder32Big.rawValue) else {
@@ -85,6 +84,8 @@ internal class MacOSPlatform: Platform {
     }
     
     func loadTexture(name: String) -> Texture? {
+        let defaultTextureFormat = Texture.Format.rgba8
+        
         guard let pathToTexture = Bundle.main.path(forResource: name, ofType: "png") else    {
             Log.resources.warning("Cannot load texture. File not found: \(name)")
             return nil
@@ -95,12 +96,21 @@ internal class MacOSPlatform: Platform {
             return nil
         }
         
-        guard let imageData = self.imageData(from: image) else {
+        guard let imageData = self.imageData(from: image, textureFormat: defaultTextureFormat) else {
             Log.resources.warning("Cannot load texture. Cannot get image data: \(pathToTexture)")
             return nil
         }
         
-        return Texture(data: imageData, size: Size(cgWidth: image.size.width, cgHeight: image.size.height))
+        var texture = Texture(data: imageData, size: Size(cgWidth: image.size.width, cgHeight: image.size.height), format: defaultTextureFormat)
+        
+        // load texture into renderer
+        if let metalRenderer = self.renderer as? MetalRenderer {
+            if let metalTexture = metalRenderer.loadNativeTexture(from: texture, label: name) {
+                texture.nativeTexture = metalTexture
+            }
+        }
+        
+        return texture
     }
 }
 
