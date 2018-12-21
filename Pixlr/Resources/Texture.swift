@@ -8,7 +8,7 @@
 
 import Foundation
 
-internal struct Texture {
+internal final class Texture {
     // MARK: Types
     internal enum Format {
         case rgba8, bgra8, argb8

@@ -101,7 +101,7 @@ internal class MacOSPlatform: Platform {
             return nil
         }
         
-        var texture = Texture(data: imageData, size: Size(cgWidth: image.size.width, cgHeight: image.size.height), format: defaultTextureFormat)
+        let texture = Texture(data: imageData, size: Size(cgWidth: image.size.width, cgHeight: image.size.height), format: defaultTextureFormat)
         
         // load texture into renderer
         if let metalRenderer = self.renderer as? MetalRenderer {
