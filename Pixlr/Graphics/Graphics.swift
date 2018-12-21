@@ -15,7 +15,7 @@ public typealias Angle = Float
 public class Graphics {
     // MARK: Types
     internal enum DrawCommand {
-        case drawSprite(sprite: Sprite, position: Point)
+        case drawSprite(sprite: Sprite, texture: Texture, position: Point)
         case drawImage(image: Image, position: Point)
         case drawPixels(pixels: [Pixel])
     }
@@ -58,8 +58,8 @@ public class Graphics {
             return
         }
         
-        if let sprite = Resources.shared.sprite(from: spriteSheet, id: sprite) {
-            self.drawingCommands.append(.drawSprite(sprite: sprite, position: Point(x: x, y: y)))
+        if let sheet = Resources.shared.spriteSheet(from: spriteSheet), let sprite = sheet.sprites[sprite] {
+            self.drawingCommands.append(.drawSprite(sprite: sprite, texture: sheet.texture, position: Point(x: x, y: y)))
         }
     }
     
