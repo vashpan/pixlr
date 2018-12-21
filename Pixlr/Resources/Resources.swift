@@ -49,6 +49,15 @@ public final class Resources {
     }
     
     // MARK: Accessing resources
+    internal func spriteSheet(from spriteSheetId: SpriteSheetId) -> SpriteSheet? {
+        guard let spriteSheet = self.spriteSheets[spriteSheetId] else {
+            Log.resources.warning("No sprite sheet of id: \(spriteSheetId) loaded!")
+            return nil
+        }
+        
+        return spriteSheet
+    }
+    
     internal func sprite(from spriteSheetId: SpriteSheetId, id spriteId: SpriteId) -> Sprite? {
         guard let spriteSheet = self.spriteSheets[spriteSheetId] else {
             Log.resources.warning("No sprite sheet of id: \(spriteSheetId) loaded!")
