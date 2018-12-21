@@ -20,7 +20,11 @@ internal class MetalRenderer: NSObject {
         let w: Float
         let h: Float
         
+        let u: Float
+        let v: Float
+
         var vertices: [PIXSpriteVertex] {
+            // FIXME: Calculate vertex uv according to sprite u,v,w,h and texture
             return [
                 PIXSpriteVertex(position: vector_float2(x,     y    ), uv: vector_float2(0.0, 1.0)),
                 PIXSpriteVertex(position: vector_float2(x,     y - w), uv: vector_float2(0.0, 0.0)),
@@ -38,6 +42,10 @@ internal class MetalRenderer: NSObject {
             
             self.w = pixlrSprite.size.width
             self.h = pixlrSprite.size.height
+            
+            // FIXME: Fill after adding support for sprite sheets
+            self.u = 0.0
+            self.v = 0.0
         }
         
         init(pixlrImage: Image, position: Point) {
@@ -46,7 +54,14 @@ internal class MetalRenderer: NSObject {
             
             self.w = pixlrImage.size.width
             self.h = pixlrImage.size.height
+
+            self.u = 0.0 // top left corner (?)
+            self.v = 0.0
         }
+    }
+    
+    private enum RendererCommand {
+        case drawSprites(sprites: [MetalSprite], texture: MTLTexture?)
     }
     
     // MARK: Properties
@@ -65,7 +80,6 @@ internal class MetalRenderer: NSObject {
     private var gameViewportSize: vector_uint2
     
     private let spritesVerticesBuffer: MTLBuffer
-    private var spriteSheet: MTLTexture? = nil
     
     // MARK: Constants
     private let maxSprites = 8192
@@ -261,22 +275,59 @@ internal class MetalRenderer: NSObject {
     }
     
     // MARK: Rendering
-    private func commandsRenderPhase(commands: [Graphics.DrawCommand], commandBuffer: MTLCommandBuffer, in view: MTKView) {
-        // FIXME: Replace this with sorting commands due to possible state changes
-        let metalSpritesToDraw: [MetalSprite] = commands.compactMap {
-            switch $0 {
-                case .drawSprite(let sprite, let position):
-                    return MetalSprite(pixlrSprite: sprite, position: position)
-                case .drawImage(let image, let position):
-                    return MetalSprite(pixlrImage: image, position: position)
-                default:
-                    return nil
-            }
-            
-        }
-        let joinedSprites = metalSpritesToDraw.map { $0.vertices }.joined()
-        let spritesVertices = Array(joinedSprites)
+    private func prepareMetalRendererCommands(from graphicsCommands: [Graphics.DrawCommand]) -> [RendererCommand] {
+        var commands = [RendererCommand]()
+        commands.reserveCapacity(graphicsCommands.count)
         
+        // batch commands by using the same texture
+        var currentTexture: MTLTexture? = nil
+        var currentSprites: [MetalSprite]? = nil
+        
+        for graphicCommand in graphicsCommands {
+            switch graphicCommand {
+                case .drawSprite(let sprite, let texture, let position):
+                    let metalSprite = MetalSprite(pixlrSprite: sprite, position: position)
+                    let metalTexture = texture.nativeTexture as? MTLTexture
+                    
+                    // batch this sprite if it's using the same texture
+                    if var currentSprites = currentSprites, metalTexture === currentTexture {
+                        currentSprites.append(metalSprite)
+                    } else {
+                        if let previousSprites = currentSprites, let previousTexture = currentTexture {
+                            commands.append(.drawSprites(sprites: previousSprites, texture: previousTexture))
+                        }
+                        
+                        // create a new set in case of new texture
+                        currentSprites = [metalSprite]
+                        currentTexture = metalTexture
+                    }
+                
+                case .drawImage(let image, let position):
+                    let metalSprite = MetalSprite(pixlrImage: image, position: position)
+                    let metalTexture = image.texture.nativeTexture as? MTLTexture
+                    
+                    // batch this sprite if it's using the same texture
+                    if var currentSprites = currentSprites, metalTexture === currentTexture {
+                        currentSprites.append(metalSprite)
+                    } else {
+                        if let previousSprites = currentSprites, let previousTexture = currentTexture {
+                            commands.append(.drawSprites(sprites: previousSprites, texture: previousTexture))
+                        }
+                        
+                        // create a new set in case of new texture
+                        currentSprites = [metalSprite]
+                        currentTexture = metalTexture
+                    }
+                
+                default:
+                    Log.graphics.warning("Drawing command: \(graphicCommand), not implemented yet!")
+            }
+        }
+        
+        return commands
+    }
+    
+    private func commandsRenderPhase(commands: [RendererCommand], commandBuffer: MTLCommandBuffer, in view: MTKView) {
         // custom render descriptor for rendering to texture
         let spritesRenderPassDescriptor = MTLRenderPassDescriptor()
         spritesRenderPassDescriptor.colorAttachments[0].texture = self.spritesFramebuffer
@@ -302,20 +353,30 @@ internal class MetalRenderer: NSObject {
         renderEncoder.setVertexBytes(&self.gameViewportSize,
                                      length: MemoryLayout<vector_uint2>.size,
                                      index: Int(PIXFramebufferVertexInputIndexViewportSize.rawValue))
-        // send sprites data
-        let spritesVerticesCount = spritesVertices.count
-        self.spritesVerticesBuffer.contents().copyMemory(from: spritesVertices, byteCount: MemoryLayout<PIXSpriteVertex>.stride * spritesVerticesCount)
-        renderEncoder.setVertexBuffer(self.spritesVerticesBuffer,
-                                      offset: 0,
-                                      index: Int(PIXSpriteVertexInputIndexVertices.rawValue))
         
-        // set texture
-        renderEncoder.setFragmentTexture(self.spriteSheet,
-                                         index: Int(PIXSpriteTextureIndexBaseColor.rawValue))
-        
-        renderEncoder.drawPrimitives(type: .triangle,
-                                     vertexStart: 0,
-                                     vertexCount: spritesVerticesCount)
+        // send sprites & pixels data
+        for command in commands {
+            switch command {
+                case .drawSprites(let spritesToDraw, let texture):
+                    let joinedSprites = spritesToDraw.map { $0.vertices }.joined()
+                    let spritesVertices = Array(joinedSprites)
+                    let spritesVerticesCount = spritesVertices.count
+                    
+                    self.spritesVerticesBuffer.contents().copyMemory(from: spritesVertices, byteCount: MemoryLayout<PIXSpriteVertex>.stride * spritesVerticesCount)
+                    renderEncoder.setVertexBuffer(self.spritesVerticesBuffer,
+                                                  offset: 0,
+                                                  index: Int(PIXSpriteVertexInputIndexVertices.rawValue))
+                    
+                    // set texture
+                    renderEncoder.setFragmentTexture(texture,
+                                                     index: Int(PIXSpriteTextureIndexBaseColor.rawValue))
+                    
+                    // draw single sprite
+                    renderEncoder.drawPrimitives(type: .triangle,
+                                                 vertexStart: 0,
+                                                 vertexCount: spritesVerticesCount)
+            }
+        }
         
         renderEncoder.endEncoding()
     }
@@ -387,7 +448,8 @@ extension MetalRenderer: Renderer {
         
         commandBuffer.label = "Main Command Buffer"
         
-        self.commandsRenderPhase(commands: commands, commandBuffer: commandBuffer, in: view)
+        let metalRendererCommands = self.prepareMetalRendererCommands(from: commands)
+        self.commandsRenderPhase(commands: metalRendererCommands, commandBuffer: commandBuffer, in: view)
         self.scaleRenderPhase(commandBuffer: commandBuffer, in: view)
         
         // schedule command buffer view present
