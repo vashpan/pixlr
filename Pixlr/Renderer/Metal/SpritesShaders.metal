@@ -49,10 +49,7 @@ float4 spritesFragmentShader(RasterizerData in [[stage_in]],
                                       min_filter::nearest);
     
     // Sample the texture to obtain a color
-    //const half4 colorSample = colorTexture.sample(textureSampler, in.uv);
-    
-    // FIXME: For now not using texture sampler because of lack of texture
-    const half4 colorSample = half4(1.0, 0.0, 0.0, 1.0);
-    
+    const half4 colorSample = colorTexture.sample(textureSampler, in.uv);
+
     return float4(colorSample);
 }
