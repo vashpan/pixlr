@@ -276,12 +276,18 @@ internal class MetalRenderer: NSObject {
     
     // MARK: Rendering
     private func prepareMetalRendererCommands(from graphicsCommands: [Graphics.DrawCommand]) -> [RendererCommand] {
+        func finalizeDrawSpritesCommand(into commands: inout [RendererCommand], sprites: [MetalSprite], texture: MTLTexture?) {
+            if sprites.count > 0 {
+                commands.append(.drawSprites(sprites: sprites, texture: texture))
+            }
+        }
+        
         var commands = [RendererCommand]()
         commands.reserveCapacity(graphicsCommands.count)
         
         // batch commands by using the same texture
         var currentTexture: MTLTexture? = nil
-        var currentSprites: [MetalSprite]? = nil
+        var currentSprites: [MetalSprite] = []
         
         for graphicCommand in graphicsCommands {
             switch graphicCommand {
@@ -290,12 +296,10 @@ internal class MetalRenderer: NSObject {
                     let metalTexture = texture.nativeTexture as? MTLTexture
                     
                     // batch this sprite if it's using the same texture
-                    if var currentSprites = currentSprites, metalTexture === currentTexture {
+                    if metalTexture === currentTexture {
                         currentSprites.append(metalSprite)
                     } else {
-                        if let previousSprites = currentSprites, let previousTexture = currentTexture {
-                            commands.append(.drawSprites(sprites: previousSprites, texture: previousTexture))
-                        }
+                        finalizeDrawSpritesCommand(into: &commands, sprites: currentSprites, texture: currentTexture)
                         
                         // create a new set in case of new texture
                         currentSprites = [metalSprite]
@@ -307,12 +311,10 @@ internal class MetalRenderer: NSObject {
                     let metalTexture = image.texture.nativeTexture as? MTLTexture
                     
                     // batch this sprite if it's using the same texture
-                    if var currentSprites = currentSprites, metalTexture === currentTexture {
+                    if metalTexture === currentTexture {
                         currentSprites.append(metalSprite)
                     } else {
-                        if let previousSprites = currentSprites, let previousTexture = currentTexture {
-                            commands.append(.drawSprites(sprites: previousSprites, texture: previousTexture))
-                        }
+                        finalizeDrawSpritesCommand(into: &commands, sprites: currentSprites, texture: currentTexture)
                         
                         // create a new set in case of new texture
                         currentSprites = [metalSprite]
@@ -323,6 +325,9 @@ internal class MetalRenderer: NSObject {
                     Log.graphics.warning("Drawing command: \(graphicCommand), not implemented yet!")
             }
         }
+        
+        // add any remaining content to commands
+        finalizeDrawSpritesCommand(into: &commands, sprites: currentSprites, texture: currentTexture)
         
         return commands
     }
