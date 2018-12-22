@@ -10,36 +10,38 @@ import Foundation
 import Pixlr
 
 final class ExampleGame: Game {
+    private struct Sprites {
+        static let sadFace = ImageId(0)
+    }
+    
     override func start() {
-        Resources.shared.loadSpriteSheet(named: "Dummy!", into: 0)
+        Resources.shared.loadImage(named: "sad-face", into: Sprites.sadFace)
     }
     
     override func draw(on gfx: Graphics) {
         let screenSize = Pixlr.config.screenSize
-        let spriteSize: Float = 16.0
+        let sadFaceSize: Float = 16.0
         
         // upper left
         //self.drawSprite(x: 0, y: self.spriteSize)
-        gfx.draw(sprite: 0, from: 0, x: 0, y: spriteSize)
+        gfx.draw(image: Sprites.sadFace, x: 0, y: sadFaceSize)
         
         // upper right
         //self.drawSprite(x: width - self.spriteSize, y: self.spriteSize)
-        gfx.draw(sprite: 0, from: 0, x: screenSize.width - spriteSize, y: spriteSize)
+        gfx.draw(image: Sprites.sadFace, x: screenSize.width - sadFaceSize, y: sadFaceSize)
         
         // down left
         //self.drawSprite(x: 0, y: height)
-        gfx.draw(sprite: 0, from: 0, x: 0, y: screenSize.height)
+        gfx.draw(image: Sprites.sadFace, x: 0, y: screenSize.height)
         
         // down right
         //self.drawSprite(x: width - self.spriteSize, y: height)
-        gfx.draw(sprite: 0, from: 0, x: screenSize.width - spriteSize, y: screenSize.height)
+        gfx.draw(image: Sprites.sadFace, x: screenSize.width - sadFaceSize, y: screenSize.height)
         
         // center
-        //self.drawSprite(x: (width  - self.spriteSize / 2.0) / 2.0,
-        //                y: (height + self.spriteSize) / 2.0)
-        gfx.draw(sprite: 0, from: 0,
-                 x: (screenSize.width - spriteSize / 2.0) / 2.0,
-                 y: (screenSize.height - spriteSize) / 2.0)
+        gfx.draw(image: Sprites.sadFace,
+                 x: (screenSize.width - sadFaceSize / 2.0) / 2.0,
+                 y: (screenSize.height - sadFaceSize) / 2.0)
     }
 }
 
