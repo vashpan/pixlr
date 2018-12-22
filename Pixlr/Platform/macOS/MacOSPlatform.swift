@@ -74,9 +74,6 @@ internal class MacOSPlatform: Platform {
         }
         
         // draw image on context
-        context.translateBy(x: 0.0, y: CGFloat(imageHeight)) // move context to the top
-        context.scaleBy(x: 0.0, y: -1.0) // rotate
-        
         let imageRect = CGRect(x: 0, y: 0, width: CGFloat(imageWidth), height: CGFloat(imageHeight))
         context.draw(cgImage, in: imageRect)
         
