@@ -25,15 +25,14 @@ internal class MetalRenderer: NSObject {
 
         var vertices: [PIXSpriteVertex] {
             // FIXME: Calculate vertex uv according to sprite u,v,w,h and texture
-            // FIXME: Rotate uv (or vectors?) to draw properly, not flipped
             return [
-                PIXSpriteVertex(position: vector_float2(x,     y    ), uv: vector_float2(0.0, 1.0)),
-                PIXSpriteVertex(position: vector_float2(x,     y - w), uv: vector_float2(0.0, 0.0)),
-                PIXSpriteVertex(position: vector_float2(x + w, y    ), uv: vector_float2(1.0, 1.0)),
+                PIXSpriteVertex(position: vector_float2(x,     y    ), uv: vector_float2(0.0, 0.0)),
+                PIXSpriteVertex(position: vector_float2(x,     y - w), uv: vector_float2(0.0, 1.0)),
+                PIXSpriteVertex(position: vector_float2(x + w, y    ), uv: vector_float2(1.0, 0.0)),
                 
-                PIXSpriteVertex(position: vector_float2(x + w, y    ), uv: vector_float2(1.0, 1.0)),
-                PIXSpriteVertex(position: vector_float2(x + w, y - w), uv: vector_float2(1.0, 0.0)),
-                PIXSpriteVertex(position: vector_float2(x,     y - w), uv: vector_float2(0.0, 0.0))
+                PIXSpriteVertex(position: vector_float2(x + w, y    ), uv: vector_float2(1.0, 0.0)),
+                PIXSpriteVertex(position: vector_float2(x + w, y - w), uv: vector_float2(1.0, 1.0)),
+                PIXSpriteVertex(position: vector_float2(x,     y - w), uv: vector_float2(0.0, 1.0))
             ]
         }
         
@@ -56,7 +55,7 @@ internal class MetalRenderer: NSObject {
             self.w = pixlrImage.size.width
             self.h = pixlrImage.size.height
 
-            self.u = 0.0 // top left corner (?)
+            self.u = 0.0 // bottom left corner (?)
             self.v = 0.0
         }
     }
