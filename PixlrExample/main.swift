@@ -22,22 +22,22 @@ final class ExampleGame: Game {
         let screenSize = Pixlr.config.screenSize
         let sadFaceSize: Float = 16.0
         
-        // upper left
+        // down left
         //self.drawSprite(x: 0, y: self.spriteSize)
         gfx.draw(image: Sprites.sadFace, x: 0, y: sadFaceSize)
         
-        // upper right
+        // down right
         //self.drawSprite(x: width - self.spriteSize, y: self.spriteSize)
         gfx.draw(image: Sprites.sadFace, x: screenSize.width - sadFaceSize, y: sadFaceSize)
-        
-        // down left
+
+        // upper left
         //self.drawSprite(x: 0, y: height)
         gfx.draw(image: Sprites.sadFace, x: 0, y: screenSize.height)
-        
-        // down right
+
+        // upper right
         //self.drawSprite(x: width - self.spriteSize, y: height)
         gfx.draw(image: Sprites.sadFace, x: screenSize.width - sadFaceSize, y: screenSize.height)
-        
+
         // center
         gfx.draw(image: Sprites.sadFace,
                  x: (screenSize.width - sadFaceSize / 2.0) / 2.0,
