@@ -52,34 +52,34 @@ public class Graphics {
     }
     
     // MARK: Drawing
-    public func draw(sprite: SpriteId, from spriteSheet: SpriteSheetId, x: Float, y: Float, scale: Float = 1.0, rotation: Angle = 0.0, flip: Bool = false) {
+    public func draw(sprite: SpriteId, from spriteSheet: SpriteSheetId, x: Float, y: Float, scale: Float = 1.0, rotation: Angle = 0.0) {
+        self.draw(sprite: sprite, from: spriteSheet, at: Point(x: x, y: y), scale: scale, rotation: rotation)
+    }
+    
+    public func draw(sprite: SpriteId, from spriteSheet: SpriteSheetId, at position: Point, scale: Float = 1.0, rotation: Angle = 0.0) {
         guard self.drawingPossible else {
             Log.graphics.warning("Drawing is not possible in this scope!")
             return
         }
         
         if let sheet = Resources.shared.spriteSheet(from: spriteSheet), let sprite = sheet.sprites[sprite] {
-            self.drawingCommands.append(.drawSprite(sprite: sprite, texture: sheet.texture, position: Point(x: x, y: y)))
+            self.drawingCommands.append(.drawSprite(sprite: sprite, texture: sheet.texture, position: position))
         }
     }
     
-    public func draw(sprite: SpriteId, from spriteSheet: SpriteSheetId, at position: Point, scale: Float = 1.0, rotation: Angle = 0.0, flip: Bool = false) {
-        self.draw(sprite: sprite, from: spriteSheet, x: position.x, y: position.y, scale: scale, rotation: rotation, flip: flip)
+    public func draw(image: ImageId, x: Float, y: Float, scale: Float = 1.0, rotation: Angle = 0.0) {
+        self.draw(image: image, at: Point(x: x, y: y), scale: scale, rotation: rotation)
     }
     
-    public func draw(image: ImageId, x: Float, y: Float, scale: Float = 1.0, rotation: Angle = 0.0, flip: Bool = false) {
+    public func draw(image: ImageId, at position: Point, scale: Float = 1.0, rotation: Angle = 0.0) {
         guard self.drawingPossible else {
             Log.graphics.warning("Drawing is not possible in this scope!")
             return
         }
         
         if let image = Resources.shared.image(from: image) {
-            self.drawingCommands.append(.drawImage(image: image, position: Point(x: x, y: y)))
+            self.drawingCommands.append(.drawImage(image: image, position: position))
         }
-    }
-    
-    public func draw(image: ImageId, at position: Point, scale: Float = 1.0, rotation: Angle = 0.0, flip: Bool = false) {
-        self.draw(image: image, x: position.x, y: position.y, scale: scale, rotation: rotation, flip: flip)
     }
     
     public func draw(pixels: [Pixel]) {
