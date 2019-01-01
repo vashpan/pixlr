@@ -20,11 +20,9 @@
 		71CD213321A1A6ED0082E5B7 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71CD213221A1A6ED0082E5B7 /* Logger.swift */; };
 		71CD213521A1AC000082E5B7 /* MetalRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71CD213421A1AC000082E5B7 /* MetalRenderer.swift */; };
 		71CD213821A1BB160082E5B7 /* Graphics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71CD213721A1BB160082E5B7 /* Graphics.swift */; };
-		71CD213A21A1C0A20082E5B7 /* Point.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71CD213921A1C0A20082E5B7 /* Point.swift */; };
 		71CD213C21A1C49A0082E5B7 /* Pixel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71CD213B21A1C49A0082E5B7 /* Pixel.swift */; };
 		71CD213E21A1C4C50082E5B7 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71CD213D21A1C4C50082E5B7 /* Color.swift */; };
 		71CD214021A1CED80082E5B7 /* Renderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71CD213F21A1CED80082E5B7 /* Renderer.swift */; };
-		71CD214221A1E3FD0082E5B7 /* Size.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71CD214121A1E3FC0082E5B7 /* Size.swift */; };
 		71CD214421A20EBD0082E5B7 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71CD214321A20EBD0082E5B7 /* Config.swift */; };
 		71CD214721A2162D0082E5B7 /* Size+macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71CD214621A2162D0082E5B7 /* Size+macOS.swift */; };
 		71CD214921A4B3D20082E5B7 /* ShaderTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = 71CD214821A4B3D20082E5B7 /* ShaderTypes.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -35,6 +33,7 @@
 		71CD215521B1A5310082E5B7 /* Texture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71CD215421B1A5310082E5B7 /* Texture.swift */; };
 		71CD215721B1A8610082E5B7 /* Sprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71CD215621B1A8610082E5B7 /* Sprite.swift */; };
 		71CD215921B88AF40082E5B7 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71CD215821B88AF40082E5B7 /* Image.swift */; };
+		71CF36CC21DC2920005CF148 /* Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71CF36CB21DC2920005CF148 /* Math.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,11 +63,9 @@
 		71CD213221A1A6ED0082E5B7 /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		71CD213421A1AC000082E5B7 /* MetalRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetalRenderer.swift; sourceTree = "<group>"; };
 		71CD213721A1BB160082E5B7 /* Graphics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Graphics.swift; sourceTree = "<group>"; };
-		71CD213921A1C0A20082E5B7 /* Point.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Point.swift; sourceTree = "<group>"; };
 		71CD213B21A1C49A0082E5B7 /* Pixel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pixel.swift; sourceTree = "<group>"; };
 		71CD213D21A1C4C50082E5B7 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		71CD213F21A1CED80082E5B7 /* Renderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Renderer.swift; sourceTree = "<group>"; };
-		71CD214121A1E3FC0082E5B7 /* Size.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Size.swift; sourceTree = "<group>"; };
 		71CD214321A20EBD0082E5B7 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		71CD214621A2162D0082E5B7 /* Size+macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Size+macOS.swift"; sourceTree = "<group>"; };
 		71CD214821A4B3D20082E5B7 /* ShaderTypes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShaderTypes.h; sourceTree = "<group>"; };
@@ -79,6 +76,7 @@
 		71CD215421B1A5310082E5B7 /* Texture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Texture.swift; sourceTree = "<group>"; };
 		71CD215621B1A8610082E5B7 /* Sprite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sprite.swift; sourceTree = "<group>"; };
 		71CD215821B88AF40082E5B7 /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
+		71CF36CB21DC2920005CF148 /* Math.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Math.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -191,6 +189,7 @@
 			isa = PBXGroup;
 			children = (
 				71CD213221A1A6ED0082E5B7 /* Logger.swift */,
+				71CF36CB21DC2920005CF148 /* Math.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -200,8 +199,6 @@
 			children = (
 				71CD213721A1BB160082E5B7 /* Graphics.swift */,
 				71CD213B21A1C49A0082E5B7 /* Pixel.swift */,
-				71CD213921A1C0A20082E5B7 /* Point.swift */,
-				71CD214121A1E3FC0082E5B7 /* Size.swift */,
 				71CD213D21A1C4C50082E5B7 /* Color.swift */,
 			);
 			path = Graphics;
@@ -339,12 +336,12 @@
 			files = (
 				715FECED21720797009AE9B1 /* PixlrApplication.swift in Sources */,
 				71CD215921B88AF40082E5B7 /* Image.swift in Sources */,
-				71CD214221A1E3FD0082E5B7 /* Size.swift in Sources */,
 				71CD214D21AB5B860082E5B7 /* SpritesShaders.metal in Sources */,
 				715FECD721713D6E009AE9B1 /* PixlrAppDelegate.swift in Sources */,
 				71CD215721B1A8610082E5B7 /* Sprite.swift in Sources */,
 				71CD214021A1CED80082E5B7 /* Renderer.swift in Sources */,
 				71CD214C21AB5B860082E5B7 /* FramebufferShaders.metal in Sources */,
+				71CF36CC21DC2920005CF148 /* Math.swift in Sources */,
 				71375093216FD7E000AE9F75 /* Pixlr.swift in Sources */,
 				71CD214721A2162D0082E5B7 /* Size+macOS.swift in Sources */,
 				715FECE721714B12009AE9B1 /* MacOSPlatform.swift in Sources */,
@@ -355,7 +352,6 @@
 				71CD213521A1AC000082E5B7 /* MetalRenderer.swift in Sources */,
 				71CD215121B1A38A0082E5B7 /* Resources.swift in Sources */,
 				71CD213821A1BB160082E5B7 /* Graphics.swift in Sources */,
-				71CD213A21A1C0A20082E5B7 /* Point.swift in Sources */,
 				71CD215521B1A5310082E5B7 /* Texture.swift in Sources */,
 				715FED1221728E6B009AE9B1 /* MetalViewController.swift in Sources */,
 				71CD214421A20EBD0082E5B7 /* Config.swift in Sources */,
