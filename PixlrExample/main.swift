@@ -9,39 +9,47 @@
 import Foundation
 import Pixlr
 
-final class ExampleGame: Game {
-    private struct Sprites {
-        static let sadFace = ImageId(0)
+struct SadFace {
+    let pos: Point
+    let rotation: Angle
+    let scale: Float
+    
+    static let size = Size(width: 16.0, height: 16.0)
+    static let imageId = ImageId(0)
+    
+    init(position: Point, rotation: Angle, scale: Float) {
+        self.pos = position
+        self.rotation = rotation
+        self.scale = scale
     }
+}
+
+final class ExampleGame: Game {
+    private var faces: [SadFace] = []
     
     override func start() {
-        Resources.shared.loadImage(named: "sad-face", into: Sprites.sadFace)
+        Resources.shared.loadImage(named: "sad-face", into: SadFace.imageId)
+        
+        // start with some faces
+        let screenSize = Pixlr.config.screenSize
+        let numberOfFaces = 32
+        for _ in 0...numberOfFaces {
+            let position = Point(x: Float.random(in: 0.0...screenSize.width - SadFace.size.width),
+                                 y: Float.random(in: 0.0...screenSize.height - SadFace.size.height))
+            
+            let rotation = Angle.random(in: 0...Angle.twoPi)
+            let scale = Float.random(in: 0.0...3.0)
+            
+            let sadFace = SadFace(position: position, rotation: rotation, scale: scale)
+            
+            self.faces.append(sadFace)
+        }
     }
     
     override func draw(on gfx: Graphics) {
-        let screenSize = Pixlr.config.screenSize
-        let sadFaceSize: Float = 16.0
-        
-        // down left
-        //self.drawSprite(x: 0, y: self.spriteSize)
-        gfx.draw(image: Sprites.sadFace, x: 0, y: sadFaceSize)
-        
-        // down right
-        //self.drawSprite(x: width - self.spriteSize, y: self.spriteSize)
-        gfx.draw(image: Sprites.sadFace, x: screenSize.width - sadFaceSize, y: sadFaceSize)
-
-        // upper left
-        //self.drawSprite(x: 0, y: height)
-        gfx.draw(image: Sprites.sadFace, x: 0, y: screenSize.height)
-
-        // upper right
-        //self.drawSprite(x: width - self.spriteSize, y: height)
-        gfx.draw(image: Sprites.sadFace, x: screenSize.width - sadFaceSize, y: screenSize.height)
-
-        // center
-        gfx.draw(image: Sprites.sadFace,
-                 x: (screenSize.width - sadFaceSize / 2.0) / 2.0,
-                 y: (screenSize.height - sadFaceSize) / 2.0)
+        for face in self.faces {
+            gfx.draw(image: SadFace.imageId, at: face.pos, scale: face.scale, rotation: face.rotation)
+        }
     }
 }
 
