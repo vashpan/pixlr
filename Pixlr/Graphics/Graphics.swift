@@ -15,8 +15,8 @@ public typealias Angle = Float
 public class Graphics {
     // MARK: Types
     internal enum DrawCommand {
-        case drawSprite(sprite: Sprite, texture: Texture, position: Point)
-        case drawImage(image: Image, position: Point)
+        case drawSprite(sprite: Sprite, texture: Texture, position: Point, transform: Matrix3)
+        case drawImage(image: Image, position: Point, transform: Matrix3)
         case drawPixels(pixels: [Pixel])
     }
     
@@ -52,19 +52,33 @@ public class Graphics {
     }
     
     // MARK: Drawing
-    public func draw(sprite: SpriteId, from spriteSheet: SpriteSheetId, x: Float, y: Float, scale: Float = 1.0, rotation: Angle = 0.0) {
-        self.draw(sprite: sprite, from: spriteSheet, at: Point(x: x, y: y), scale: scale, rotation: rotation)
+    public func draw(sprite spriteId: SpriteId, from spriteSheet: SpriteSheetId, x: Float, y: Float, scale: Float = 1.0, rotation: Angle = 0.0) {
+        self.draw(sprite: spriteId, from: spriteSheet, at: Point(x: x, y: y), scale: scale, rotation: rotation)
     }
     
-    public func draw(sprite: SpriteId, from spriteSheet: SpriteSheetId, at position: Point, scale: Float = 1.0, rotation: Angle = 0.0) {
+    public func draw(sprite spriteId: SpriteId, from spriteSheet: SpriteSheetId, at position: Point, scale: Float = 1.0, rotation: Angle = 0.0) {
         guard self.drawingPossible else {
             Log.graphics.warning("Drawing is not possible in this scope!")
             return
         }
         
-        if let sheet = Resources.shared.spriteSheet(from: spriteSheet), let sprite = sheet.sprites[sprite] {
-            self.drawingCommands.append(.drawSprite(sprite: sprite, texture: sheet.texture, position: position))
+        guard let sheet = Resources.shared.spriteSheet(from: spriteSheet) else {
+            return
         }
+        
+        guard let sprite = sheet.sprites[spriteId] else {
+            Log.graphics.error("Cannot find sprite \(spriteId) ")
+            return
+        }
+        
+        // transform
+        let translate = Matrix3(translation: position)
+        let scale = Matrix3(scale: Vector2(x: scale, y: scale))
+        let rotate = Matrix3(rotation: rotation)
+        let transform = translate * scale * rotate
+        
+        // add drawing command
+        self.drawingCommands.append(.drawSprite(sprite: sprite, texture: sheet.texture, position: position, transform: transform))
     }
     
     public func draw(image: ImageId, x: Float, y: Float, scale: Float = 1.0, rotation: Angle = 0.0) {
@@ -77,9 +91,18 @@ public class Graphics {
             return
         }
         
-        if let image = Resources.shared.image(from: image) {
-            self.drawingCommands.append(.drawImage(image: image, position: position))
+        guard let image = Resources.shared.image(from: image) else {
+            return
         }
+        
+        // transform
+        let translate = Matrix3(translation: position)
+        let scale = Matrix3(scale: Vector2(x: scale, y: scale))
+        let rotate = Matrix3(rotation: rotation)
+        let transform = translate * scale * rotate
+        
+        // add drawing command
+        self.drawingCommands.append(.drawImage(image: image, position: position, transform: transform))
     }
     
     public func draw(pixels: [Pixel]) {

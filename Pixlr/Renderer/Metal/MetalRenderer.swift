@@ -300,7 +300,7 @@ internal class MetalRenderer: NSObject {
         
         for graphicCommand in graphicsCommands {
             switch graphicCommand {
-                case .drawSprite(let sprite, let texture, let position):
+                case .drawSprite(let sprite, let texture, let position, let transform):
                     let metalSprite = MetalSprite(pixlrSprite: sprite, position: position)
                     let metalTexture = texture.nativeTexture as? MTLTexture
                     
@@ -315,7 +315,7 @@ internal class MetalRenderer: NSObject {
                         currentTexture = metalTexture
                     }
                 
-                case .drawImage(let image, let position):
+                case .drawImage(let image, let position, let transform):
                     let metalSprite = MetalSprite(pixlrImage: image, position: position)
                     let metalTexture = image.texture.nativeTexture as? MTLTexture
                     
