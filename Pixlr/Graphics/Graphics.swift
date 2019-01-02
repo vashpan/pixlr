@@ -49,10 +49,14 @@ public class Graphics {
     
     // MARK: Drawing
     public func draw(sprite spriteId: SpriteId, from spriteSheet: SpriteSheetId, x: Float, y: Float, scale: Float = 1.0, rotation: Angle = 0.0) {
+        self.draw(sprite: spriteId, from: spriteSheet, at: Point(x: x, y: y), scale: Vector2(x: scale, y: scale), rotation: rotation)
+    }
+    
+    public func draw(sprite spriteId: SpriteId, from spriteSheet: SpriteSheetId, x: Float, y: Float, scale: Vector2 = Vector2(1.0), rotation: Angle = 0.0) {
         self.draw(sprite: spriteId, from: spriteSheet, at: Point(x: x, y: y), scale: scale, rotation: rotation)
     }
     
-    public func draw(sprite spriteId: SpriteId, from spriteSheet: SpriteSheetId, at position: Point, scale: Float = 1.0, rotation: Angle = 0.0) {
+    public func draw(sprite spriteId: SpriteId, from spriteSheet: SpriteSheetId, at position: Point, scale: Vector2 = Vector2(1.0), rotation: Angle = 0.0) {
         guard self.drawingPossible else {
             Log.graphics.warning("Drawing is not possible in this scope!")
             return
@@ -69,7 +73,7 @@ public class Graphics {
         
         // transform
         let translate = Matrix3(translation: position)
-        let scale = Matrix3(scale: Vector2(x: scale, y: scale))
+        let scale = Matrix3(scale: scale)
         let rotate = Matrix3(rotation: rotation)
         let transform = translate * scale * rotate
         
@@ -78,10 +82,14 @@ public class Graphics {
     }
     
     public func draw(image: ImageId, x: Float, y: Float, scale: Float = 1.0, rotation: Angle = 0.0) {
+        self.draw(image: image, at: Point(x: x, y: y), scale: Vector2(x: scale, y: scale), rotation: rotation)
+    }
+    
+    public func draw(image: ImageId, x: Float, y: Float, scale: Vector2 = Vector2(1.0), rotation: Angle = 0.0) {
         self.draw(image: image, at: Point(x: x, y: y), scale: scale, rotation: rotation)
     }
     
-    public func draw(image: ImageId, at position: Point, scale: Float = 1.0, rotation: Angle = 0.0) {
+    public func draw(image: ImageId, at position: Point, scale: Vector2 = Vector2(1.0), rotation: Angle = 0.0) {
         guard self.drawingPossible else {
             Log.graphics.warning("Drawing is not possible in this scope!")
             return
@@ -93,7 +101,7 @@ public class Graphics {
         
         // transform
         let translate = Matrix3(translation: position)
-        let scale = Matrix3(scale: Vector2(x: scale, y: scale))
+        let scale = Matrix3(scale: scale)
         let rotate = Matrix3(rotation: rotation)
         let transform = translate * scale * rotate
         

@@ -38,7 +38,7 @@ final class ExampleGame: Game {
                                  y: Float.random(in: 0.0...screenSize.height - SadFace.size.height))
             
             let rotation = Angle.random(in: 0...Angle.twoPi)
-            let scale = Float.random(in: 0.0...3.0)
+            let scale = Float.random(in: 0.2...3.0)
             
             let sadFace = SadFace(position: position, rotation: rotation, scale: scale)
             
@@ -48,7 +48,7 @@ final class ExampleGame: Game {
     
     override func draw(on gfx: Graphics) {
         for face in self.faces {
-            gfx.draw(image: SadFace.imageId, at: face.pos, scale: face.scale, rotation: face.rotation)
+            gfx.draw(image: SadFace.imageId, at: face.pos, scale: Vector2(face.scale), rotation: face.rotation)
         }
     }
 }
