@@ -123,6 +123,10 @@ public struct Vector2 {
         self.init(x: x, y: y)
     }
     
+    public init(_ value: Float) {
+        self.init(value, value)
+    }
+    
     // MARK: Functions
     public func dot(_ v: Vector2) -> Float {
         return self.x * v.x + self.y * v.y
