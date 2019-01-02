@@ -68,6 +68,11 @@ public struct Size {
     public let height: Float
     
     public static let zero = Size(width: 0.0, height: 0.0)
+    
+    public init(width: Float, height: Float) {
+        self.width = width
+        self.height = height
+    }
 }
 
 // MARK: 2 dimensional vector
