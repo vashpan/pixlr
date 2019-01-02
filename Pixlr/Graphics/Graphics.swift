@@ -15,8 +15,8 @@ public typealias Angle = Float
 public class Graphics {
     // MARK: Types
     internal enum DrawCommand {
-        case drawSprite(sprite: Sprite, texture: Texture, position: Point, transform: Matrix3)
-        case drawImage(image: Image, position: Point, transform: Matrix3)
+        case drawSprite(sprite: Sprite, texture: Texture, transform: Matrix3)
+        case drawImage(image: Image, transform: Matrix3)
         case drawPixels(pixels: [Pixel])
     }
     
@@ -78,7 +78,7 @@ public class Graphics {
         let transform = translate * scale * rotate
         
         // add drawing command
-        self.drawingCommands.append(.drawSprite(sprite: sprite, texture: sheet.texture, position: position, transform: transform))
+        self.drawingCommands.append(.drawSprite(sprite: sprite, texture: sheet.texture, transform: transform))
     }
     
     public func draw(image: ImageId, x: Float, y: Float, scale: Float = 1.0, rotation: Angle = 0.0) {
@@ -102,7 +102,7 @@ public class Graphics {
         let transform = translate * scale * rotate
         
         // add drawing command
-        self.drawingCommands.append(.drawImage(image: image, position: position, transform: transform))
+        self.drawingCommands.append(.drawImage(image: image, transform: transform))
     }
     
     public func draw(pixels: [Pixel]) {
