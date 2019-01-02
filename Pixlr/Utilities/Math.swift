@@ -43,14 +43,14 @@
 import Foundation
 
 public typealias Point = Vector2
+public typealias Angle = Float
 
 // MARK: Float additional utilities
 public extension Float {
     public static let halfPi = pi / 2
     public static let quarterPi = pi / 4
     public static let twoPi = pi * 2
-    public static let degreesPerRadian = 180 / pi
-    public static let radiansPerDegree = pi / 180
+    
     public static let epsilon: Float = 0.0001
     
     public static func ~= (lhs: Float, rhs: Float) -> Bool {
@@ -59,6 +59,20 @@ public extension Float {
     
     public var sign: Float {
         return self > 0 ? 1 : -1
+    }
+}
+
+// MARK: Angle additional utilities
+public extension Angle {
+    public static let degreesPerRadian = 180 / pi
+    public static let radiansPerDegree = pi / 180
+    
+    public init(radians: Float) {
+        self = radians
+    }
+    
+    public init(degrees: Float) {
+        self = degrees * Angle.radiansPerDegree
     }
 }
 

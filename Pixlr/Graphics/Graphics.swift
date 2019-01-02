@@ -8,10 +8,6 @@
 
 import Foundation
 
-// MARK: Helper types
-public typealias Angle = Float
-
-// MARK: - Graphics interface
 public class Graphics {
     // MARK: Types
     internal enum DrawCommand {
