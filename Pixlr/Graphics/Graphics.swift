@@ -130,7 +130,7 @@ public class Graphics {
         self.drawingCommands.append(.drawPixels(pixels: pixels))
     }
     
-    public func draw(text: String, x: Float, y: Float) {
+    public func draw(text: String, at position: Point) {
         guard self.drawingPossible else {
             Log.graphics.warning("Drawing is not possible in this scope!")
             return
@@ -138,9 +138,5 @@ public class Graphics {
         
         // FIXME: Implement text drawing
         Log.graphics.info("Drawing text not implemented yet!")
-    }
-    
-    public func draw(text: String, at position: Point) {
-        self.draw(text: text, x: position.x, y: position.y)
     }
 }
