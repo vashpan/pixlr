@@ -6,7 +6,6 @@
 //  Copyright © 2018 One Minute Games. All rights reserved.
 //
 
-import Cocoa
 import MetalKit
 
 internal class MetalViewController: NSViewController {
@@ -79,6 +78,8 @@ extension MetalViewController: MTKViewDelegate {
     }
     
     func draw(in view: MTKView) {
+        self.currentGame.update(dt: 1.0 / 60.0)
+        
         self.graphics.beginFrame()
         self.currentGame.draw(on: self.graphics)
         self.graphics.endFrame()
