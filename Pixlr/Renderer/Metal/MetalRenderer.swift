@@ -15,6 +15,7 @@ internal class MetalRenderer: NSObject {
     // MARK: Types
     private struct MetalSprite {
         let a, b, c, d: Point
+        let cr, cg, cb, ca: Float
         
         let u: Float
         let v: Float
@@ -22,17 +23,17 @@ internal class MetalRenderer: NSObject {
         var vertices: [PIXSpriteVertex] {
             // FIXME: Calculate vertex uv according to sprite u,v,w,h and texture
             return [
-                PIXSpriteVertex(position: vector_float2(a.x, a.y), color: vector_float4(1.0, 1.0, 1.0, 1.0), uv: vector_float2(0.0, 1.0)),
-                PIXSpriteVertex(position: vector_float2(d.x, d.y), color: vector_float4(1.0, 1.0, 1.0, 1.0), uv: vector_float2(0.0, 0.0)),
-                PIXSpriteVertex(position: vector_float2(c.x, c.y), color: vector_float4(1.0, 1.0, 1.0, 1.0), uv: vector_float2(1.0, 0.0)),
+                PIXSpriteVertex(position: vector_float2(a.x, a.y), color: vector_float4(cr, cg, cb, ca), uv: vector_float2(0.0, 1.0)),
+                PIXSpriteVertex(position: vector_float2(d.x, d.y), color: vector_float4(cr, cg, cb, ca), uv: vector_float2(0.0, 0.0)),
+                PIXSpriteVertex(position: vector_float2(c.x, c.y), color: vector_float4(cr, cg, cb, ca), uv: vector_float2(1.0, 0.0)),
                 
-                PIXSpriteVertex(position: vector_float2(c.x, c.y), color: vector_float4(1.0, 1.0, 1.0, 1.0), uv: vector_float2(1.0, 0.0)),
-                PIXSpriteVertex(position: vector_float2(b.x, b.y), color: vector_float4(1.0, 1.0, 1.0, 1.0), uv: vector_float2(1.0, 1.0)),
-                PIXSpriteVertex(position: vector_float2(a.x, a.y), color: vector_float4(1.0, 1.0, 1.0, 1.0), uv: vector_float2(0.0, 1.0))
+                PIXSpriteVertex(position: vector_float2(c.x, c.y), color: vector_float4(cr, cg, cb, ca), uv: vector_float2(1.0, 0.0)),
+                PIXSpriteVertex(position: vector_float2(b.x, b.y), color: vector_float4(cr, cg, cb, ca), uv: vector_float2(1.0, 1.0)),
+                PIXSpriteVertex(position: vector_float2(a.x, a.y), color: vector_float4(cr, cg, cb, ca), uv: vector_float2(0.0, 1.0))
             ]
         }
         
-        init(pixlrSprite: Sprite, transform: Matrix3) {
+        init(pixlrSprite: Sprite, color: Color, transform: Matrix3) {
             let w = pixlrSprite.size.width
             let h = pixlrSprite.size.height
             
@@ -41,12 +42,17 @@ internal class MetalRenderer: NSObject {
             self.c = Point(x: 0 + w, y: 0 + h) * transform
             self.d = Point(x: 0, y: 0 + h) * transform
             
+            self.cr = Float(color.r) / 255.0
+            self.cg = Float(color.g) / 255.0
+            self.cb = Float(color.b) / 255.0
+            self.ca = Float(color.a) / 255.0
+            
             // FIXME: Fill after adding support for sprite sheets
             self.u = 0.0
             self.v = 0.0
         }
         
-        init(pixlrImage: Image, transform: Matrix3) {
+        init(pixlrImage: Image, color: Color, transform: Matrix3) {
             let w = pixlrImage.size.width
             let h = pixlrImage.size.height
             
@@ -54,6 +60,11 @@ internal class MetalRenderer: NSObject {
             self.b = Point(x: 0 + w, y: 0) * transform
             self.c = Point(x: 0 + w, y: 0 + h) * transform
             self.d = Point(x: 0, y: 0 + h) * transform
+            
+            self.cr = Float(color.r) / 255.0
+            self.cg = Float(color.g) / 255.0
+            self.cb = Float(color.b) / 255.0
+            self.ca = Float(color.a) / 255.0
             
             self.u = 0.0 // top left corner of image
             self.v = 0.0
@@ -300,8 +311,8 @@ internal class MetalRenderer: NSObject {
         
         for graphicCommand in graphicsCommands {
             switch graphicCommand {
-                case .drawSprite(let sprite, let texture, let transform):
-                    let metalSprite = MetalSprite(pixlrSprite: sprite, transform: transform)
+                case .drawSprite(let sprite, let texture, let color, let transform):
+                    let metalSprite = MetalSprite(pixlrSprite: sprite, color: color, transform: transform)
                     let metalTexture = texture.nativeTexture as? MTLTexture
                     
                     // batch this sprite if it's using the same texture
@@ -315,8 +326,8 @@ internal class MetalRenderer: NSObject {
                         currentTexture = metalTexture
                     }
                 
-                case .drawImage(let image, let transform):
-                    let metalSprite = MetalSprite(pixlrImage: image, transform: transform)
+                case .drawImage(let image, let color, let transform):
+                    let metalSprite = MetalSprite(pixlrImage: image, color: color, transform: transform)
                     let metalTexture = image.texture.nativeTexture as? MTLTexture
                     
                     // batch this sprite if it's using the same texture
