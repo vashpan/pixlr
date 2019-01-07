@@ -53,7 +53,7 @@
 		715FECE421714A8F009AE9B1 /* Platform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Platform.swift; sourceTree = "<group>"; };
 		715FECE621714B12009AE9B1 /* MacOSPlatform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacOSPlatform.swift; sourceTree = "<group>"; };
 		715FECEC21720797009AE9B1 /* PixlrApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PixlrApplication.swift; sourceTree = "<group>"; };
-		715FED1121728E6B009AE9B1 /* MetalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetalViewController.swift; sourceTree = "<group>"; };
+		715FED1121728E6B009AE9B1 /* MetalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetalViewController.swift; sourceTree = "<group>"; wrapsLines = 1; };
 		7189BCA2216E8BFC0078034A /* Pixlr.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pixlr.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7189BCA5216E8BFC0078034A /* Pixlr.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Pixlr.h; sourceTree = "<group>"; };
 		7189BCA6216E8BFC0078034A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };

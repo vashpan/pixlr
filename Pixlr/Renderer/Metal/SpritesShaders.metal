@@ -15,6 +15,7 @@ using namespace metal;
 // Vertex shader outputs and fragment shader inputs
 typedef struct {
     float4 position [[position]];
+    float4 color;
     float2 uv;
     
 } RasterizerData;
@@ -35,6 +36,9 @@ spritesVertexShader(uint vertexID [[vertex_id]],
     // Map viewport position to Metal space
     out.position.xy = (vertexPosition / viewportSize - 0.5) * 2.0;
     
+    // Pass color further
+    out.color = vertices[vertexID].color;
+    
     // Pass UV further
     out.uv = vertices[vertexID].uv;
     
@@ -49,7 +53,7 @@ float4 spritesFragmentShader(RasterizerData in [[stage_in]],
                                       min_filter::nearest);
     
     // Sample the texture to obtain a color
-    const half4 colorSample = colorTexture.sample(textureSampler, in.uv);
+    const half4 colorSample = colorTexture.sample(textureSampler, in.uv) * half4(in.color);
 
     return float4(colorSample);
 }

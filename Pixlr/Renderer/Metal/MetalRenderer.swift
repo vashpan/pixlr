@@ -22,13 +22,13 @@ internal class MetalRenderer: NSObject {
         var vertices: [PIXSpriteVertex] {
             // FIXME: Calculate vertex uv according to sprite u,v,w,h and texture
             return [
-                PIXSpriteVertex(position: vector_float2(a.x, a.y), uv: vector_float2(0.0, 1.0)),
-                PIXSpriteVertex(position: vector_float2(d.x, d.y), uv: vector_float2(0.0, 0.0)),
-                PIXSpriteVertex(position: vector_float2(c.x, c.y), uv: vector_float2(1.0, 0.0)),
+                PIXSpriteVertex(position: vector_float2(a.x, a.y), color: vector_float4(1.0, 1.0, 1.0, 1.0), uv: vector_float2(0.0, 1.0)),
+                PIXSpriteVertex(position: vector_float2(d.x, d.y), color: vector_float4(1.0, 1.0, 1.0, 1.0), uv: vector_float2(0.0, 0.0)),
+                PIXSpriteVertex(position: vector_float2(c.x, c.y), color: vector_float4(1.0, 1.0, 1.0, 1.0), uv: vector_float2(1.0, 0.0)),
                 
-                PIXSpriteVertex(position: vector_float2(c.x, c.y), uv: vector_float2(1.0, 0.0)),
-                PIXSpriteVertex(position: vector_float2(b.x, b.y), uv: vector_float2(1.0, 1.0)),
-                PIXSpriteVertex(position: vector_float2(a.x, a.y), uv: vector_float2(0.0, 1.0))
+                PIXSpriteVertex(position: vector_float2(c.x, c.y), color: vector_float4(1.0, 1.0, 1.0, 1.0), uv: vector_float2(1.0, 0.0)),
+                PIXSpriteVertex(position: vector_float2(b.x, b.y), color: vector_float4(1.0, 1.0, 1.0, 1.0), uv: vector_float2(1.0, 1.0)),
+                PIXSpriteVertex(position: vector_float2(a.x, a.y), color: vector_float4(1.0, 1.0, 1.0, 1.0), uv: vector_float2(0.0, 1.0))
             ]
         }
         
