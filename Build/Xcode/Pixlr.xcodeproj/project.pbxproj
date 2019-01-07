@@ -34,6 +34,7 @@
 		71CD215721B1A8610082E5B7 /* Sprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71CD215621B1A8610082E5B7 /* Sprite.swift */; };
 		71CD215921B88AF40082E5B7 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71CD215821B88AF40082E5B7 /* Image.swift */; };
 		71CF36CC21DC2920005CF148 /* Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71CF36CB21DC2920005CF148 /* Math.swift */; };
+		71DF28EC21E40F9C00507A85 /* Color+macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71DF28EB21E40F9C00507A85 /* Color+macOS.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,6 +78,7 @@
 		71CD215621B1A8610082E5B7 /* Sprite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sprite.swift; sourceTree = "<group>"; };
 		71CD215821B88AF40082E5B7 /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		71CF36CB21DC2920005CF148 /* Math.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Math.swift; sourceTree = "<group>"; };
+		71DF28EB21E40F9C00507A85 /* Color+macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+macOS.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -208,6 +210,7 @@
 			isa = PBXGroup;
 			children = (
 				71CD214621A2162D0082E5B7 /* Size+macOS.swift */,
+				71DF28EB21E40F9C00507A85 /* Color+macOS.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -351,6 +354,7 @@
 				715FECE521714A8F009AE9B1 /* Platform.swift in Sources */,
 				71CD213521A1AC000082E5B7 /* MetalRenderer.swift in Sources */,
 				71CD215121B1A38A0082E5B7 /* Resources.swift in Sources */,
+				71DF28EC21E40F9C00507A85 /* Color+macOS.swift in Sources */,
 				71CD213821A1BB160082E5B7 /* Graphics.swift in Sources */,
 				71CD215521B1A5310082E5B7 /* Texture.swift in Sources */,
 				715FED1221728E6B009AE9B1 /* MetalViewController.swift in Sources */,
