@@ -16,6 +16,7 @@ using namespace metal;
 typedef struct {
     float4 position [[position]];
     float4 color;
+    bool isColorOverlay;
     float2 uv;
     
 } RasterizerData;
@@ -38,6 +39,7 @@ spritesVertexShader(uint vertexID [[vertex_id]],
     
     // Pass color further
     out.color = vertices[vertexID].color;
+    out.isColorOverlay = vertices[vertexID].isColorOverlay;
     
     // Pass UV further
     out.uv = vertices[vertexID].uv;
@@ -53,7 +55,8 @@ float4 spritesFragmentShader(RasterizerData in [[stage_in]],
                                       min_filter::nearest);
     
     // Sample the texture to obtain a color
-    const half4 colorSample = colorTexture.sample(textureSampler, in.uv) * half4(in.color);
+    const half4 colorSample = !in.isColorOverlay ? colorTexture.sample(textureSampler, in.uv) * half4(in.color)
+                                                 : half4(in.color);
 
     return float4(colorSample);
 }

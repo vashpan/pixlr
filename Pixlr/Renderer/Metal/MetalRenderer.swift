@@ -16,6 +16,7 @@ internal class MetalRenderer: NSObject {
     private struct MetalSprite {
         let a, b, c, d: Point
         let cr, cg, cb, ca: Float
+        let colorIsOverlay: Bool
         
         let u: Float
         let v: Float
@@ -23,13 +24,13 @@ internal class MetalRenderer: NSObject {
         var vertices: [PIXSpriteVertex] {
             // FIXME: Calculate vertex uv according to sprite u,v,w,h and texture
             return [
-                PIXSpriteVertex(position: vector_float2(a.x, a.y), color: vector_float4(cr, cg, cb, ca), uv: vector_float2(0.0, 1.0)),
-                PIXSpriteVertex(position: vector_float2(d.x, d.y), color: vector_float4(cr, cg, cb, ca), uv: vector_float2(0.0, 0.0)),
-                PIXSpriteVertex(position: vector_float2(c.x, c.y), color: vector_float4(cr, cg, cb, ca), uv: vector_float2(1.0, 0.0)),
-                
-                PIXSpriteVertex(position: vector_float2(c.x, c.y), color: vector_float4(cr, cg, cb, ca), uv: vector_float2(1.0, 0.0)),
-                PIXSpriteVertex(position: vector_float2(b.x, b.y), color: vector_float4(cr, cg, cb, ca), uv: vector_float2(1.0, 1.0)),
-                PIXSpriteVertex(position: vector_float2(a.x, a.y), color: vector_float4(cr, cg, cb, ca), uv: vector_float2(0.0, 1.0))
+                PIXSpriteVertex(position: vector_float2(a.x, a.y), color: vector_float4(cr, cg, cb, ca), isColorOverlay: colorIsOverlay, uv: vector_float2(0.0, 1.0)),
+                PIXSpriteVertex(position: vector_float2(d.x, d.y), color: vector_float4(cr, cg, cb, ca), isColorOverlay: colorIsOverlay, uv: vector_float2(0.0, 0.0)),
+                PIXSpriteVertex(position: vector_float2(c.x, c.y), color: vector_float4(cr, cg, cb, ca), isColorOverlay: colorIsOverlay, uv: vector_float2(1.0, 0.0)),
+
+                PIXSpriteVertex(position: vector_float2(c.x, c.y), color: vector_float4(cr, cg, cb, ca), isColorOverlay: colorIsOverlay, uv: vector_float2(1.0, 0.0)),
+                PIXSpriteVertex(position: vector_float2(b.x, b.y), color: vector_float4(cr, cg, cb, ca), isColorOverlay: colorIsOverlay, uv: vector_float2(1.0, 1.0)),
+                PIXSpriteVertex(position: vector_float2(a.x, a.y), color: vector_float4(cr, cg, cb, ca), isColorOverlay: colorIsOverlay, uv: vector_float2(0.0, 1.0))
             ]
         }
         
@@ -46,6 +47,7 @@ internal class MetalRenderer: NSObject {
             self.cg = Float(color.g) / 255.0
             self.cb = Float(color.b) / 255.0
             self.ca = Float(color.a) / 255.0
+            self.colorIsOverlay = color.isOverlay
             
             // FIXME: Fill after adding support for sprite sheets
             self.u = 0.0
@@ -65,6 +67,7 @@ internal class MetalRenderer: NSObject {
             self.cg = Float(color.g) / 255.0
             self.cb = Float(color.b) / 255.0
             self.ca = Float(color.a) / 255.0
+            self.colorIsOverlay = color.isOverlay
             
             self.u = 0.0 // top left corner of image
             self.v = 0.0

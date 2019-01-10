@@ -34,6 +34,7 @@ typedef enum PIXFramebufferTextureIndex {
 typedef struct {
     vector_float2 position;
     vector_float4 color;
+    bool isColorOverlay;
     vector_float2 uv;
 } PIXSpriteVertex;
 
