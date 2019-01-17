@@ -17,11 +17,13 @@ internal class MetalViewController: NSViewController {
     private var renderer: MetalRenderer!
     
     private let targetGameScreenSize: Size
+    private let screenScaleMode: Config.ScreenScaleMode
     
     // MARK: Initialization & overrides
-    internal init(game: Game, targetGameScreenSize: Size) {
+    internal init(game: Game, targetGameScreenSize: Size, scaleMode: Config.ScreenScaleMode) {
         self.currentGame = game
         self.targetGameScreenSize = targetGameScreenSize
+        self.screenScaleMode = scaleMode
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -44,7 +46,7 @@ internal class MetalViewController: NSViewController {
         self.metalView = MTKView(frame: frame, device: defaultMetalDevice)
         self.view = self.metalView
         
-        guard let newRenderer = MetalRenderer(metalKitView: self.metalView, targetGameScreenSize: self.targetGameScreenSize) else {
+        guard let newRenderer = MetalRenderer(metalKitView: self.metalView, targetGameScreenSize: self.targetGameScreenSize, scaleMode: self.screenScaleMode) else {
             Log.graphics.error("Cannot create Metal renderer!")
             return
         }
@@ -56,7 +58,7 @@ internal class MetalViewController: NSViewController {
         platform.renderer = newRenderer
         
         self.renderer = newRenderer
-        self.graphics = Graphics(renderer: self.renderer, screenSize: self.targetGameScreenSize)
+        self.graphics = Graphics(renderer: self.renderer, screenSize: self.targetGameScreenSize, scaleMode: self.screenScaleMode)
         
         self.mtkView(self.metalView, drawableSizeWillChange: self.metalView.drawableSize)
     }

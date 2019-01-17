@@ -23,10 +23,12 @@ public class Graphics {
     private var drawingCommands: [DrawCommand] = []
     
     public private(set) var screenSize: Size
+    public private(set) var screenScaleMode: Config.ScreenScaleMode
     
     // MARK: Initialization
-    internal init(renderer: Renderer, screenSize: Size) {
+    internal init(renderer: Renderer, screenSize: Size, scaleMode: Config.ScreenScaleMode) {
         self.screenSize = screenSize
+        self.screenScaleMode = scaleMode
         self.renderer = renderer
     }
     

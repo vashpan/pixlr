@@ -92,6 +92,7 @@ internal class MetalRenderer: NSObject {
     
     private var viewportSize: vector_uint2
     private var gameViewportSize: vector_uint2
+    private let gameViewportScaleMode: Config.ScreenScaleMode
     
     private let spritesVerticesBuffer: MTLBuffer
     
@@ -99,7 +100,7 @@ internal class MetalRenderer: NSObject {
     private let maxSprites = 8192
     
     // MARK: Initialization
-    internal init?(metalKitView: MTKView, targetGameScreenSize: Size) {
+    internal init?(metalKitView: MTKView, targetGameScreenSize: Size, scaleMode: Config.ScreenScaleMode) {
         guard let device = metalKitView.device else {
             Log.graphics.error("Cannot get Metal device!")
             return nil
@@ -158,6 +159,7 @@ internal class MetalRenderer: NSObject {
         
         // reset viewports
         self.gameViewportSize = targetGameScreenSize.simdSize
+        self.gameViewportScaleMode = scaleMode
         self.viewportSize = vector_uint2()
         
         super.init()
