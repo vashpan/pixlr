@@ -90,7 +90,7 @@ internal class MetalRenderer: NSObject {
     private var spritesPipeline: MTLRenderPipelineState
     private var renderPipeline: MTLRenderPipelineState
     
-    private var viewportSize: vector_uint2
+    private var realViewportSize: vector_uint2
     private var gameViewportSize: vector_uint2
     private let gameViewportScaleMode: Config.ScreenScaleMode
     
@@ -160,7 +160,7 @@ internal class MetalRenderer: NSObject {
         // reset viewports
         self.gameViewportSize = targetGameScreenSize.simdSize
         self.gameViewportScaleMode = scaleMode
-        self.viewportSize = vector_uint2()
+        self.realViewportSize = vector_uint2()
         
         super.init()
     }
@@ -412,7 +412,7 @@ internal class MetalRenderer: NSObject {
     }
     
     private func scaleRenderPhase(commandBuffer: MTLCommandBuffer, in view: MTKView) {
-        let vertices = self.framebufferVertices(gameViewportSize: self.gameViewportSize, viewportSize: self.viewportSize)
+        let vertices = self.framebufferVertices(gameViewportSize: self.gameViewportSize, viewportSize: self.realViewportSize)
         let verticesCount = vertices.count
         
         // obtain a renderPassDescriptor generated fro view's drawable textures
@@ -431,12 +431,12 @@ internal class MetalRenderer: NSObject {
         
         // set the drawable region & state
         renderEncoder.setViewport(MTLViewport(originX: 0.0, originY: 0.0,
-                                              width: Double(self.viewportSize.x), height: Double(self.viewportSize.y),
+                                              width: Double(self.realViewportSize.x), height: Double(self.realViewportSize.y),
                                               znear: -1.0, zfar: 1.0))
         renderEncoder.setRenderPipelineState(self.renderPipeline)
         
         // send viewport size
-        renderEncoder.setVertexBytes(&self.viewportSize,
+        renderEncoder.setVertexBytes(&self.realViewportSize,
                                      length: MemoryLayout<vector_uint2>.size,
                                      index: Int(PIXFramebufferVertexInputIndexViewportSize.rawValue))
         
@@ -460,7 +460,7 @@ internal class MetalRenderer: NSObject {
 // MARK: Pixlr Renderer conformance
 extension MetalRenderer: Renderer {    
     func viewportWillChange(to size: Size) {
-        self.viewportSize = size.simdSize
+        self.realViewportSize = size.simdSize
     }
     
     func performDrawCommands(commands: [Graphics.DrawCommand]) {
