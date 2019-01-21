@@ -76,7 +76,21 @@ internal class MetalViewController: NSViewController {
 // MARK: - MTKViewDelegate functions
 extension MetalViewController: MTKViewDelegate {
     func mtkView(_ view: MTKView, drawableSizeWillChange size: CGSize) {
-        self.renderer.viewportWillChange(to: Size(cgSize: size))
+        let realSize = Size(cgSize: size)
+        var gameSize = Pixlr.config.screenSize
+        switch self.screenScaleMode {
+            case .keepHeight:
+                let heightFactor = gameSize.height / realSize.height
+                gameSize.width = realSize.width * heightFactor
+            case .keepWidth:
+                let widthFactor = gameSize.width / realSize.width
+                gameSize.height = realSize.height * widthFactor
+            
+            case .keepWidthAndHeight:
+                break // do nothing in this case as game viewport will be constant
+        }
+        
+        self.renderer.viewportWillChange(realSize: realSize, gameSize: gameSize)
     }
     
     func draw(in view: MTKView) {

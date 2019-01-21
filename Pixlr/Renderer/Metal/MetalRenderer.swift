@@ -459,8 +459,11 @@ internal class MetalRenderer: NSObject {
 
 // MARK: Pixlr Renderer conformance
 extension MetalRenderer: Renderer {    
-    func viewportWillChange(to size: Size) {
-        self.realViewportSize = size.simdSize
+    func viewportWillChange(realSize: Size, gameSize: Size) {
+        self.realViewportSize = realSize.simdSize
+        self.gameViewportSize = gameSize.simdSize
+        
+        Log.graphics.info("Game Viewport: \(self.gameViewportSize)")
     }
     
     func performDrawCommands(commands: [Graphics.DrawCommand]) {
