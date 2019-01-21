@@ -78,8 +78,8 @@ public extension Angle {
 
 // MARK: Size
 public struct Size {
-    public let width: Float
-    public let height: Float
+    public var width: Float
+    public var height: Float
     
     public static let zero = Size(width: 0.0, height: 0.0)
     
