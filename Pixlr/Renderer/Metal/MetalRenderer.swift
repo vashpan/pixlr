@@ -458,10 +458,18 @@ internal class MetalRenderer: NSObject {
 // MARK: Pixlr Renderer conformance
 extension MetalRenderer: Renderer {    
     func viewportWillChange(realSize: Size, gameSize: Size) {
+        guard let view = self.metalKitView else {
+            return
+        }
+        
         self.realViewportSize = realSize.simdSize
         self.gameViewportSize = gameSize.simdSize
         
-        Log.graphics.info("Game Viewport: \(self.gameViewportSize)")
+        // remake current render target texture
+        let targetPixelFormat = view.colorPixelFormat
+        self.spritesFramebuffer = MetalRenderer.createSpritesFramebufferTexture(using: self.device,
+                                                                                pixelFormat: targetPixelFormat,
+                                                                                size: gameSize)
     }
     
     func performDrawCommands(commands: [Graphics.DrawCommand]) {
