@@ -9,6 +9,16 @@
 import Foundation
 import Pixlr
 
+final class SadFaceConfig: Config {
+    override var screenSize: Size {
+        return Size(width: 320.0, height: 240.0)
+    }
+    
+    override var scaleMode: Config.ScreenScaleMode {
+        return .keepWidth
+    }
+}
+
 class SadFace {
     var pos: Point
     var rotation: Angle
@@ -46,14 +56,15 @@ final class ExampleGame: Game {
     private var faces: [SadFace] = []
     
     override func start() {
+        super.start()
+        
         Resources.shared.loadImage(named: "sad-face", into: SadFace.imageId)
         
         // start with some faces
-        let screenSize = Pixlr.config.screenSize
         let numberOfFaces = 32
         for _ in 0...numberOfFaces {
-            let position = Point(x: Float.random(in: 0.0...screenSize.width - SadFace.radius),
-                                 y: Float.random(in: 0.0...screenSize.height - SadFace.radius))
+            let position = Point(x: Float.random(in: 0.0...self.screenSize.width - SadFace.radius),
+                                 y: Float.random(in: 0.0...self.screenSize.height - SadFace.radius))
             
             let rotation = Angle.random(in: 0...Angle.twoPi)
             let scale = Float.random(in: 0.2...3.0)
@@ -71,12 +82,10 @@ final class ExampleGame: Game {
     }
     
     override func update(dt: TimeInterval) {
-        let screenSize = Pixlr.config.screenSize
-        
         for face in self.faces {
-            face.update(dt: dt, screenSize: screenSize)
+            face.update(dt: dt, screenSize: self.screenSize)
         }
     }
 }
 
-Pixlr.run(game: ExampleGame())
+Pixlr.run(game: ExampleGame(), with: SadFaceConfig())
