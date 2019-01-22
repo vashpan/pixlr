@@ -77,7 +77,7 @@ public extension Angle {
 }
 
 // MARK: Size
-public struct Size {
+public struct Size: Equatable {
     public var width: Float
     public var height: Float
     
