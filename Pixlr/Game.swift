@@ -9,14 +9,21 @@
 import Foundation
 
 open class Game: NSObject {
+    // MARK: Properties
+    public internal(set) var screenSize: Size
+    
     // MARK: Initialization
     public override init() {
-        
+        self.screenSize = .zero
     }
     
     // MARK: Game lifecycle
     open func start() {
-        
+        // some checks
+        guard self.screenSize != Size.zero else {
+            Log.global.error("Game: screen size not set!?")
+            return
+        }
     }
     
     open func onAppResume() {

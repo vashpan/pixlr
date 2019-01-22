@@ -44,9 +44,10 @@ internal class MetalViewController: NSViewController {
         
         let frame = NSRect(origin: .zero, size: mainWindow.frame.size)
         self.metalView = MTKView(frame: frame, device: defaultMetalDevice)
+        self.metalView.delegate = self
         self.view = self.metalView
         
-        guard let newRenderer = MetalRenderer(metalKitView: self.metalView, targetGameScreenSize: self.targetGameScreenSize, scaleMode: self.screenScaleMode) else {
+        guard let newRenderer = MetalRenderer(metalKitView: self.metalView, targetGameScreenSize: self.targetGameScreenSize) else {
             Log.graphics.error("Cannot create Metal renderer!")
             return
         }
@@ -58,15 +59,13 @@ internal class MetalViewController: NSViewController {
         platform.renderer = newRenderer
         
         self.renderer = newRenderer
-        self.graphics = Graphics(renderer: self.renderer, screenSize: self.targetGameScreenSize, scaleMode: self.screenScaleMode)
+        self.graphics = Graphics(renderer: self.renderer)
         
         self.mtkView(self.metalView, drawableSizeWillChange: self.metalView.drawableSize)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        self.metalView.delegate = self
         
         // start game
         self.currentGame.start()
@@ -77,7 +76,7 @@ internal class MetalViewController: NSViewController {
 extension MetalViewController: MTKViewDelegate {
     func mtkView(_ view: MTKView, drawableSizeWillChange size: CGSize) {
         let realSize = Size(cgSize: size)
-        var gameSize = Pixlr.config.screenSize
+        var gameSize = self.targetGameScreenSize
         switch self.screenScaleMode {
             case .keepHeight:
                 let heightFactor = gameSize.height / realSize.height
@@ -89,6 +88,8 @@ extension MetalViewController: MTKViewDelegate {
             case .keepWidthAndHeight:
                 break // do nothing in this case as game viewport will be constant
         }
+        
+        self.currentGame.screenSize = gameSize
         
         self.renderer.viewportWillChange(realSize: realSize, gameSize: gameSize)
     }

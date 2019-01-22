@@ -22,19 +22,9 @@ public class Graphics {
     private var drawingPossible = false
     private var drawingCommands: [DrawCommand] = []
     
-    public private(set) var screenSize: Size
-    public private(set) var screenScaleMode: Config.ScreenScaleMode
-    
     // MARK: Initialization
-    internal init(renderer: Renderer, screenSize: Size, scaleMode: Config.ScreenScaleMode) {
-        self.screenSize = screenSize
-        self.screenScaleMode = scaleMode
+    internal init(renderer: Renderer) {
         self.renderer = renderer
-    }
-    
-    // MARK: Updating state
-    internal func updateScreenSize(size: Size) {
-        self.screenSize = size
     }
     
     // MARK: Frame processing

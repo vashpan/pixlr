@@ -92,7 +92,6 @@ internal class MetalRenderer: NSObject {
     
     private var realViewportSize: vector_uint2
     private var gameViewportSize: vector_uint2
-    private let gameViewportScaleMode: Config.ScreenScaleMode
     
     private let spritesVerticesBuffer: MTLBuffer
     
@@ -100,7 +99,7 @@ internal class MetalRenderer: NSObject {
     private let maxSprites = 8192
     
     // MARK: Initialization
-    internal init?(metalKitView: MTKView, targetGameScreenSize: Size, scaleMode: Config.ScreenScaleMode) {
+    internal init?(metalKitView: MTKView, targetGameScreenSize: Size) {
         guard let device = metalKitView.device else {
             Log.graphics.error("Cannot get Metal device!")
             return nil
@@ -159,7 +158,6 @@ internal class MetalRenderer: NSObject {
         
         // reset viewports
         self.gameViewportSize = targetGameScreenSize.simdSize
-        self.gameViewportScaleMode = scaleMode
         self.realViewportSize = vector_uint2()
         
         super.init()
@@ -227,9 +225,9 @@ internal class MetalRenderer: NSObject {
     }
     
     // MARK: Utils
-    private func framebufferVertices(gameViewportSize: vector_uint2, viewportSize: vector_uint2) -> [PIXFramebufferVertex] {
-        let widthRatio = Float(viewportSize.x) / Float(gameViewportSize.x)
-        let heightRatio = Float(viewportSize.y) / Float(gameViewportSize.y)
+    private func framebufferVertices(gameViewportSize: vector_uint2, realViewportSize: vector_uint2) -> [PIXFramebufferVertex] {
+        let widthRatio = Float(realViewportSize.x) / Float(gameViewportSize.x)
+        let heightRatio = Float(realViewportSize.y) / Float(gameViewportSize.y)
         
         let realWidth = Float(gameViewportSize.x) * heightRatio
         let realHeight = Float(gameViewportSize.y) * widthRatio
@@ -238,17 +236,17 @@ internal class MetalRenderer: NSObject {
         let yStart: Float, yStop: Float
         
         if heightRatio < widthRatio {
-            xStart = (Float(viewportSize.x) - realWidth) / 2.0
+            xStart = (Float(realViewportSize.x) - realWidth) / 2.0
             xStop = xStart + realWidth
             
             yStart = 0.0
-            yStop = Float(viewportSize.y)
+            yStop = Float(realViewportSize.y)
             
         } else {
             xStart = 0.0
-            xStop = Float(viewportSize.x)
+            xStop = Float(realViewportSize.x)
             
-            yStart = (Float(viewportSize.y) - realHeight) / 2.0
+            yStart = (Float(realViewportSize.y) - realHeight) / 2.0
             yStop = yStart + realHeight
         }
         
@@ -412,7 +410,7 @@ internal class MetalRenderer: NSObject {
     }
     
     private func scaleRenderPhase(commandBuffer: MTLCommandBuffer, in view: MTKView) {
-        let vertices = self.framebufferVertices(gameViewportSize: self.gameViewportSize, viewportSize: self.realViewportSize)
+        let vertices = self.framebufferVertices(gameViewportSize: self.gameViewportSize, realViewportSize: self.realViewportSize)
         let verticesCount = vertices.count
         
         // obtain a renderPassDescriptor generated fro view's drawable textures
