@@ -10,7 +10,7 @@ import Foundation
 import Pixlr
 
 final class SadFaceConfig: Config {
-    override var screenSize: Size {
+    override var targetScreenSize: Size {
         return Size(width: 320.0, height: 240.0)
     }
     

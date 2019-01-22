@@ -15,7 +15,7 @@ open class Config {
     }
     
     // MARK: Screen
-    open var screenSize: Size {
+    open var targetScreenSize: Size {
         return Size(width: 320.0, height: 240.0)
     }
     
