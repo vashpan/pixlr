@@ -31,6 +31,15 @@ public struct Color {
         self.init(r: UInt8(floatR * 255.0), g: UInt8(floatG * 255.0), b: UInt8(floatB * 255.0), a: UInt8(floatA * 255.0), overlay: overlay)
     }
     
+    // MARK: Creating derivative colors
+    public func withAlpha(a: UInt8) -> Color {
+        return Color(r: self.r, g: self.g, b: self.b, a: a, overlay: self.isOverlay)
+    }
+    
+    public func withAlpha(floatA: Float) -> Color {
+        return self.withAlpha(a: UInt8(floatA * 255.0))
+    }
+    
     // MARK: Predefined colors
     public static let clear = Color(r: 255, g: 255, b: 255, a: 0)
     
