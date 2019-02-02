@@ -23,18 +23,22 @@ class SadFace {
     var pos: Point
     var rotation: Angle
     let scale: Float
+    let pivot: Vector2
+    let color: Color
     
     var direction: Vector2
     
     static let radius: Float = 16.0
     static let imageId = ImageId(0)
     
-    private static let rotationSpeed: Angle = 0.1 // 0.1r/s
+    private static let rotationSpeed: Angle = 1.5 // 1.5rad/s
     
-    init(position: Point, rotation: Angle, scale: Float) {
+    init(position: Point, pivot: Vector2, rotation: Angle, scale: Float) {
         self.pos = position
+        self.pivot = pivot
         self.rotation = rotation
         self.scale = scale
+        self.color = Color(r: UInt8.random(in: 0...255), g: UInt8.random(in: 0...255), b: UInt8.random(in: 0...255), a: 255)
         
         self.direction = Vector2(x: Float.random(in: -15.0...15.0), y: Float.random(in: -15.0...15.0))
     }
@@ -62,22 +66,35 @@ final class ExampleGame: Game {
         
         // start with some faces
         let numberOfFaces = 32
-        for _ in 0...numberOfFaces {
+        for _ in 0..<numberOfFaces {
             let position = Point(x: Float.random(in: 0.0...self.screenSize.width - SadFace.radius),
                                  y: Float.random(in: 0.0...self.screenSize.height - SadFace.radius))
-            
+
             let rotation = Angle.random(in: 0...Angle.twoPi)
-            let scale = Float.random(in: 0.2...3.0)
-            
-            let sadFace = SadFace(position: position, rotation: rotation, scale: scale)
-            
+            let scale = Float.random(in: 0.4...2.0)
+
+            let sadFace = SadFace(position: position, pivot: Vector2(0.5), rotation: rotation, scale: scale)
+
             self.faces.append(sadFace)
         }
+        
+        // COMMENTED FOR MORE GRANULAR TESTS:
+        
+        //let position = Point(x: 100.0/*Float.random(in: 0.0...self.screenSize.width - SadFace.radius)*/,
+        //                     y: 100.0/*Float.random(in: 0.0...self.screenSize.height - SadFace.radius)*/)
+        
+        // test 1
+        //let sadFace1 = SadFace(position: position, pivot: Vector2(1.0), rotation: Angle(degrees: 0), scale: 1.0)
+        //self.faces.append(sadFace1)
+        
+        // test 2
+        //let sadFace2 = SadFace(position: position, pivot: Vector2(x: 0.4, y: 0.4), rotation: Angle(degrees: 0), scale: 2.0)
+        //self.faces.append(sadFace2)
     }
     
     override func draw(on gfx: Graphics) {
         for face in self.faces {
-            gfx.draw(image: SadFace.imageId, at: face.pos, scale: Vector2(face.scale), rotation: face.rotation)
+            gfx.draw(image: SadFace.imageId, at: face.pos, pivot: face.pivot, scale: Vector2(face.scale), rotation: face.rotation, color: face.color)
         }
     }
     
