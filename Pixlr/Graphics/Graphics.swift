@@ -27,6 +27,23 @@ public class Graphics {
         self.renderer = renderer
     }
     
+    // MARK: Helpers
+    private func makeTransformMatrix(origin: Point, size: Size, pivot: Vector2, scale: Vector2, rotation: Angle) -> Matrix3 {
+        // pivot in points
+        let pivotInPoints = Vector2(x: pivot.x * size.width * scale.x, y: pivot.y * size.height * scale.y)
+        
+        // translate + rotation including pivot
+        var transform = Matrix3(translation: origin + pivotInPoints) * Matrix3(rotation: rotation)
+        
+        // move by pivot after rotation
+        transform = transform * Matrix3(translation: -pivotInPoints)
+        
+        // and scale...
+        transform = transform * Matrix3(scale: scale)
+        
+        return transform
+    }
+    
     // MARK: Frame processing
     internal func beginFrame() {
         self.drawingCommands.removeAll(keepingCapacity: true)
@@ -40,7 +57,7 @@ public class Graphics {
     }
     
     // MARK: Drawing
-    public func draw(sprite spriteId: SpriteId, from spriteSheet: SpriteSheetId, at position: Point, scale: Vector2 = Vector2(1.0), rotation: Angle = 0.0, color: Color = .white) {
+    public func draw(sprite spriteId: SpriteId, from spriteSheet: SpriteSheetId, at position: Point, pivot: Vector2 = Vector2(0.5), scale: Vector2 = Vector2(1.0), rotation: Angle = 0.0, color: Color = .white) {
         guard self.drawingPossible else {
             Log.graphics.warning("Drawing is not possible in this scope!")
             return
@@ -56,20 +73,17 @@ public class Graphics {
         }
         
         // transform
-        let translate = Matrix3(translation: position)
-        let scale = Matrix3(scale: scale)
-        let rotate = Matrix3(rotation: rotation)
-        let transform = translate * scale * rotate
+        let transform = self.makeTransformMatrix(origin: position, size: sprite.size, pivot: pivot, scale: scale, rotation: rotation)
         
         // add drawing command
         self.drawingCommands.append(.drawSprite(sprite: sprite, texture: sheet.texture, color: color, transform: transform))
     }
     
-    public func draw(sprite spriteId: SpriteId, from spriteSheet: SpriteSheetId, at position: Point, scale: Float = 1.0, rotation: Angle = 0.0, color: Color = .white) {
-        self.draw(sprite: spriteId, from: spriteSheet, at: position, scale: Vector2(x: scale, y: scale), rotation: rotation, color: color)
+    public func draw(sprite spriteId: SpriteId, from spriteSheet: SpriteSheetId, at position: Point, pivot: Vector2 = Vector2(0.5), scale: Float = 1.0, rotation: Angle = 0.0, color: Color = .white) {
+        self.draw(sprite: spriteId, from: spriteSheet, at: position, pivot: pivot, scale: Vector2(x: scale, y: scale), rotation: rotation, color: color)
     }
     
-    public func draw(image: ImageId, at position: Point, scale: Vector2 = Vector2(1.0), rotation: Angle = 0.0, color: Color = .white) {
+    public func draw(image: ImageId, at position: Point, pivot: Vector2 = Vector2(0.5), scale: Vector2 = Vector2(1.0), rotation: Angle = 0.0, color: Color = .white) {
         guard self.drawingPossible else {
             Log.graphics.warning("Drawing is not possible in this scope!")
             return
@@ -80,17 +94,14 @@ public class Graphics {
         }
         
         // transform
-        let translate = Matrix3(translation: position)
-        let scale = Matrix3(scale: scale)
-        let rotate = Matrix3(rotation: rotation)
-        let transform = translate * scale * rotate
+        let transform = self.makeTransformMatrix(origin: position, size: image.size, pivot: pivot, scale: scale, rotation: rotation)
         
         // add drawing command
         self.drawingCommands.append(.drawImage(image: image, color: color, transform: transform))
     }
     
-    public func draw(image: ImageId, at position: Point, scale: Float = 1.0, rotation: Angle = 0.0, color: Color = .white) {
-        self.draw(image: image, at: position, scale: Vector2(x: scale, y: scale), rotation: rotation, color: color)
+    public func draw(image: ImageId, at position: Point, pivot: Vector2 = Vector2(0.5), scale: Float = 1.0, rotation: Angle = 0.0, color: Color = .white) {
+        self.draw(image: image, at: position, pivot: pivot, scale: Vector2(x: scale, y: scale), rotation: rotation, color: color)
     }
     
     public func draw(pixels: [Pixel]) {
