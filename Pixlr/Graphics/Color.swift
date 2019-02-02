@@ -18,7 +18,7 @@ public struct Color {
     public var isOverlay: Bool
     
     // MARK: Initialization
-    init(r: UInt8, g: UInt8, b: UInt8, a: UInt8 = 255, overlay: Bool = false) {
+    public init(r: UInt8, g: UInt8, b: UInt8, a: UInt8 = 255, overlay: Bool = false) {
         self.r = r
         self.g = g
         self.b = b
@@ -27,7 +27,7 @@ public struct Color {
         self.isOverlay = overlay
     }
     
-    init(floatR: Float, floatG: Float, floatB: Float, floatA: Float = 1.0, overlay: Bool = false) {
+    public init(floatR: Float, floatG: Float, floatB: Float, floatA: Float = 1.0, overlay: Bool = false) {
         self.init(r: UInt8(floatR * 255.0), g: UInt8(floatG * 255.0), b: UInt8(floatB * 255.0), a: UInt8(floatA * 255.0), overlay: overlay)
     }
     
