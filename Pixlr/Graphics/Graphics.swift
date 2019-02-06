@@ -79,10 +79,6 @@ public class Graphics {
         self.drawingCommands.append(.drawSprite(sprite: sprite, texture: sheet.texture, color: color, transform: transform))
     }
     
-    public func draw(sprite spriteId: SpriteId, from spriteSheet: SpriteSheetId, at position: Point, pivot: Vector2 = Vector2(0.5), scale: Float = 1.0, rotation: Angle = 0.0, color: Color = .white) {
-        self.draw(sprite: spriteId, from: spriteSheet, at: position, pivot: pivot, scale: Vector2(x: scale, y: scale), rotation: rotation, color: color)
-    }
-    
     public func draw(image: ImageId, at position: Point, pivot: Vector2 = Vector2(0.5), scale: Vector2 = Vector2(1.0), rotation: Angle = 0.0, color: Color = .white) {
         guard self.drawingPossible else {
             Log.graphics.warning("Drawing is not possible in this scope!")
@@ -98,10 +94,6 @@ public class Graphics {
         
         // add drawing command
         self.drawingCommands.append(.drawImage(image: image, color: color, transform: transform))
-    }
-    
-    public func draw(image: ImageId, at position: Point, pivot: Vector2 = Vector2(0.5), scale: Float = 1.0, rotation: Angle = 0.0, color: Color = .white) {
-        self.draw(image: image, at: position, pivot: pivot, scale: Vector2(x: scale, y: scale), rotation: rotation, color: color)
     }
     
     public func draw(pixels: [Pixel]) {
