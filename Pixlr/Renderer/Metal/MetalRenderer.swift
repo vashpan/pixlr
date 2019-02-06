@@ -18,23 +18,21 @@ internal class MetalRenderer: NSObject {
         let cr, cg, cb, ca: Float
         let colorIsOverlay: Bool
         
-        let u: Float
-        let v: Float
+        let u, v, uw, uh: Float
 
         var vertices: [PIXSpriteVertex] {
-            // FIXME: Calculate vertex uv according to sprite u,v,w,h and texture
             return [
-                PIXSpriteVertex(position: vector_float2(a.x, a.y), color: vector_float4(cr, cg, cb, ca), isColorOverlay: colorIsOverlay, uv: vector_float2(0.0, 1.0)),
-                PIXSpriteVertex(position: vector_float2(d.x, d.y), color: vector_float4(cr, cg, cb, ca), isColorOverlay: colorIsOverlay, uv: vector_float2(0.0, 0.0)),
-                PIXSpriteVertex(position: vector_float2(c.x, c.y), color: vector_float4(cr, cg, cb, ca), isColorOverlay: colorIsOverlay, uv: vector_float2(1.0, 0.0)),
+                PIXSpriteVertex(position: vector_float2(a.x, a.y), color: vector_float4(cr, cg, cb, ca), isColorOverlay: colorIsOverlay, uv: vector_float2(u, v + uh)),
+                PIXSpriteVertex(position: vector_float2(d.x, d.y), color: vector_float4(cr, cg, cb, ca), isColorOverlay: colorIsOverlay, uv: vector_float2(u, v)),
+                PIXSpriteVertex(position: vector_float2(c.x, c.y), color: vector_float4(cr, cg, cb, ca), isColorOverlay: colorIsOverlay, uv: vector_float2(u + uw, v)),
 
-                PIXSpriteVertex(position: vector_float2(c.x, c.y), color: vector_float4(cr, cg, cb, ca), isColorOverlay: colorIsOverlay, uv: vector_float2(1.0, 0.0)),
-                PIXSpriteVertex(position: vector_float2(b.x, b.y), color: vector_float4(cr, cg, cb, ca), isColorOverlay: colorIsOverlay, uv: vector_float2(1.0, 1.0)),
-                PIXSpriteVertex(position: vector_float2(a.x, a.y), color: vector_float4(cr, cg, cb, ca), isColorOverlay: colorIsOverlay, uv: vector_float2(0.0, 1.0))
+                PIXSpriteVertex(position: vector_float2(c.x, c.y), color: vector_float4(cr, cg, cb, ca), isColorOverlay: colorIsOverlay, uv: vector_float2(u + uw, v)),
+                PIXSpriteVertex(position: vector_float2(b.x, b.y), color: vector_float4(cr, cg, cb, ca), isColorOverlay: colorIsOverlay, uv: vector_float2(u + uw, v + uh)),
+                PIXSpriteVertex(position: vector_float2(a.x, a.y), color: vector_float4(cr, cg, cb, ca), isColorOverlay: colorIsOverlay, uv: vector_float2(u, v + uh))
             ]
         }
         
-        init(pixlrSprite: Sprite, color: Color, transform: Matrix3) {
+        init(pixlrSprite: Sprite, sheetSize: Size, color: Color, transform: Matrix3) {
             let w = pixlrSprite.size.width
             let h = pixlrSprite.size.height
             
@@ -49,9 +47,10 @@ internal class MetalRenderer: NSObject {
             self.ca = Float(color.a) / 255.0
             self.colorIsOverlay = color.isOverlay
             
-            // FIXME: Fill after adding support for sprite sheets
-            self.u = 0.0
-            self.v = 0.0
+            self.u = pixlrSprite.uv.x / sheetSize.width
+            self.v = pixlrSprite.uv.y / sheetSize.height
+            self.uw = pixlrSprite.size.width / sheetSize.width
+            self.uh = pixlrSprite.size.height / sheetSize.height
         }
         
         init(pixlrImage: Image, color: Color, transform: Matrix3) {
@@ -69,8 +68,11 @@ internal class MetalRenderer: NSObject {
             self.ca = Float(color.a) / 255.0
             self.colorIsOverlay = color.isOverlay
             
-            self.u = 0.0 // top left corner of image
+            // top left corner of image
+            self.u = 0.0
             self.v = 0.0
+            self.uw = 1.0
+            self.uh = 1.0
         }
     }
     
@@ -315,7 +317,7 @@ internal class MetalRenderer: NSObject {
         for graphicCommand in graphicsCommands {
             switch graphicCommand {
                 case .drawSprite(let sprite, let texture, let color, let transform):
-                    let metalSprite = MetalSprite(pixlrSprite: sprite, color: color, transform: transform)
+                    let metalSprite = MetalSprite(pixlrSprite: sprite, sheetSize: texture.size, color: color, transform: transform)
                     let metalTexture = texture.nativeTexture as? MTLTexture
                     
                     // batch this sprite if it's using the same texture
