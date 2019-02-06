@@ -22,16 +22,44 @@ public final class Resources {
             return
         }
         
-        Log.resources.warning("Loading sprite sheets not implemented yet! Dummy sprite sheet will be loaded!")
-        
-        // creating dummy sprite sheet (with 10 sprites)
-        let dummyTexture = Texture(data: Data(), size: Size(width: 512, height: 512))
-        var dummySprites: [SpriteId : Sprite] = [:]
-        for n in 0...10 {
-            dummySprites[n] = Sprite(size: Size(width: 16.0, height: 16.0), uv: .zero)
+        // parse sprite sheet file
+        guard let spriteSheetUrl = Bundle.main.url(forResource: spriteSheetName, withExtension: "json") else {
+            Log.resources.error("Sprite sheet of name: \(spriteSheetName) cannot be found!")
+            return
         }
         
-        self.spriteSheets[spriteSheetId] = SpriteSheet(sprites: dummySprites, texture: dummyTexture)
+        guard let jsonData = FileManager.default.contents(atPath: spriteSheetUrl.path) else {
+            Log.resources.error("Cannot load atlas JSON data for sprite sheet of name: \(spriteSheetName)!")
+            return
+        }
+        
+        guard let json = try? JSONSerialization.jsonObject(with: jsonData, options: .allowFragments), let frames = json as? [String:Any] else {
+            Log.resources.error("Cannot parse atlas JSON data for sprite sheet of name: \(spriteSheetName)!")
+            return
+        }
+        
+        var sprites = [SpriteId: Sprite]()
+        var currentSpriteId: SpriteId = 0
+        if let framesArray = frames["frames"] as? [Any] {
+            for spriteFrameObject in framesArray {
+                if let spriteFrameDict = spriteFrameObject as? [String:Any] {
+                    if let frame = spriteFrameDict["frame"] as? [String:Int] {
+                        let sprite = Sprite(size: Size(width: Float(frame["w"] ?? 0), height: Float(frame["h"] ?? 0)),
+                                            uv: Point(x: Float(frame["x"] ?? 0), y: Float(frame["y"] ?? 0)))
+                        sprites[currentSpriteId] = sprite
+                        currentSpriteId += 1
+                    }
+                }
+            }
+        }
+        
+        // Add load sprites sheet texture
+        guard let spritesTexture = Pixlr.currentPlatform.loadTexture(name: spriteSheetName) else {
+            Log.resources.error("Can't load sprites texture: \(spriteSheetName)!")
+            return
+        }
+        
+        self.spriteSheets[spriteSheetId] = SpriteSheet(sprites: sprites, texture: spritesTexture)
     }
     
     public func loadImage(named imageName: String, into imageId: ImageId) {
