@@ -1,0 +1,19 @@
+1. Pixrl sprite sheet format
+
+It's a very simple format, using JSON file. It's an array of frame (named "frames") objects with following format:
+
+{
+  "id" : 16, "name" : "foo/bar/sprite",
+  "x"  : 100, "y"  : 100,
+  "w"  : 16, "h"  : 32
+}
+
+2. How to make sprite sheets/atlases for use with Pixlr?
+
+Currently sprite atlases can be made with help of TexturePacker (https://www.codeandweb.com/texturepacker) and custom exporter prepared to generate Pixlr format of sprite atlases.
+
+First copy contents of "tp-exporter" to your folder with custom TexturePacker exporters. If you don't have one, you can create one and set it in your TexturePacker GUI app Preferences.
+
+Then you can use either TexturePacker GUI application with "Pixlr" format selected, or script "build-sprite-sheet.sh" in current folder. 
+
+Usage: ./build-sprite-sheet.sh <sprite sheet name> <source folder>

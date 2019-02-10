@@ -1,0 +1,14 @@
+{
+  "frames" : [ {% for sprite in allSprites %}
+    {
+      "id" : {{forloop.counter0}}, "name" : "{{sprite.trimmedName}}",
+      "x"  : {{sprite.frameRect.x}}, "y"  : {{sprite.frameRect.y}},
+      "w"  : {{sprite.frameRect.width}}, "h"  : {{sprite.frameRect.height}}
+    } {% if not forloop.last %}, {% endif %} {% endfor %}
+  ],
+
+  "texturepacker": [
+    "SmartUpdateHash: {{smartUpdateKey}}",
+    "Created with TexturePacker (http://www.texturepacker.com) for Pixrl"
+  ]
+}
