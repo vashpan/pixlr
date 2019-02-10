@@ -42,13 +42,16 @@ public final class Resources {
         var currentSpriteId: SpriteId = 0
         if let framesArray = frames["frames"] as? [Any] {
             for spriteFrameObject in framesArray {
-                if let spriteFrameDict = spriteFrameObject as? [String:Any] {
-                    if let frame = spriteFrameDict["frame"] as? [String:Int] {
-                        let sprite = Sprite(size: Size(width: Float(frame["w"] ?? 0), height: Float(frame["h"] ?? 0)),
-                                            uv: Point(x: Float(frame["x"] ?? 0), y: Float(frame["y"] ?? 0)))
-                        sprites[currentSpriteId] = sprite
-                        currentSpriteId += 1
-                    }
+                if let frame = spriteFrameObject as? [String:Any] {
+                    let x = frame["x"] as? Int
+                    let y = frame["y"] as? Int
+                    let w = frame["w"] as? Int
+                    let h = frame["h"] as? Int
+                    
+                    let sprite = Sprite(size: Size(width: Float(w ?? 0), height: Float(h ?? 0)),
+                                        uv: Point(x: Float(x ?? 0), y: Float(y ?? 0)))
+                    sprites[currentSpriteId] = sprite
+                    currentSpriteId += 1
                 }
             }
         }
