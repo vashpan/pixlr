@@ -385,6 +385,7 @@ internal class MetalRenderer: NSObject {
                                      index: Int(PIXFramebufferVertexInputIndexViewportSize.rawValue))
         
         // send sprites & pixels data
+        var spritesVerticesBufferOffset = 0
         for command in commands {
             switch command {
                 case .drawSprites(let spritesToDraw, let texture):
@@ -392,19 +393,26 @@ internal class MetalRenderer: NSObject {
                     let spritesVertices = Array(joinedSprites)
                     let spritesVerticesCount = spritesVertices.count
                     
-                    self.spritesVerticesBuffer.contents().copyMemory(from: spritesVertices, byteCount: MemoryLayout<PIXSpriteVertex>.stride * spritesVerticesCount)
+                    // copy new vertices to our vertex buffer
+                    self.spritesVerticesBuffer.contents()
+                                              .advanced(by: MemoryLayout<PIXSpriteVertex>.stride * spritesVerticesBufferOffset)
+                                              .copyMemory(from: spritesVertices, byteCount: MemoryLayout<PIXSpriteVertex>.stride * spritesVerticesCount)
+                    
+                    // set current vertex buffer
                     renderEncoder.setVertexBuffer(self.spritesVerticesBuffer,
-                                                  offset: 0,
+                                                  offset: MemoryLayout<PIXSpriteVertex>.stride * spritesVerticesBufferOffset,
                                                   index: Int(PIXSpriteVertexInputIndexVertices.rawValue))
                     
                     // set texture
                     renderEncoder.setFragmentTexture(texture,
                                                      index: Int(PIXSpriteTextureIndexBaseColor.rawValue))
                     
-                    // draw single sprite
+                    // draw sprite/sprites
                     renderEncoder.drawPrimitives(type: .triangle,
                                                  vertexStart: 0,
                                                  vertexCount: spritesVerticesCount)
+                
+                    spritesVerticesBufferOffset += spritesVerticesCount
             }
         }
         
