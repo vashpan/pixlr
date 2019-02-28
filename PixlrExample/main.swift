@@ -19,7 +19,15 @@ final class SadFaceConfig: Config {
     }
 }
 
-class SadFace {
+struct SpriteIds {
+    static let sadFace = ImageId(0)
+    static let happyFace = ImageId(1)
+    static let dodgerFace = ImageId(2)
+}
+
+class Face {
+    let image: ImageId
+    
     var pos: Point
     var rotation: Angle
     let scale: Float
@@ -29,11 +37,12 @@ class SadFace {
     var direction: Vector2
     
     static let radius: Float = 16.0
-    static let imageId = ImageId(0)
     
     private static let rotationSpeed: Angle = 1.5 // 1.5rad/s
     
-    init(position: Point, pivot: Vector2, rotation: Angle, scale: Float) {
+    init(face: ImageId? = nil, position: Point, pivot: Vector2, rotation: Angle, scale: Float) {
+        self.image = face ?? [SpriteIds.sadFace, SpriteIds.happyFace, SpriteIds.dodgerFace].randomElement()!
+        
         self.pos = position
         self.pivot = pivot
         self.rotation = rotation
@@ -45,56 +54,62 @@ class SadFace {
     
     func update(dt: TimeInterval, screenSize: Size) {
         // update
-        self.rotation += SadFace.rotationSpeed * Float(dt)
+        self.rotation += Face.rotationSpeed * Float(dt)
         self.pos = self.pos + self.direction * Float(dt)
         
         // bounces
-        if self.pos.x <= 0.0 || self.pos.y >= screenSize.height - SadFace.radius * self.scale ||
-           self.pos.x >= screenSize.width - SadFace.radius * self.scale || self.pos.y <= 0.0 {
+        if self.pos.x <= 0.0 || self.pos.y >= screenSize.height - Face.radius * self.scale ||
+           self.pos.x >= screenSize.width - Face.radius * self.scale || self.pos.y <= 0.0 {
             self.direction = self.direction.inverse
         }
     }
 }
 
 final class ExampleGame: Game {
-    private var faces: [SadFace] = []
+    private var faces: [Face] = []
     
     override func start() {
         super.start()
         
-        Resources.shared.loadImage(named: "sad-face", into: SadFace.imageId)
+        Resources.shared.loadImage(named: "sad-face", into: SpriteIds.sadFace)
+        Resources.shared.loadImage(named: "happy-face", into: SpriteIds.happyFace)
+        Resources.shared.loadImage(named: "dodger-face", into: SpriteIds.dodgerFace)
         
         // start with some faces
         let numberOfFaces = 32
         for _ in 0..<numberOfFaces {
-            let position = Point(x: Float.random(in: 0.0...self.screenSize.width - SadFace.radius),
-                                 y: Float.random(in: 0.0...self.screenSize.height - SadFace.radius))
+            let position = Point(x: Float.random(in: 0.0...self.screenSize.width - Face.radius),
+                                 y: Float.random(in: 0.0...self.screenSize.height - Face.radius))
 
             let rotation = Angle.random(in: 0...Angle.twoPi)
             let scale = Float.random(in: 0.4...2.0)
 
-            let sadFace = SadFace(position: position, pivot: Vector2(0.5), rotation: rotation, scale: scale)
+            let sadFace = Face(position: position, pivot: Vector2(0.5), rotation: rotation, scale: scale)
 
             self.faces.append(sadFace)
         }
         
         // COMMENTED FOR MORE GRANULAR TESTS:
         
-        //let position = Point(x: 100.0/*Float.random(in: 0.0...self.screenSize.width - SadFace.radius)*/,
-        //                     y: 100.0/*Float.random(in: 0.0...self.screenSize.height - SadFace.radius)*/)
+//        let position = Point(x: 100.0/*Float.random(in: 0.0...self.screenSize.width - SadFace.radius)*/,
+//                             y: 100.0/*Float.random(in: 0.0...self.screenSize.height - SadFace.radius)*/)
         
-        // test 1
-        //let sadFace1 = SadFace(position: position, pivot: Vector2(1.0), rotation: Angle(degrees: 0), scale: 1.0)
-        //self.faces.append(sadFace1)
-        
-        // test 2
-        //let sadFace2 = SadFace(position: position, pivot: Vector2(x: 0.4, y: 0.4), rotation: Angle(degrees: 0), scale: 2.0)
-        //self.faces.append(sadFace2)
+//        // test 1
+//        let sadFace1 = SadFace(face: SpriteIds.dodgerFace, position: Point(x: 100.0, y: 100.0), pivot: Vector2(1.0), rotation: Angle(degrees: 0), scale: 1.0)
+//        self.faces.append(sadFace1)
+//
+//        // test 2
+//        let sadFace2 = SadFace(face: SpriteIds.dodgerFace, position: Point(x: 150.0, y: 100.0), pivot: Vector2(1.0), rotation: Angle(degrees: 0), scale: 1.0)
+//        self.faces.append(sadFace2)
+//
+//        // test 3
+//        let sadFace3 = SadFace(face: SpriteIds.sadFace, position: Point(x: 200.0, y: 100.0), pivot: Vector2(1.0), rotation: Angle(degrees: 0), scale: 1.0)
+//        self.faces.append(sadFace3)
     }
     
     override func draw(on gfx: Graphics) {
         for face in self.faces {
-            gfx.draw(image: SadFace.imageId, at: face.pos, pivot: face.pivot, scale: Vector2(face.scale), rotation: face.rotation, color: face.color)
+            gfx.draw(image: face.image, at: face.pos, pivot: face.pivot, scale: Vector2(face.scale), rotation: face.rotation, color: face.color)
         }
     }
     
