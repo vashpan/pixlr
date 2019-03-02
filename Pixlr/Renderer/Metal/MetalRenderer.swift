@@ -32,6 +32,28 @@ internal class MetalRenderer: NSObject {
             ]
         }
         
+        init() {
+            let w: Float = 16.0
+            let h: Float = 16.0
+            
+            self.a = Point(x: 0, y: 0)
+            self.b = Point(x: 0 + w, y: 0)
+            self.c = Point(x: 0 + w, y: 0 + h)
+            self.d = Point(x: 0, y: 0 + h)
+            
+            self.cr = 1.0
+            self.cg = 1.0
+            self.cb = 1.0
+            self.ca = 1.0
+            self.colorIsOverlay = false
+            
+            // top left corner of image
+            self.u = 0.0
+            self.v = 0.0
+            self.uw = 1.0
+            self.uh = 1.0
+        }
+        
         init(pixlrSprite: Sprite, sheetSize: Size, color: Color, transform: Matrix3) {
             let w = pixlrSprite.size.width
             let h = pixlrSprite.size.height
@@ -51,6 +73,27 @@ internal class MetalRenderer: NSObject {
             self.v = pixlrSprite.uv.y / sheetSize.height
             self.uw = pixlrSprite.size.width / sheetSize.width
             self.uh = pixlrSprite.size.height / sheetSize.height
+        }
+        
+        init(pixlrGlyph: Glyph, size: Size, sheetSize: Size, color: Color, transform: Matrix3) {
+            let w = size.width
+            let h = size.height
+            
+            self.a = Point(x: 0, y: 0) * transform
+            self.b = Point(x: 0 + w, y: 0) * transform
+            self.c = Point(x: 0 + w, y: 0 + h) * transform
+            self.d = Point(x: 0, y: 0 + h) * transform
+            
+            self.cr = Float(color.r) / 255.0
+            self.cg = Float(color.g) / 255.0
+            self.cb = Float(color.b) / 255.0
+            self.ca = Float(color.a) / 255.0
+            self.colorIsOverlay = color.isOverlay
+            
+            self.u = pixlrGlyph.uv.x / sheetSize.width
+            self.v = pixlrGlyph.uv.y / sheetSize.height
+            self.uw = size.width / sheetSize.width
+            self.uh = size.height / sheetSize.height
         }
         
         init(pixlrImage: Image, color: Color, transform: Matrix3) {
@@ -315,39 +358,37 @@ internal class MetalRenderer: NSObject {
         var currentSprites: [MetalSprite] = []
         
         for graphicCommand in graphicsCommands {
+            let metalSprite: MetalSprite
+            let metalTexture: MTLTexture?
             switch graphicCommand {
                 case .drawSprite(let sprite, let texture, let color, let transform):
-                    let metalSprite = MetalSprite(pixlrSprite: sprite, sheetSize: texture.size, color: color, transform: transform)
-                    let metalTexture = texture.nativeTexture as? MTLTexture
-                    
-                    // batch this sprite if it's using the same texture
-                    if metalTexture === currentTexture {
-                        currentSprites.append(metalSprite)
-                    } else {
-                        finalizeDrawSpritesCommand(into: &commands, sprites: currentSprites, texture: currentTexture)
-                        
-                        // create a new set in case of new texture
-                        currentSprites = [metalSprite]
-                        currentTexture = metalTexture
-                    }
+                    metalSprite = MetalSprite(pixlrSprite: sprite, sheetSize: texture.size, color: color, transform: transform)
+                    metalTexture = texture.nativeTexture as? MTLTexture
                 
                 case .drawImage(let image, let color, let transform):
-                    let metalSprite = MetalSprite(pixlrImage: image, color: color, transform: transform)
-                    let metalTexture = image.texture.nativeTexture as? MTLTexture
-                    
-                    // batch this sprite if it's using the same texture
-                    if metalTexture === currentTexture {
-                        currentSprites.append(metalSprite)
-                    } else {
-                        finalizeDrawSpritesCommand(into: &commands, sprites: currentSprites, texture: currentTexture)
-                        
-                        // create a new set in case of new texture
-                        currentSprites = [metalSprite]
-                        currentTexture = metalTexture
-                    }
+                    metalSprite = MetalSprite(pixlrImage: image, color: color, transform: transform)
+                    metalTexture = image.texture.nativeTexture as? MTLTexture
+                
+                case .drawGlyph(let glyph, let size, let texture, let color, let transform):
+                    metalSprite = MetalSprite(pixlrGlyph: glyph, size: size, sheetSize: texture.size, color: color, transform: transform)
+                    metalTexture = texture.nativeTexture as? MTLTexture
                 
                 default:
+                    metalSprite = MetalSprite()
+                    metalTexture = nil
+                    
                     Log.graphics.warning("Drawing command: \(graphicCommand), not implemented yet!")
+            }
+            
+            // batch this sprite if it's using the same texture
+            if metalTexture === currentTexture {
+                currentSprites.append(metalSprite)
+            } else {
+                finalizeDrawSpritesCommand(into: &commands, sprites: currentSprites, texture: currentTexture)
+                
+                // create a new set in case of new texture
+                currentSprites = [metalSprite]
+                currentTexture = metalTexture
             }
         }
         
