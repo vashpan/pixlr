@@ -14,6 +14,7 @@ public final class Resources {
     
     internal var spriteSheets: [SpriteSheetId: SpriteSheet] = [:]
     internal var images: [ImageId: Image] = [:]
+    internal var fonts: [FontId: Font] = [:]
     
     // MARK: Loading resources
     public func loadSpriteSheet(named spriteSheetName: String, into spriteSheetId: SpriteSheetId) {
@@ -77,6 +78,65 @@ public final class Resources {
         }
         
         self.images[imageId] = Image(texture: texture)
+    }
+    
+    public func loadFont(named fontName: String, into fontId: FontId) {
+        guard !self.fonts.keys.contains(fontId) else {
+            Log.resources.error("Font of id: \(fontId) is already loaded!")
+            return
+        }
+        
+        // open font data file
+        guard let fontDataUrl = Bundle.main.url(forResource: fontName, withExtension: "json") else {
+            Log.resources.error("Font of name: \(fontName) cannot be found!")
+            return
+        }
+        
+        guard let jsonData = FileManager.default.contents(atPath: fontDataUrl.path) else {
+            Log.resources.error("Cannot load font JSON data for font of name: \(fontName)!")
+            return
+        }
+        
+        guard let json = try? JSONSerialization.jsonObject(with: jsonData, options: .allowFragments), let font = json as? [String:Any] else {
+            Log.resources.error("Cannot parse font JSON data for font of name: \(fontName)!")
+            return
+        }
+        
+        // open font image file
+        guard let fontTexture = Pixlr.currentPlatform.loadTexture(name: fontName) else {
+            Log.resources.error("Cannot load font texture for font of name: \(fontName)!")
+            return
+        }
+        
+        // parse font data
+        var glyphs = [Character: Sprite]()
+        if let glyphSizeObject = font["glyph_size"] as? [String:Any] {
+            let w = glyphSizeObject["w"] as? Int
+            let h = glyphSizeObject["h"] as? Int
+            let glyphSize = Size(width: w ?? 0, height: h ?? 0)
+            
+            let textureSize = fontTexture.size
+            
+            // map characters from the beginning of image
+            var currentPoint = Point(x: 0.0, y: 0.0)
+            if let characters = font["characters"] as? String {
+                for c in characters {
+                    let uv = currentPoint
+                    let glyphSprite = Sprite(size: glyphSize, uv: uv)
+                    
+                    glyphs[c] = glyphSprite
+                    
+                    // advance to next glyph
+                    currentPoint.x += glyphSize.width
+                    if currentPoint.x > textureSize.width - glyphSize.width {
+                        currentPoint.x = 0.0
+                        currentPoint.y += glyphSize.width
+                    }
+                }
+            }
+        }
+        
+        self.fonts[fontId] = Font(glyphs: glyphs, texture: fontTexture)
     }
     
     // MARK: Accessing resources

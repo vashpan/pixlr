@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		71375093216FD7E000AE9F75 /* Pixlr.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71375092216FD7E000AE9F75 /* Pixlr.swift */; };
+		71513EC5222ACDDF00C5A990 /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71513EC4222ACDDF00C5A990 /* Font.swift */; };
 		715FECD321713BEE009AE9B1 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715FECD221713BEE009AE9B1 /* Game.swift */; };
 		715FECD721713D6E009AE9B1 /* PixlrAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715FECD621713D6E009AE9B1 /* PixlrAppDelegate.swift */; };
 		715FECE521714A8F009AE9B1 /* Platform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715FECE421714A8F009AE9B1 /* Platform.swift */; };
@@ -49,6 +50,7 @@
 
 /* Begin PBXFileReference section */
 		71375092216FD7E000AE9F75 /* Pixlr.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pixlr.swift; sourceTree = "<group>"; };
+		71513EC4222ACDDF00C5A990 /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
 		715FECD221713BEE009AE9B1 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		715FECD621713D6E009AE9B1 /* PixlrAppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PixlrAppDelegate.swift; path = ../../../PixlrExample/PixlrAppDelegate.swift; sourceTree = "<group>"; };
 		715FECE421714A8F009AE9B1 /* Platform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Platform.swift; sourceTree = "<group>"; };
@@ -219,6 +221,7 @@
 			isa = PBXGroup;
 			children = (
 				71CD215021B1A38A0082E5B7 /* Resources.swift */,
+				71513EC4222ACDDF00C5A990 /* Font.swift */,
 				71CD215221B1A4540082E5B7 /* SpritesSheet.swift */,
 				71CD215621B1A8610082E5B7 /* Sprite.swift */,
 				71CD215821B88AF40082E5B7 /* Image.swift */,
@@ -344,6 +347,7 @@
 				71CD215721B1A8610082E5B7 /* Sprite.swift in Sources */,
 				71CD214021A1CED80082E5B7 /* Renderer.swift in Sources */,
 				71CD214C21AB5B860082E5B7 /* FramebufferShaders.metal in Sources */,
+				71513EC5222ACDDF00C5A990 /* Font.swift in Sources */,
 				71CF36CC21DC2920005CF148 /* Math.swift in Sources */,
 				71375093216FD7E000AE9F75 /* Pixlr.swift in Sources */,
 				71CD214721A2162D0082E5B7 /* Size+macOS.swift in Sources */,
