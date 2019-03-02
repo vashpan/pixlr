@@ -87,6 +87,11 @@ public struct Size: Equatable {
         self.width = width
         self.height = height
     }
+    
+    public init(width: Int, height: Int) {
+        self.width = Float(width)
+        self.height = Float(height)
+    }
 }
 
 // MARK: 2 dimensional vector
@@ -124,6 +129,19 @@ public struct Vector2 {
     }
     
     public init(_ value: Float) {
+        self.init(value, value)
+    }
+    
+    public init(x: Int, y: Int) {
+        self.x = Float(x)
+        self.y = Float(y)
+    }
+    
+    public init(_ x: Int, _ y: Int) {
+        self.init(x: x, y: y)
+    }
+    
+    public init(_ value: Int) {
         self.init(value, value)
     }
     
