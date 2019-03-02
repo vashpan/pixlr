@@ -25,6 +25,10 @@ struct SpriteIds {
     static let dodgerFace = ImageId(2)
 }
 
+struct FontIds {
+    static let pressStart = FontId(1)
+}
+
 class Face {
     let image: ImageId
     
@@ -74,6 +78,7 @@ final class ExampleGame: Game {
         Resources.shared.loadImage(named: "sad-face", into: SpriteIds.sadFace)
         Resources.shared.loadImage(named: "happy-face", into: SpriteIds.happyFace)
         Resources.shared.loadImage(named: "dodger-face", into: SpriteIds.dodgerFace)
+        Resources.shared.loadFont(named: "press-start", into: FontIds.pressStart)
         
         // start with some faces
         let numberOfFaces = 32
