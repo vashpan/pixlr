@@ -11,8 +11,15 @@ import Foundation
 // MARK: Helper types
 public typealias FontId = Int
 
-// MARK: Sprite definition
+// MARK: Glyph definition
+internal struct Glyph {
+    internal let uv: Point
+}
+
+// MARK: - Font definition
 internal struct Font {
-    internal let glyphs: [Character: Sprite]
+    internal let glyphs: [Character: Glyph]
+    
+    internal let glyphSize: Size
     internal let texture: Texture
 }

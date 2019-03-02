@@ -109,11 +109,12 @@ public final class Resources {
         }
         
         // parse font data
-        var glyphs = [Character: Sprite]()
+        var glyphs = [Character: Glyph]()
+        var glyphSize = Size.zero
         if let glyphSizeObject = font["glyph_size"] as? [String:Any] {
             let w = glyphSizeObject["w"] as? Int
             let h = glyphSizeObject["h"] as? Int
-            let glyphSize = Size(width: w ?? 0, height: h ?? 0)
+            glyphSize = Size(width: w ?? 0, height: h ?? 0)
             
             let textureSize = fontTexture.size
             
@@ -121,14 +122,12 @@ public final class Resources {
             var currentPoint = Point(x: 0.0, y: 0.0)
             if let characters = font["characters"] as? String {
                 for c in characters {
-                    let uv = currentPoint
-                    let glyphSprite = Sprite(size: glyphSize, uv: uv)
-                    
-                    glyphs[c] = glyphSprite
+                    let glyph = Glyph(uv: currentPoint)
+                    glyphs[c] = glyph
                     
                     // advance to next glyph
                     currentPoint.x += glyphSize.width
-                    if currentPoint.x > textureSize.width - glyphSize.width {
+                    if currentPoint.x >= textureSize.width - glyphSize.width {
                         currentPoint.x = 0.0
                         currentPoint.y += glyphSize.width
                     }
@@ -136,7 +135,7 @@ public final class Resources {
             }
         }
         
-        self.fonts[fontId] = Font(glyphs: glyphs, texture: fontTexture)
+        self.fonts[fontId] = Font(glyphs: glyphs, glyphSize: glyphSize, texture: fontTexture)
     }
     
     // MARK: Accessing resources
@@ -170,5 +169,14 @@ public final class Resources {
         }
         
         return image
+    }
+    
+    internal func font(from fontId: FontId) -> Font? {
+        guard let font = self.fonts[fontId] else {
+            Log.resources.warning("No font of id: \(fontId) loaded!")
+            return nil
+        }
+        
+        return font
     }
 }
