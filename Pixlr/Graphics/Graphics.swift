@@ -12,6 +12,7 @@ public class Graphics {
     // MARK: Types
     internal enum DrawCommand {
         case drawSprite(sprite: Sprite, texture: Texture, color: Color, transform: Matrix3)
+        case drawGlyph(glyph: Glyph, size: Size, texture: Texture, color: Color, transform: Matrix3)
         case drawImage(image: Image, color: Color, transform: Matrix3)
         case drawPixels(pixels: [Pixel])
     }
@@ -105,13 +106,30 @@ public class Graphics {
         self.drawingCommands.append(.drawPixels(pixels: pixels))
     }
     
-    public func draw(text: String, at position: Point) {
+    public func draw(text: String, using fontId: FontId, at position: Point, color: Color = .white) {
         guard self.drawingPossible else {
             Log.graphics.warning("Drawing is not possible in this scope!")
             return
         }
         
-        // FIXME: Implement text drawing
-        Log.graphics.info("Drawing text not implemented yet!")
+        guard let font = Resources.shared.font(from: fontId) else {
+            Log.graphics.error("Cannot find font \(fontId) ")
+            return
+        }
+        
+        var insertion = position
+        for c in text {
+            if c == " " {
+                insertion.x += font.glyphSize.width
+                continue
+            }
+            
+            if let glyph = font.glyphs[c] {
+                let transform = self.makeTransformMatrix(origin: insertion, size: font.glyphSize, pivot: Vector2(0.0), scale: Vector2(1.0), rotation: 0.0)
+                self.drawingCommands.append(.drawGlyph(glyph: glyph, size: font.glyphSize, texture: font.texture, color: color, transform: transform))
+                
+                insertion.x += font.glyphSize.width
+            }
+        }
     }
 }
