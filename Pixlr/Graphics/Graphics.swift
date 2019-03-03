@@ -106,7 +106,7 @@ public class Graphics {
         self.drawingCommands.append(.drawPixels(pixels: pixels))
     }
     
-    public func draw(text: String, using fontId: FontId, at position: Point, color: Color = .white) {
+    public func draw(text: String, using fontId: FontId, at position: Point, scale: Vector2 = Vector2(1.0), color: Color = .white) {
         guard self.drawingPossible else {
             Log.graphics.warning("Drawing is not possible in this scope!")
             return
@@ -117,18 +117,20 @@ public class Graphics {
             return
         }
         
+        let scaledGlyphSize = Size(width: font.glyphSize.width * scale.x, height: font.glyphSize.height * scale.y)
+        
         var insertion = position
         for c in text {
             if c == " " {
-                insertion.x += font.glyphSize.width
+                insertion.x += scaledGlyphSize.width
                 continue
             }
             
             if let glyph = font.glyphs[c] {
-                let transform = self.makeTransformMatrix(origin: insertion, size: font.glyphSize, pivot: Vector2(0.0), scale: Vector2(1.0), rotation: 0.0)
+                let transform = self.makeTransformMatrix(origin: insertion, size: font.glyphSize, pivot: Vector2(0.0), scale: scale, rotation: 0.0)
                 self.drawingCommands.append(.drawGlyph(glyph: glyph, size: font.glyphSize, texture: font.texture, color: color, transform: transform))
                 
-                insertion.x += font.glyphSize.width
+                insertion.x += scaledGlyphSize.width
             }
         }
     }

@@ -116,6 +116,8 @@ final class ExampleGame: Game {
         for face in self.faces {
             gfx.draw(image: face.image, at: face.pos, pivot: face.pivot, scale: Vector2(face.scale), rotation: face.rotation, color: face.color)
         }
+        
+        gfx.draw(text: "Hello World!", using: FontIds.pressStart, at: Point(x: 100.0, y: 100.0))
     }
     
     override func update(dt: TimeInterval) {
