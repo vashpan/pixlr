@@ -17,6 +17,8 @@ public class Graphics {
         case drawPixels(pixels: [Pixel])
     }
     
+    public typealias GlyphTransform = (Character, Int) -> (Vector2, Vector2, Color, Angle)
+    
     // MARK: Properties
     private let renderer: Renderer
     
@@ -107,6 +109,12 @@ public class Graphics {
     }
     
     public func draw(text: String, using fontId: FontId, at position: Point, scale: Vector2 = Vector2(1.0), color: Color = .white) {
+        self.draw(text: text, using: fontId, at: position, scale: scale) { (c, i) -> (Vector2, Vector2, Color, Angle) in
+            return (Vector2.zero, scale, color, Angle(0.0))
+        }
+    }
+    
+    public func draw(text: String, using fontId: FontId, at position: Point, scale: Vector2 = Vector2(1.0), glyphTransform: GlyphTransform) {
         guard self.drawingPossible else {
             Log.graphics.warning("Drawing is not possible in this scope!")
             return
@@ -120,6 +128,7 @@ public class Graphics {
         let scaledGlyphSize = Size(width: font.glyphSize.width * scale.x, height: font.glyphSize.height * scale.y)
         
         var insertion = position
+        var i = 0
         for c in text {
             if c == " " {
                 insertion.x += scaledGlyphSize.width
@@ -127,11 +136,14 @@ public class Graphics {
             }
             
             if let glyph = font.glyphs[c] {
-                let transform = self.makeTransformMatrix(origin: insertion, size: font.glyphSize, pivot: Vector2(0.0), scale: scale, rotation: 0.0)
+                let (pivot, scale, color, angle) = glyphTransform(c, i)
+                let transform = self.makeTransformMatrix(origin: insertion, size: font.glyphSize, pivot: pivot, scale: scale, rotation: angle)
                 self.drawingCommands.append(.drawGlyph(glyph: glyph, size: font.glyphSize, texture: font.texture, color: color, transform: transform))
                 
                 insertion.x += scaledGlyphSize.width
             }
+            
+            i += 1
         }
     }
 }

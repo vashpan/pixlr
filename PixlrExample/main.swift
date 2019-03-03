@@ -118,6 +118,9 @@ final class ExampleGame: Game {
         }
         
         gfx.draw(text: "Hello World!", using: FontIds.pressStart, at: Point(x: 100.0, y: 100.0))
+        gfx.draw(text: "Boom!", using: FontIds.pressStart, at: Point(x: 100.0, y: 200.0)) { (c, i) -> (Vector2, Vector2, Color, Angle) in
+            return (Vector2.zero, Vector2(1.2), Color.init(r: UInt8.random(in: 0...255), g: UInt8.random(in: 0...255), b: UInt8.random(in: 0...255)), Angle(0.0))
+        }
     }
     
     override func update(dt: TimeInterval) {
