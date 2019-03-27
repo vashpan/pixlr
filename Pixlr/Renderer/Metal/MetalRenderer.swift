@@ -336,7 +336,9 @@ internal class MetalRenderer: NSObject {
         let region = MTLRegionMake2D(0, 0, width, height)
         
         texture.data.withUnsafeBytes { bytes in
-            metalTexture.replace(region: region, mipmapLevel: 0, withBytes: bytes, bytesPerRow: bytesPerRow)
+            if let bytesBaseAddress = bytes.baseAddress {
+                metalTexture.replace(region: region, mipmapLevel: 0, withBytes: bytesBaseAddress, bytesPerRow: bytesPerRow)
+            }
         }
         
         return metalTexture

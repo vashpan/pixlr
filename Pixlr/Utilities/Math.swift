@@ -46,7 +46,7 @@ public typealias Point = Vector2
 public typealias Angle = Float
 
 // MARK: Float additional utilities
-public extension Float {
+extension Float {
     public static let halfPi = pi / 2
     public static let quarterPi = pi / 4
     public static let twoPi = pi * 2
@@ -63,7 +63,7 @@ public extension Float {
 }
 
 // MARK: Angle additional utilities
-public extension Angle {
+extension Angle {
     public static let degreesPerRadian = 180 / pi
     public static let radiansPerDegree = pi / 180
     

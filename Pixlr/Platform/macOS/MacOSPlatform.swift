@@ -112,6 +112,6 @@ internal class MacOSPlatform: Platform {
 }
 
 // MARK: - Pixlr extension for macOS platform
-internal extension Pixlr {
+extension Pixlr {
     internal static var currentPlatform: Platform = MacOSPlatform()
 }

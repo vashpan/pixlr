@@ -8,7 +8,7 @@
 
 import CoreGraphics
 
-internal extension Size {
+extension Size {
     // MARK: Properties
     internal var cgSize: CGSize {
         return CGSize(width: CGFloat(self.width), height: CGFloat(self.height))

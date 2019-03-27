@@ -293,7 +293,7 @@
 				TargetAttributes = {
 					7189BCA1216E8BFC0078034A = {
 						CreatedOnToolsVersion = 10.0;
-						LastSwiftMigration = 1000;
+						LastSwiftMigration = 1020;
 					};
 					7189BCAA216E8BFC0078034A = {
 						CreatedOnToolsVersion = 10.0;
@@ -306,6 +306,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = 7189BC98216E8BFC0078034A;
 			productRefGroup = 7189BCA3216E8BFC0078034A /* Products */;
@@ -532,7 +533,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -559,7 +560,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.oneminutegames.Pixlr;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
