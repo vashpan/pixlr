@@ -125,20 +125,21 @@ public class Graphics {
             return
         }
         
-        let scaledGlyphSize = Size(width: font.glyphSize.width * scale.x, height: font.glyphSize.height * scale.y)
-        
         var insertion = position
         var i = 0
         for c in text {
             if c == " " {
-                insertion.x += scaledGlyphSize.width
+                insertion.x += Float(font.size) * scale.x
                 continue
             }
             
             if let glyph = font.glyphs[c] {
+                let glyphSize = glyph.size
+                let scaledGlyphSize = Size(width: glyphSize.width * scale.x, height: glyphSize.height * scale.y)
                 let (pivot, scale, color, angle) = glyphTransform(c, i)
-                let transform = self.makeTransformMatrix(origin: insertion, size: font.glyphSize, pivot: pivot, scale: scale, rotation: angle)
-                self.drawingCommands.append(.drawGlyph(glyph: glyph, size: font.glyphSize, texture: font.texture, color: color, transform: transform))
+                let transform = self.makeTransformMatrix(origin: insertion, size: glyphSize, pivot: pivot, scale: scale, rotation: angle)
+                
+                self.drawingCommands.append(.drawGlyph(glyph: glyph, size: glyphSize, texture: font.texture, color: color, transform: transform))
                 
                 insertion.x += scaledGlyphSize.width
             }

@@ -108,34 +108,50 @@ public final class Resources {
             return
         }
         
-        // parse font data
+        // parse font info
+        guard let fontInfo = font["fontInfo"] as? [String:Int] else {
+            Log.resources.error("No font info section in JSON for font of name: \(fontName)!")
+            return
+        }
+        
+        guard let fontLineHeight = fontInfo["lineHeight"] else {
+            Log.resources.error("No font line height info in JSON for font of name: \(fontName)!")
+            return
+        }
+        
+        guard let fontSize = fontInfo["size"] else {
+            Log.resources.error("No font size info in JSON for font of name: \(fontName)!")
+            return
+        }
+        
+        let fontSpacing = fontInfo["spacing"] ?? 0
+        
+        // parse glyphs
         var glyphs = [Character: Glyph]()
-        var glyphSize = Size.zero
-        if let glyphSizeObject = font["glyph_size"] as? [String:Any] {
-            let w = glyphSizeObject["w"] as? Int
-            let h = glyphSizeObject["h"] as? Int
-            glyphSize = Size(width: w ?? 0, height: h ?? 0)
-            
-            let textureSize = fontTexture.size
-            
-            // map characters from the beginning of image
-            var currentPoint = Point(x: 0.0, y: 0.0)
-            if let characters = font["characters"] as? String {
-                for c in characters {
-                    let glyph = Glyph(uv: currentPoint)
-                    glyphs[c] = glyph
+        if let glyphsArray = font["glyphs"] as? [Any] {
+            for glyphObject in glyphsArray {
+                if let glyph = glyphObject as? [String:Any] {
+                    let x = glyph["x"] as? Int
+                    let y = glyph["y"] as? Int
+                    let w = glyph["w"] as? Int
+                    let h = glyph["h"] as? Int
                     
-                    // advance to next glyph
-                    currentPoint.x += glyphSize.width
-                    if currentPoint.x >= textureSize.width - glyphSize.width {
-                        currentPoint.x = 0.0
-                        currentPoint.y += glyphSize.width
+                    if let char = glyph["char"] as? String, char.count == 1 {
+                        let sprite = Glyph(size: Size(width: Float(w ?? 0), height: Float(h ?? 0)),
+                                             uv: Point(x: Float(x ?? 0), y: Float(y ?? 0)))
+                        glyphs[Character(char)] = sprite
+                    } else {
+                        Log.resources.warning("No character, for specified glyph! Skipping...")
                     }
                 }
             }
         }
         
-        self.fonts[fontId] = Font(glyphs: glyphs, glyphSize: glyphSize, texture: fontTexture)
+        self.fonts[fontId] = Font(glyphs: glyphs,
+                                  texture: fontTexture,
+                                  lineHeight: fontLineHeight,
+                                  spacing: fontSpacing,
+                                  size: fontSize)
     }
     
     // MARK: Accessing resources
