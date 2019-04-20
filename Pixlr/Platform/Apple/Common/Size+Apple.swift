@@ -1,5 +1,5 @@
 //
-//  Size+macOS.swift
+//  Size+Apple.swift
 //  Pixlr
 //
 //  Created by Konrad Kołakowski on 18/11/2018.

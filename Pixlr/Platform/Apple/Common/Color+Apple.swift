@@ -1,5 +1,5 @@
 //
-//  Color+macOS.swift
+//  Color+Apple.swift
 //  Pixlr
 //
 //  Created by Konrad Kołakowski on 07/01/2019.
