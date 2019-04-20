@@ -125,11 +125,20 @@ public class Graphics {
             return
         }
         
+        let scaledSpacing = Float(font.spacing) * scale.x
+        let scaledLineHeight = Float(font.lineHeight + font.spacing) * scale.y
+        
         var insertion = position
         var i = 0
         for c in text {
             if c == " " {
                 insertion.x += Float(font.size) * scale.x
+                continue
+            }
+            
+            if c == "\n" {
+                insertion.y -= scaledLineHeight
+                insertion.x = position.x
                 continue
             }
             
@@ -141,7 +150,7 @@ public class Graphics {
                 
                 self.drawingCommands.append(.drawGlyph(glyph: glyph, size: glyphSize, texture: font.texture, color: color, transform: transform))
                 
-                insertion.x += scaledGlyphSize.width
+                insertion.x += scaledGlyphSize.width + scaledSpacing
             }
             
             i += 1
