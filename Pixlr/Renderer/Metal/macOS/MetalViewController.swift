@@ -8,7 +8,7 @@
 
 import MetalKit
 
-internal class MetalViewController: NSViewController {
+internal class MacMetalViewController: NSViewController {
     // MARK: Properties
     private var metalView: MTKView!
     
@@ -73,7 +73,7 @@ internal class MetalViewController: NSViewController {
 }
 
 // MARK: - MTKViewDelegate functions
-extension MetalViewController: MTKViewDelegate {
+extension MacMetalViewController: MTKViewDelegate {
     func mtkView(_ view: MTKView, drawableSizeWillChange size: CGSize) {
         let realSize = Size(cgSize: size)
         var gameSize = self.targetGameScreenSize

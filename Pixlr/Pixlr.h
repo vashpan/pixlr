@@ -6,7 +6,7 @@
 //  Copyright © 2018 One Minute Games. All rights reserved.
 //
 
-#import <Cocoa/Cocoa.h>
+@import Foundation;
 
 //! Project version number for Pixlr.
 FOUNDATION_EXPORT double PixlrVersionNumber;

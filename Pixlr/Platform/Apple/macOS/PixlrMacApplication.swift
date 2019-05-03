@@ -8,7 +8,7 @@
 
 import Cocoa
 
-internal class PixlrApplication: NSApplication {
+internal class PixlrMacApplication: NSApplication {
     // MARK: Creating menus
     private func addToMainMenu(title: String, menu: NSMenu) {
         guard let mainMenu = self.mainMenu else {

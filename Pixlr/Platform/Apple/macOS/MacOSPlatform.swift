@@ -36,8 +36,8 @@ internal class MacOSPlatform: Platform {
     
     // MARK: App lifecycle
     internal func startApp(with game: Game) {
-        let app = PixlrApplication.shared as! PixlrApplication
-        let delegate = PixlrAppDelegate()
+        let app = PixlrMacApplication.shared as! PixlrMacApplication
+        let delegate = PixlrMacAppDelegate()
         
         app.createMainMenu()
         app.createMainWindow(title: self.appName)
@@ -80,7 +80,7 @@ internal class MacOSPlatform: Platform {
         return Data(bytes: rawData, count: bytesInImage)
     }
     
-    func loadTexture(name: String) -> Texture? {
+    internal func loadTexture(name: String) -> Texture? {
         let defaultTextureFormat = Texture.Format.rgba8
         
         guard let pathToTexture = Bundle.main.path(forResource: name, ofType: "png") else    {
