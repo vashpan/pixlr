@@ -31,7 +31,7 @@ internal class iOSPlatform: Platform {
     
     // MARK: App lifecycle
     func startApp(with game: Game) {
-        Log.platform.error("Start app not implemented yet on iOS!")
+        UIApplicationMain(CommandLine.argc, CommandLine.unsafeArgv, nil, NSStringFromClass(PixlrIOSAppDelegate.self))
     }
     
     // MARK: Loading resources

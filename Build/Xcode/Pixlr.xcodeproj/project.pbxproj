@@ -10,6 +10,7 @@
 		71375093216FD7E000AE9F75 /* Pixlr.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71375092216FD7E000AE9F75 /* Pixlr.swift */; };
 		71513EC5222ACDDF00C5A990 /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71513EC4222ACDDF00C5A990 /* Font.swift */; };
 		7152A58E227C42DC000F2DA1 /* iOSPlatform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7152A58D227C42DC000F2DA1 /* iOSPlatform.swift */; };
+		7152A591227D811C000F2DA1 /* PixlrIOSAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7152A590227D811C000F2DA1 /* PixlrIOSAppDelegate.swift */; };
 		715FECD321713BEE009AE9B1 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715FECD221713BEE009AE9B1 /* Game.swift */; };
 		715FECE521714A8F009AE9B1 /* Platform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715FECE421714A8F009AE9B1 /* Platform.swift */; };
 		715FECE721714B12009AE9B1 /* MacOSPlatform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715FECE621714B12009AE9B1 /* MacOSPlatform.swift */; };
@@ -76,6 +77,7 @@
 		71375092216FD7E000AE9F75 /* Pixlr.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pixlr.swift; sourceTree = "<group>"; };
 		71513EC4222ACDDF00C5A990 /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
 		7152A58D227C42DC000F2DA1 /* iOSPlatform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSPlatform.swift; sourceTree = "<group>"; };
+		7152A590227D811C000F2DA1 /* PixlrIOSAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PixlrIOSAppDelegate.swift; sourceTree = "<group>"; };
 		715FECD221713BEE009AE9B1 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		715FECE421714A8F009AE9B1 /* Platform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Platform.swift; sourceTree = "<group>"; };
 		715FECE621714B12009AE9B1 /* MacOSPlatform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacOSPlatform.swift; sourceTree = "<group>"; };
@@ -83,7 +85,6 @@
 		715FED1121728E6B009AE9B1 /* MacMetalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacMetalViewController.swift; sourceTree = "<group>"; wrapsLines = 1; };
 		717356A7226B6DAF004995FF /* PixlrMacAppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PixlrMacAppDelegate.swift; sourceTree = "<group>"; };
 		7182758422764A300003B98F /* Pixlr.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pixlr.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		7182758522764A300003B98F /* Pixlr copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Pixlr copy-Info.plist"; path = "/Users/Konrad/Projekty/Prototypy/Pixlr/Build/Xcode/Pixlr copy-Info.plist"; sourceTree = "<absolute>"; };
 		7189BCA2216E8BFC0078034A /* Pixlr.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pixlr.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7189BCA5216E8BFC0078034A /* Pixlr.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Pixlr.h; sourceTree = "<group>"; };
 		7189BCA6216E8BFC0078034A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -198,6 +199,7 @@
 		717356A6226B6934004995FF /* iOS */ = {
 			isa = PBXGroup;
 			children = (
+				7152A590227D811C000F2DA1 /* PixlrIOSAppDelegate.swift */,
 				7152A58D227C42DC000F2DA1 /* iOSPlatform.swift */,
 			);
 			path = iOS;
@@ -209,7 +211,6 @@
 				7189BCA4216E8BFC0078034A /* Pixlr */,
 				7189BCAF216E8BFC0078034A /* PixlrTests */,
 				7189BCA3216E8BFC0078034A /* Products */,
-				7182758522764A300003B98F /* Pixlr copy-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -376,7 +377,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1000;
-				LastUpgradeCheck = 1000;
+				LastUpgradeCheck = 1020;
 				ORGANIZATIONNAME = "One Minute Games";
 				TargetAttributes = {
 					7189BCA1216E8BFC0078034A = {
@@ -448,6 +449,7 @@
 				7182756E22764A300003B98F /* Pixlr.swift in Sources */,
 				7182756F22764A300003B98F /* Size+Apple.swift in Sources */,
 				7182757222764A300003B98F /* Color.swift in Sources */,
+				7152A591227D811C000F2DA1 /* PixlrIOSAppDelegate.swift in Sources */,
 				7182757322764A300003B98F /* SpritesSheet.swift in Sources */,
 				7182757422764A300003B98F /* Pixel.swift in Sources */,
 				7182757522764A300003B98F /* Platform.swift in Sources */,
@@ -516,7 +518,6 @@
 		7182758222764A300003B98F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
@@ -547,7 +548,6 @@
 		7182758322764A300003B98F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
