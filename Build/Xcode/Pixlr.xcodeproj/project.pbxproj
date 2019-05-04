@@ -11,6 +11,7 @@
 		71513EC5222ACDDF00C5A990 /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71513EC4222ACDDF00C5A990 /* Font.swift */; };
 		7152A58E227C42DC000F2DA1 /* iOSPlatform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7152A58D227C42DC000F2DA1 /* iOSPlatform.swift */; };
 		7152A591227D811C000F2DA1 /* PixlrIOSAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7152A590227D811C000F2DA1 /* PixlrIOSAppDelegate.swift */; };
+		7152A599227DC883000F2DA1 /* iOSMetalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7152A598227DC883000F2DA1 /* iOSMetalViewController.swift */; };
 		715FECD321713BEE009AE9B1 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715FECD221713BEE009AE9B1 /* Game.swift */; };
 		715FECE521714A8F009AE9B1 /* Platform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715FECE421714A8F009AE9B1 /* Platform.swift */; };
 		715FECE721714B12009AE9B1 /* MacOSPlatform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715FECE621714B12009AE9B1 /* MacOSPlatform.swift */; };
@@ -78,6 +79,7 @@
 		71513EC4222ACDDF00C5A990 /* Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
 		7152A58D227C42DC000F2DA1 /* iOSPlatform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSPlatform.swift; sourceTree = "<group>"; };
 		7152A590227D811C000F2DA1 /* PixlrIOSAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PixlrIOSAppDelegate.swift; sourceTree = "<group>"; };
+		7152A598227DC883000F2DA1 /* iOSMetalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = iOSMetalViewController.swift; sourceTree = "<group>"; };
 		715FECD221713BEE009AE9B1 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		715FECE421714A8F009AE9B1 /* Platform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Platform.swift; sourceTree = "<group>"; };
 		715FECE621714B12009AE9B1 /* MacOSPlatform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacOSPlatform.swift; sourceTree = "<group>"; };
@@ -145,6 +147,14 @@
 			path = macOS;
 			sourceTree = "<group>";
 		};
+		7152A597227DC818000F2DA1 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				7152A598227DC883000F2DA1 /* iOSMetalViewController.swift */,
+			);
+			path = iOS;
+			sourceTree = "<group>";
+		};
 		715FECD421713D59009AE9B1 /* Platform */ = {
 			isa = PBXGroup;
 			children = (
@@ -177,6 +187,7 @@
 		715FED1021728E18009AE9B1 /* Metal */ = {
 			isa = PBXGroup;
 			children = (
+				7152A597227DC818000F2DA1 /* iOS */,
 				7152A58F227C4CED000F2DA1 /* macOS */,
 				71CD213421A1AC000082E5B7 /* MetalRenderer.swift */,
 				71CD214821A4B3D20082E5B7 /* ShaderTypes.h */,
@@ -442,6 +453,7 @@
 				7182756822764A300003B98F /* SpritesShaders.metal in Sources */,
 				7182756922764A300003B98F /* Sprite.swift in Sources */,
 				7152A58E227C42DC000F2DA1 /* iOSPlatform.swift in Sources */,
+				7152A599227DC883000F2DA1 /* iOSMetalViewController.swift in Sources */,
 				7182756A22764A300003B98F /* Renderer.swift in Sources */,
 				7182756B22764A300003B98F /* FramebufferShaders.metal in Sources */,
 				7182756C22764A300003B98F /* Font.swift in Sources */,

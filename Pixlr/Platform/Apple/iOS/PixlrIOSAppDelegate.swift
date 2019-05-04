@@ -15,11 +15,13 @@ internal class PixlrIOSAppDelegate: NSObject, UIApplicationDelegate {
         let screenRect = UIScreen.main.bounds
         self.window = UIWindow(frame: screenRect)
         
-        // FIXME: Replace this placeholder VC with IOSMetalViewController
-        let placeholderVc = UIViewController()
-        placeholderVc.view.backgroundColor = .green
+        // setup our view controller, depending on renderer
+        // in the future we could get renderers from config
+        let metalViewController = iOSMetalViewController(game: Pixlr.game,
+                                                         targetGameScreenSize: Pixlr.config.targetScreenSize,
+                                                         scaleMode: Pixlr.config.scaleMode)
         
-        self.window?.rootViewController = placeholderVc
+        self.window?.rootViewController = metalViewController
         self.window?.makeKeyAndVisible()
     }
     
