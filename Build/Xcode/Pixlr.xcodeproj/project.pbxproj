@@ -9,38 +9,38 @@
 /* Begin PBXBuildFile section */
 		71375093216FD7E000AE9F75 /* Pixlr.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71375092216FD7E000AE9F75 /* Pixlr.swift */; };
 		71513EC5222ACDDF00C5A990 /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71513EC4222ACDDF00C5A990 /* Font.swift */; };
-		7152A58E227C42DC000F2DA1 /* iOSPlatform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7152A58D227C42DC000F2DA1 /* iOSPlatform.swift */; };
-		7152A591227D811C000F2DA1 /* PixlrIOSAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7152A590227D811C000F2DA1 /* PixlrIOSAppDelegate.swift */; };
-		7152A599227DC883000F2DA1 /* iOSMetalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7152A598227DC883000F2DA1 /* iOSMetalViewController.swift */; };
+		7152A5B4227E1D5B000F2DA1 /* Pixlr.h in Headers */ = {isa = PBXBuildFile; fileRef = 7189BCA5216E8BFC0078034A /* Pixlr.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7152A5B6227E1DAE000F2DA1 /* Pixlr.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71375092216FD7E000AE9F75 /* Pixlr.swift */; };
+		7152A5B7227E1DB1000F2DA1 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71CD214321A20EBD0082E5B7 /* Config.swift */; };
+		7152A5B8227E1DB4000F2DA1 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715FECD221713BEE009AE9B1 /* Game.swift */; };
+		7152A5B9227E1DBC000F2DA1 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71CD213221A1A6ED0082E5B7 /* Logger.swift */; };
+		7152A5BA227E1DBC000F2DA1 /* Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71CF36CB21DC2920005CF148 /* Math.swift */; };
+		7152A5BB227E1DC0000F2DA1 /* Graphics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71CD213721A1BB160082E5B7 /* Graphics.swift */; };
+		7152A5BC227E1DC0000F2DA1 /* Pixel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71CD213B21A1C49A0082E5B7 /* Pixel.swift */; };
+		7152A5BD227E1DC0000F2DA1 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71CD213D21A1C4C50082E5B7 /* Color.swift */; };
+		7152A5BE227E1DC5000F2DA1 /* Resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71CD215021B1A38A0082E5B7 /* Resources.swift */; };
+		7152A5BF227E1DC5000F2DA1 /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71513EC4222ACDDF00C5A990 /* Font.swift */; };
+		7152A5C0227E1DC5000F2DA1 /* SpritesSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71CD215221B1A4540082E5B7 /* SpritesSheet.swift */; };
+		7152A5C1227E1DC5000F2DA1 /* Sprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71CD215621B1A8610082E5B7 /* Sprite.swift */; };
+		7152A5C2227E1DC5000F2DA1 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71CD215821B88AF40082E5B7 /* Image.swift */; };
+		7152A5C3227E1DC5000F2DA1 /* Texture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71CD215421B1A5310082E5B7 /* Texture.swift */; };
+		7152A5C4227E1DCB000F2DA1 /* Platform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715FECE421714A8F009AE9B1 /* Platform.swift */; };
+		7152A5C5227E1DCF000F2DA1 /* PixlrIOSAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7152A590227D811C000F2DA1 /* PixlrIOSAppDelegate.swift */; };
+		7152A5C6227E1DCF000F2DA1 /* iOSPlatform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7152A58D227C42DC000F2DA1 /* iOSPlatform.swift */; };
+		7152A5C7227E1DD3000F2DA1 /* Size+Apple.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71CD214621A2162D0082E5B7 /* Size+Apple.swift */; };
+		7152A5C8227E1DD3000F2DA1 /* Color+Apple.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71DF28EB21E40F9C00507A85 /* Color+Apple.swift */; };
+		7152A5C9227E1E79000F2DA1 /* Renderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71CD213F21A1CED80082E5B7 /* Renderer.swift */; };
+		7152A5CA227E1E7F000F2DA1 /* MetalRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71CD213421A1AC000082E5B7 /* MetalRenderer.swift */; };
+		7152A5CB227E1E7F000F2DA1 /* ShaderTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = 71CD214821A4B3D20082E5B7 /* ShaderTypes.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7152A5CC227E1E7F000F2DA1 /* FramebufferShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 71CD214A21AB5B860082E5B7 /* FramebufferShaders.metal */; };
+		7152A5CD227E1E7F000F2DA1 /* SpritesShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 71CD214B21AB5B860082E5B7 /* SpritesShaders.metal */; };
+		7152A5CE227E1E84000F2DA1 /* iOSMetalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7152A598227DC883000F2DA1 /* iOSMetalViewController.swift */; };
 		715FECD321713BEE009AE9B1 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715FECD221713BEE009AE9B1 /* Game.swift */; };
 		715FECE521714A8F009AE9B1 /* Platform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715FECE421714A8F009AE9B1 /* Platform.swift */; };
 		715FECE721714B12009AE9B1 /* MacOSPlatform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715FECE621714B12009AE9B1 /* MacOSPlatform.swift */; };
 		715FECED21720797009AE9B1 /* PixlrMacApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715FECEC21720797009AE9B1 /* PixlrMacApplication.swift */; };
 		715FED1221728E6B009AE9B1 /* MacMetalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715FED1121728E6B009AE9B1 /* MacMetalViewController.swift */; };
 		717356A8226B6DAF004995FF /* PixlrMacAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717356A7226B6DAF004995FF /* PixlrMacAppDelegate.swift */; };
-		7182756322764A300003B98F /* Pixlr.h in Headers */ = {isa = PBXBuildFile; fileRef = 7189BCA5216E8BFC0078034A /* Pixlr.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7182756422764A300003B98F /* ShaderTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = 71CD214821A4B3D20082E5B7 /* ShaderTypes.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7182756722764A300003B98F /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71CD215821B88AF40082E5B7 /* Image.swift */; };
-		7182756822764A300003B98F /* SpritesShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 71CD214B21AB5B860082E5B7 /* SpritesShaders.metal */; };
-		7182756922764A300003B98F /* Sprite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71CD215621B1A8610082E5B7 /* Sprite.swift */; };
-		7182756A22764A300003B98F /* Renderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71CD213F21A1CED80082E5B7 /* Renderer.swift */; };
-		7182756B22764A300003B98F /* FramebufferShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 71CD214A21AB5B860082E5B7 /* FramebufferShaders.metal */; };
-		7182756C22764A300003B98F /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71513EC4222ACDDF00C5A990 /* Font.swift */; };
-		7182756D22764A300003B98F /* Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71CF36CB21DC2920005CF148 /* Math.swift */; };
-		7182756E22764A300003B98F /* Pixlr.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71375092216FD7E000AE9F75 /* Pixlr.swift */; };
-		7182756F22764A300003B98F /* Size+Apple.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71CD214621A2162D0082E5B7 /* Size+Apple.swift */; };
-		7182757222764A300003B98F /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71CD213D21A1C4C50082E5B7 /* Color.swift */; };
-		7182757322764A300003B98F /* SpritesSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71CD215221B1A4540082E5B7 /* SpritesSheet.swift */; };
-		7182757422764A300003B98F /* Pixel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71CD213B21A1C49A0082E5B7 /* Pixel.swift */; };
-		7182757522764A300003B98F /* Platform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715FECE421714A8F009AE9B1 /* Platform.swift */; };
-		7182757622764A300003B98F /* MetalRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71CD213421A1AC000082E5B7 /* MetalRenderer.swift */; };
-		7182757722764A300003B98F /* Resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71CD215021B1A38A0082E5B7 /* Resources.swift */; };
-		7182757822764A300003B98F /* Color+Apple.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71DF28EB21E40F9C00507A85 /* Color+Apple.swift */; };
-		7182757922764A300003B98F /* Graphics.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71CD213721A1BB160082E5B7 /* Graphics.swift */; };
-		7182757A22764A300003B98F /* Texture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71CD215421B1A5310082E5B7 /* Texture.swift */; };
-		7182757C22764A300003B98F /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71CD214321A20EBD0082E5B7 /* Config.swift */; };
-		7182757D22764A300003B98F /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715FECD221713BEE009AE9B1 /* Game.swift */; };
-		7182757E22764A300003B98F /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71CD213221A1A6ED0082E5B7 /* Logger.swift */; };
 		7189BCAC216E8BFC0078034A /* Pixlr.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7189BCA2216E8BFC0078034A /* Pixlr.framework */; };
 		7189BCB1216E8BFC0078034A /* PixlrTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7189BCB0216E8BFC0078034A /* PixlrTests.swift */; };
 		7189BCB3216E8BFC0078034A /* Pixlr.h in Headers */ = {isa = PBXBuildFile; fileRef = 7189BCA5216E8BFC0078034A /* Pixlr.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -80,13 +80,13 @@
 		7152A58D227C42DC000F2DA1 /* iOSPlatform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iOSPlatform.swift; sourceTree = "<group>"; };
 		7152A590227D811C000F2DA1 /* PixlrIOSAppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PixlrIOSAppDelegate.swift; sourceTree = "<group>"; };
 		7152A598227DC883000F2DA1 /* iOSMetalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = iOSMetalViewController.swift; sourceTree = "<group>"; };
+		7152A5AB227E1CF8000F2DA1 /* Pixlr.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pixlr.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		715FECD221713BEE009AE9B1 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		715FECE421714A8F009AE9B1 /* Platform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Platform.swift; sourceTree = "<group>"; };
 		715FECE621714B12009AE9B1 /* MacOSPlatform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacOSPlatform.swift; sourceTree = "<group>"; };
 		715FECEC21720797009AE9B1 /* PixlrMacApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PixlrMacApplication.swift; sourceTree = "<group>"; };
 		715FED1121728E6B009AE9B1 /* MacMetalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacMetalViewController.swift; sourceTree = "<group>"; wrapsLines = 1; };
 		717356A7226B6DAF004995FF /* PixlrMacAppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PixlrMacAppDelegate.swift; sourceTree = "<group>"; };
-		7182758422764A300003B98F /* Pixlr.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pixlr.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7189BCA2216E8BFC0078034A /* Pixlr.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pixlr.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7189BCA5216E8BFC0078034A /* Pixlr.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Pixlr.h; sourceTree = "<group>"; };
 		7189BCA6216E8BFC0078034A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -114,7 +114,7 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		7182757F22764A300003B98F /* Frameworks */ = {
+		7152A5A8227E1CF8000F2DA1 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -230,7 +230,7 @@
 			children = (
 				7189BCA2216E8BFC0078034A /* Pixlr.framework */,
 				7189BCAB216E8BFC0078034A /* PixlrTests.xctest */,
-				7182758422764A300003B98F /* Pixlr.framework */,
+				7152A5AB227E1CF8000F2DA1 /* Pixlr.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -306,12 +306,12 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		7182756222764A300003B98F /* Headers */ = {
+		7152A5A6227E1CF8000F2DA1 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7182756322764A300003B98F /* Pixlr.h in Headers */,
-				7182756422764A300003B98F /* ShaderTypes.h in Headers */,
+				7152A5B4227E1D5B000F2DA1 /* Pixlr.h in Headers */,
+				7152A5CB227E1E7F000F2DA1 /* ShaderTypes.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -327,14 +327,14 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		7182756122764A300003B98F /* Pixlr-iOS */ = {
+		7152A5AA227E1CF8000F2DA1 /* Pixlr-iOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 7182758122764A300003B98F /* Build configuration list for PBXNativeTarget "Pixlr-iOS" */;
+			buildConfigurationList = 7152A5B0227E1CF8000F2DA1 /* Build configuration list for PBXNativeTarget "Pixlr-iOS" */;
 			buildPhases = (
-				7182756222764A300003B98F /* Headers */,
-				7182756522764A300003B98F /* Sources */,
-				7182757F22764A300003B98F /* Frameworks */,
-				7182758022764A300003B98F /* Resources */,
+				7152A5A6227E1CF8000F2DA1 /* Headers */,
+				7152A5A7227E1CF8000F2DA1 /* Sources */,
+				7152A5A8227E1CF8000F2DA1 /* Frameworks */,
+				7152A5A9227E1CF8000F2DA1 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -342,7 +342,7 @@
 			);
 			name = "Pixlr-iOS";
 			productName = Pixlr;
-			productReference = 7182758422764A300003B98F /* Pixlr.framework */;
+			productReference = 7152A5AB227E1CF8000F2DA1 /* Pixlr.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		7189BCA1216E8BFC0078034A /* Pixlr-macOS */ = {
@@ -391,6 +391,9 @@
 				LastUpgradeCheck = 1020;
 				ORGANIZATIONNAME = "One Minute Games";
 				TargetAttributes = {
+					7152A5AA227E1CF8000F2DA1 = {
+						CreatedOnToolsVersion = 10.2.1;
+					};
 					7189BCA1216E8BFC0078034A = {
 						CreatedOnToolsVersion = 10.0;
 						LastSwiftMigration = 1020;
@@ -414,14 +417,14 @@
 			projectRoot = "";
 			targets = (
 				7189BCA1216E8BFC0078034A /* Pixlr-macOS */,
-				7182756122764A300003B98F /* Pixlr-iOS */,
+				7152A5AA227E1CF8000F2DA1 /* Pixlr-iOS */,
 				7189BCAA216E8BFC0078034A /* PixlrTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		7182758022764A300003B98F /* Resources */ = {
+		7152A5A9227E1CF8000F2DA1 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -445,34 +448,34 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		7182756522764A300003B98F /* Sources */ = {
+		7152A5A7227E1CF8000F2DA1 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7182756722764A300003B98F /* Image.swift in Sources */,
-				7182756822764A300003B98F /* SpritesShaders.metal in Sources */,
-				7182756922764A300003B98F /* Sprite.swift in Sources */,
-				7152A58E227C42DC000F2DA1 /* iOSPlatform.swift in Sources */,
-				7152A599227DC883000F2DA1 /* iOSMetalViewController.swift in Sources */,
-				7182756A22764A300003B98F /* Renderer.swift in Sources */,
-				7182756B22764A300003B98F /* FramebufferShaders.metal in Sources */,
-				7182756C22764A300003B98F /* Font.swift in Sources */,
-				7182756D22764A300003B98F /* Math.swift in Sources */,
-				7182756E22764A300003B98F /* Pixlr.swift in Sources */,
-				7182756F22764A300003B98F /* Size+Apple.swift in Sources */,
-				7182757222764A300003B98F /* Color.swift in Sources */,
-				7152A591227D811C000F2DA1 /* PixlrIOSAppDelegate.swift in Sources */,
-				7182757322764A300003B98F /* SpritesSheet.swift in Sources */,
-				7182757422764A300003B98F /* Pixel.swift in Sources */,
-				7182757522764A300003B98F /* Platform.swift in Sources */,
-				7182757622764A300003B98F /* MetalRenderer.swift in Sources */,
-				7182757722764A300003B98F /* Resources.swift in Sources */,
-				7182757822764A300003B98F /* Color+Apple.swift in Sources */,
-				7182757922764A300003B98F /* Graphics.swift in Sources */,
-				7182757A22764A300003B98F /* Texture.swift in Sources */,
-				7182757C22764A300003B98F /* Config.swift in Sources */,
-				7182757D22764A300003B98F /* Game.swift in Sources */,
-				7182757E22764A300003B98F /* Logger.swift in Sources */,
+				7152A5C4227E1DCB000F2DA1 /* Platform.swift in Sources */,
+				7152A5BC227E1DC0000F2DA1 /* Pixel.swift in Sources */,
+				7152A5CA227E1E7F000F2DA1 /* MetalRenderer.swift in Sources */,
+				7152A5BB227E1DC0000F2DA1 /* Graphics.swift in Sources */,
+				7152A5CE227E1E84000F2DA1 /* iOSMetalViewController.swift in Sources */,
+				7152A5BF227E1DC5000F2DA1 /* Font.swift in Sources */,
+				7152A5B6227E1DAE000F2DA1 /* Pixlr.swift in Sources */,
+				7152A5B8227E1DB4000F2DA1 /* Game.swift in Sources */,
+				7152A5C3227E1DC5000F2DA1 /* Texture.swift in Sources */,
+				7152A5C0227E1DC5000F2DA1 /* SpritesSheet.swift in Sources */,
+				7152A5CD227E1E7F000F2DA1 /* SpritesShaders.metal in Sources */,
+				7152A5C9227E1E79000F2DA1 /* Renderer.swift in Sources */,
+				7152A5CC227E1E7F000F2DA1 /* FramebufferShaders.metal in Sources */,
+				7152A5C2227E1DC5000F2DA1 /* Image.swift in Sources */,
+				7152A5C8227E1DD3000F2DA1 /* Color+Apple.swift in Sources */,
+				7152A5C7227E1DD3000F2DA1 /* Size+Apple.swift in Sources */,
+				7152A5B7227E1DB1000F2DA1 /* Config.swift in Sources */,
+				7152A5C5227E1DCF000F2DA1 /* PixlrIOSAppDelegate.swift in Sources */,
+				7152A5C6227E1DCF000F2DA1 /* iOSPlatform.swift in Sources */,
+				7152A5BD227E1DC0000F2DA1 /* Color.swift in Sources */,
+				7152A5BE227E1DC5000F2DA1 /* Resources.swift in Sources */,
+				7152A5B9227E1DBC000F2DA1 /* Logger.swift in Sources */,
+				7152A5C1227E1DC5000F2DA1 /* Sprite.swift in Sources */,
+				7152A5BA227E1DBC000F2DA1 /* Math.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -527,62 +530,56 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		7182758222764A300003B98F /* Debug */ = {
+		7152A5B1227E1CF8000F2DA1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 3DS5SGYDG6;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				FRAMEWORK_VERSION = A;
 				INFOPLIST_FILE = "$(SRCROOT)/../../Pixlr/Platform/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
-					"@executable_path/../Frameworks",
+					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.oneminutegames.Pixlr;
 				PRODUCT_NAME = Pixlr;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
-		7182758322764A300003B98F /* Release */ = {
+		7152A5B2227E1CF8000F2DA1 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = 3DS5SGYDG6;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				FRAMEWORK_VERSION = A;
 				INFOPLIST_FILE = "$(SRCROOT)/../../Pixlr/Platform/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
-					"@executable_path/../Frameworks",
+					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.oneminutegames.Pixlr;
 				PRODUCT_NAME = Pixlr;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
@@ -638,6 +635,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -696,6 +694,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -803,11 +802,11 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		7182758122764A300003B98F /* Build configuration list for PBXNativeTarget "Pixlr-iOS" */ = {
+		7152A5B0227E1CF8000F2DA1 /* Build configuration list for PBXNativeTarget "Pixlr-iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				7182758222764A300003B98F /* Debug */,
-				7182758322764A300003B98F /* Release */,
+				7152A5B1227E1CF8000F2DA1 /* Debug */,
+				7152A5B2227E1CF8000F2DA1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
