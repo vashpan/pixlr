@@ -15,7 +15,7 @@ final class SadFaceConfig: Config {
     }
     
     override var scaleMode: Config.ScreenScaleMode {
-        return .keepWidth
+        return .keepHeight
     }
 }
 
