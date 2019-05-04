@@ -1,5 +1,5 @@
 //
-//  MetalViewController.swift
+//  MacMetalViewController.swift
 //  Pixlr
 //
 //  Created by Konrad Kołakowski on 13/10/2018.

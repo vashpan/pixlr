@@ -14,7 +14,7 @@
 		715FECE521714A8F009AE9B1 /* Platform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715FECE421714A8F009AE9B1 /* Platform.swift */; };
 		715FECE721714B12009AE9B1 /* MacOSPlatform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715FECE621714B12009AE9B1 /* MacOSPlatform.swift */; };
 		715FECED21720797009AE9B1 /* PixlrMacApplication.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715FECEC21720797009AE9B1 /* PixlrMacApplication.swift */; };
-		715FED1221728E6B009AE9B1 /* MetalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715FED1121728E6B009AE9B1 /* MetalViewController.swift */; };
+		715FED1221728E6B009AE9B1 /* MacMetalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715FED1121728E6B009AE9B1 /* MacMetalViewController.swift */; };
 		717356A8226B6DAF004995FF /* PixlrMacAppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 717356A7226B6DAF004995FF /* PixlrMacAppDelegate.swift */; };
 		7182756322764A300003B98F /* Pixlr.h in Headers */ = {isa = PBXBuildFile; fileRef = 7189BCA5216E8BFC0078034A /* Pixlr.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7182756422764A300003B98F /* ShaderTypes.h in Headers */ = {isa = PBXBuildFile; fileRef = 71CD214821A4B3D20082E5B7 /* ShaderTypes.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -80,7 +80,7 @@
 		715FECE421714A8F009AE9B1 /* Platform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Platform.swift; sourceTree = "<group>"; };
 		715FECE621714B12009AE9B1 /* MacOSPlatform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacOSPlatform.swift; sourceTree = "<group>"; };
 		715FECEC21720797009AE9B1 /* PixlrMacApplication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PixlrMacApplication.swift; sourceTree = "<group>"; };
-		715FED1121728E6B009AE9B1 /* MetalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetalViewController.swift; sourceTree = "<group>"; wrapsLines = 1; };
+		715FED1121728E6B009AE9B1 /* MacMetalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacMetalViewController.swift; sourceTree = "<group>"; wrapsLines = 1; };
 		717356A7226B6DAF004995FF /* PixlrMacAppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PixlrMacAppDelegate.swift; sourceTree = "<group>"; };
 		7182758422764A300003B98F /* Pixlr.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pixlr.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7182758522764A300003B98F /* Pixlr copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Pixlr copy-Info.plist"; path = "/Users/Konrad/Projekty/Prototypy/Pixlr/Build/Xcode/Pixlr copy-Info.plist"; sourceTree = "<absolute>"; };
@@ -139,7 +139,7 @@
 		7152A58F227C4CED000F2DA1 /* macOS */ = {
 			isa = PBXGroup;
 			children = (
-				715FED1121728E6B009AE9B1 /* MetalViewController.swift */,
+				715FED1121728E6B009AE9B1 /* MacMetalViewController.swift */,
 			);
 			path = macOS;
 			sourceTree = "<group>";
@@ -487,7 +487,7 @@
 				71DF28EC21E40F9C00507A85 /* Color+Apple.swift in Sources */,
 				71CD213821A1BB160082E5B7 /* Graphics.swift in Sources */,
 				71CD215521B1A5310082E5B7 /* Texture.swift in Sources */,
-				715FED1221728E6B009AE9B1 /* MetalViewController.swift in Sources */,
+				715FED1221728E6B009AE9B1 /* MacMetalViewController.swift in Sources */,
 				71CD214421A20EBD0082E5B7 /* Config.swift in Sources */,
 				715FECD321713BEE009AE9B1 /* Game.swift in Sources */,
 				71CD213321A1A6ED0082E5B7 /* Logger.swift in Sources */,
