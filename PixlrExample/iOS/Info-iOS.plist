@@ -18,11 +18,19 @@
 	<string>1.0.0</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
-	<key>LSMinimumSystemVersion</key>
-	<string>$(MACOSX_DEPLOYMENT_TARGET)</string>
+	<key>LSRequiresIPhoneOS</key>
+	<true/>
 	<key>NSHumanReadableCopyright</key>
 	<string>Copyright © 2018 One Minute Games. All rights reserved.</string>
-	<key>NSPrincipalClass</key>
-	<string>NSApplication</string>
+	<key>UILaunchStoryboardName</key>
+	<string>LaunchScreen</string>
+	<key>UIRequiredDeviceCapabilities</key>
+	<array>
+		<string>armv7</string>
+	</array>
+	<key>UIRequiresFullScreen</key>
+	<true/>
+	<key>UIStatusBarHidden</key>
+	<true/>
 </dict>
 </plist>
