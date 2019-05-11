@@ -23,8 +23,16 @@ internal class PixlrMacAppDelegate: NSObject, NSApplicationDelegate {
         self.window.contentViewController = metalViewController
     }
 
+    public func applicationWillResignActive(_ notification: Notification) {
+        Pixlr.game.onAppPause()
+    }
+    
+    public func applicationWillBecomeActive(_ notification: Notification) {
+        Pixlr.game.onAppResume()
+    }
+    
     public func applicationWillTerminate(_ aNotification: Notification) {
-        
+        Pixlr.game.onAppTerminate()
     }
     
     public func applicationShouldTerminateAfterLastWindowClosed(_ sender: NSApplication) -> Bool {

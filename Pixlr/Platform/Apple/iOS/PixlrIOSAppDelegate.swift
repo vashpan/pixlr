@@ -25,8 +25,16 @@ internal class PixlrIOSAppDelegate: NSObject, UIApplicationDelegate {
         self.window?.makeKeyAndVisible()
     }
     
+    public func applicationWillResignActive(_ application: UIApplication) {
+        Pixlr.game.onAppPause()
+    }
+    
+    public func applicationDidBecomeActive(_ application: UIApplication) {
+        Pixlr.game.onAppResume()
+    }
+    
     public func applicationWillTerminate(_ application: UIApplication) {
-        
+        Pixlr.game.onAppTerminate()
     }
 }
 

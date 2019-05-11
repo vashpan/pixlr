@@ -26,11 +26,15 @@ open class Game: NSObject {
         }
     }
     
+    open func onAppPause() {
+        
+    }
+    
     open func onAppResume() {
         
     }
     
-    open func onAppPause() {
+    open func onAppTerminate() {
         
     }
     
