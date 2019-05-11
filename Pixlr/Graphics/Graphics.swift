@@ -47,6 +47,39 @@ public class Graphics {
         return transform
     }
     
+    public func textSize(text: String, using fontId: FontId, scale: Vector2 = Vector2(1.0)) -> Size {
+        guard let font = Resources.shared.font(from: fontId) else {
+            Log.graphics.error("Cannot find font \(fontId) ")
+            return .zero
+        }
+        
+        let scaledSpacing = Float(font.spacing) * scale.x
+        let scaledLineHeight = Float(font.lineHeight + font.spacing) * scale.y
+        
+        var size = Size(width: 0.0, height: scaledLineHeight)
+        for c in text {
+            if c == " " {
+                size.width += Float(font.size) * scale.x
+                continue
+            }
+            
+            if c == "\n" {
+                size.height -= scaledLineHeight
+                size.width = 0.0
+                continue
+            }
+            
+            if let glyph = font.glyphs[c] {
+                let glyphSize = glyph.size
+                let scaledGlyphSize = Size(width: glyphSize.width * scale.x, height: glyphSize.height * scale.y)
+
+                size.width += scaledGlyphSize.width + scaledSpacing
+            }
+        }
+        
+        return size
+    }
+    
     // MARK: Frame processing
     internal func beginFrame() {
         self.drawingCommands.removeAll(keepingCapacity: true)
