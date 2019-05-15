@@ -62,6 +62,8 @@
 		71CD215921B88AF40082E5B7 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71CD215821B88AF40082E5B7 /* Image.swift */; };
 		71CF36CC21DC2920005CF148 /* Math.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71CF36CB21DC2920005CF148 /* Math.swift */; };
 		71DF28EC21E40F9C00507A85 /* Color+Apple.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71DF28EB21E40F9C00507A85 /* Color+Apple.swift */; };
+		71F391FF228CA6F400E6B198 /* Vector2+Apple.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71F391FE228CA6F400E6B198 /* Vector2+Apple.swift */; };
+		71F39200228CA6F400E6B198 /* Vector2+Apple.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71F391FE228CA6F400E6B198 /* Vector2+Apple.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -111,6 +113,7 @@
 		71CD215821B88AF40082E5B7 /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		71CF36CB21DC2920005CF148 /* Math.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Math.swift; sourceTree = "<group>"; };
 		71DF28EB21E40F9C00507A85 /* Color+Apple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Apple.swift"; sourceTree = "<group>"; };
+		71F391FE228CA6F400E6B198 /* Vector2+Apple.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Vector2+Apple.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -284,6 +287,7 @@
 		71CD214521A215FF0082E5B7 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				71F391FE228CA6F400E6B198 /* Vector2+Apple.swift */,
 				71CD214621A2162D0082E5B7 /* Size+Apple.swift */,
 				71DF28EB21E40F9C00507A85 /* Color+Apple.swift */,
 			);
@@ -467,6 +471,7 @@
 				7152A5CC227E1E7F000F2DA1 /* FramebufferShaders.metal in Sources */,
 				7152A5C2227E1DC5000F2DA1 /* Image.swift in Sources */,
 				7152A5C8227E1DD3000F2DA1 /* Color+Apple.swift in Sources */,
+				71F39200228CA6F400E6B198 /* Vector2+Apple.swift in Sources */,
 				7152A5C7227E1DD3000F2DA1 /* Size+Apple.swift in Sources */,
 				7152A5B7227E1DB1000F2DA1 /* Config.swift in Sources */,
 				7152A5C5227E1DCF000F2DA1 /* PixlrIOSAppDelegate.swift in Sources */,
@@ -502,6 +507,7 @@
 				71CD213521A1AC000082E5B7 /* MetalRenderer.swift in Sources */,
 				71CD215121B1A38A0082E5B7 /* Resources.swift in Sources */,
 				71DF28EC21E40F9C00507A85 /* Color+Apple.swift in Sources */,
+				71F391FF228CA6F400E6B198 /* Vector2+Apple.swift in Sources */,
 				71CD213821A1BB160082E5B7 /* Graphics.swift in Sources */,
 				71CD215521B1A5310082E5B7 /* Texture.swift in Sources */,
 				715FED1221728E6B009AE9B1 /* MacMetalViewController.swift in Sources */,
