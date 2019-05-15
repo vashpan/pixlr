@@ -48,6 +48,19 @@ open class Game: NSObject {
     }
     
     // MARK: Input
+    open func onTouch(touches: [Touch]) {
+        
+    }
     
-    // FIXME: Add input handling
+    open func onKey(keys: [Key]) {
+        
+    }
+    
+    open func onMouseMove(mouse: Mouse) {
+        
+    }
+    
+    open func onMouseClick(mouse: Mouse) {
+        
+    }
 }
