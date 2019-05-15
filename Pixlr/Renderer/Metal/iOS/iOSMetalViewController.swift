@@ -70,6 +70,43 @@ internal class iOSMetalViewController: UIViewController {
         // start game
         self.currentGame.start()
     }
+    
+    // MARK: Helpers
+    private func uiTouchesToPixlrTouches(touches: Set<UITouch>, state: Touch.State) -> [Touch] {
+        let realSize = Size(cgSize: self.metalView.bounds.size)
+        let gameSize = self.currentGame.screenSize
+        let widthFactor = gameSize.width / realSize.width
+        let heightFactor = gameSize.height / realSize.height
+        
+        return touches.map { (uiTouch) in
+            // scale & transform touch locations to target game resolution
+            var uiPosition = uiTouch.location(in: self.view)
+            uiPosition.x *= CGFloat(widthFactor)
+            uiPosition.y *= CGFloat(heightFactor)
+            uiPosition.y = gameSize.cgSize.height - uiPosition.y
+            
+            let position = Point(cgPoint: uiPosition)
+            
+            return Touch(position: position, state: state)
+        }
+    }
+    
+    // MARK: Handling touch input
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.currentGame.onTouch(touches: self.uiTouchesToPixlrTouches(touches: touches, state: .began))
+    }
+    
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.currentGame.onTouch(touches: self.uiTouchesToPixlrTouches(touches: touches, state: .moved))
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.currentGame.onTouch(touches: self.uiTouchesToPixlrTouches(touches: touches, state: .ended))
+    }
+    
+    override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.currentGame.onTouch(touches: self.uiTouchesToPixlrTouches(touches: touches, state: .ended))
+    }
 }
 
 // MARK: - MTKViewDelegate functions
