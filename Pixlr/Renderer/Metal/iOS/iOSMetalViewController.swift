@@ -94,18 +94,26 @@ internal class iOSMetalViewController: UIViewController {
     // MARK: Handling touch input
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.currentGame.onTouch(touches: self.uiTouchesToPixlrTouches(touches: touches, state: .began))
+        
+        super.touchesBegan(touches, with: event)
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.currentGame.onTouch(touches: self.uiTouchesToPixlrTouches(touches: touches, state: .moved))
+        
+        super.touchesMoved(touches, with: event)
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.currentGame.onTouch(touches: self.uiTouchesToPixlrTouches(touches: touches, state: .ended))
+        
+        super.touchesEnded(touches, with: event)
     }
     
     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.currentGame.onTouch(touches: self.uiTouchesToPixlrTouches(touches: touches, state: .ended))
+        
+        super.touchesCancelled(touches, with: event)
     }
 }
 
