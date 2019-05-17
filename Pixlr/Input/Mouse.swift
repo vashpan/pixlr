@@ -22,6 +22,12 @@ public struct Mouse {
     public let position: Point
     private let state: [Button : ClickState]
     
+    // MARK: Initialization
+    public init(position: Point, state: [Button : ClickState]) {
+        self.position = position
+        self.state = state
+    }
+    
     // MARK: Helpers
     public func clickState(for button: Button) -> ClickState {
         return self.state[button] ?? .up

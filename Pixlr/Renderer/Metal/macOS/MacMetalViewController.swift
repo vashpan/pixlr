@@ -11,6 +11,7 @@ import MetalKit
 internal class MacMetalViewController: NSViewController {
     // MARK: Properties
     private var metalView: MTKView!
+    private var trackingArea: NSTrackingArea? // for mouse move tracking
     
     private let currentGame: Game
     private var graphics: Graphics!
@@ -62,6 +63,7 @@ internal class MacMetalViewController: NSViewController {
         self.graphics = Graphics(renderer: self.renderer)
         
         self.mtkView(self.metalView, drawableSizeWillChange: self.metalView.drawableSize)
+        self.updateMouseTrackingArea(for: self.metalView)
     }
     
     override func viewDidLoad() {
@@ -69,6 +71,84 @@ internal class MacMetalViewController: NSViewController {
         
         // start game
         self.currentGame.start()
+    }
+    
+    // MARK: Helpers
+    private func updateMouseTrackingArea(for view: NSView) {
+        if let oldTrackingArea = self.trackingArea {
+            view.removeTrackingArea(oldTrackingArea)
+        }
+        
+        let options: NSTrackingArea.Options = [.mouseEnteredAndExited, .mouseMoved, .activeInKeyWindow]
+        let newTrackingArea = NSTrackingArea(rect: self.view.bounds, options: options, owner: self, userInfo: nil)
+        
+        view.addTrackingArea(newTrackingArea)
+        
+        self.trackingArea = newTrackingArea
+    }
+    
+    private func nsEventToMouseState(_ event: NSEvent) -> Mouse {
+        let realSize = Size(cgSize: self.metalView.bounds.size)
+        let gameSize = self.currentGame.screenSize
+        let widthFactor = gameSize.width / realSize.width
+        let heightFactor = gameSize.height / realSize.height
+        
+        // scale & transform touch locations to target game resolution
+        var uiPosition = event.locationInWindow
+        uiPosition.x *= CGFloat(widthFactor)
+        uiPosition.y *= CGFloat(heightFactor)
+
+        let position = Point(cgPoint: uiPosition)
+        
+        let buttonsState: [Mouse.Button: Mouse.ClickState] = [
+            Mouse.Button.left: NSEvent.pressedMouseButtons == 1 << 0 ? .down : .up,
+            Mouse.Button.right: NSEvent.pressedMouseButtons == 1 << 1 ? .down : .up,
+        ]
+        
+        return Mouse(position: position, state: buttonsState)
+    }
+    
+    // MARK: Handling touch input
+    override func mouseMoved(with event: NSEvent) {
+        self.currentGame.onMouseMove(mouse: self.nsEventToMouseState(event))
+        
+        super.mouseMoved(with: event)
+    }
+    
+    override func mouseDown(with event: NSEvent) {
+        self.currentGame.onMouseClick(mouse: self.nsEventToMouseState(event))
+        
+        super.mouseDown(with: event)
+    }
+    
+    override func mouseUp(with event: NSEvent) {
+        self.currentGame.onMouseClick(mouse: self.nsEventToMouseState(event))
+        
+        super.mouseUp(with: event)
+    }
+    
+    override func mouseDragged(with event: NSEvent) {
+        self.currentGame.onMouseMove(mouse: self.nsEventToMouseState(event))
+        
+        super.mouseDragged(with: event)
+    }
+    
+    override func rightMouseDown(with event: NSEvent) {
+        self.currentGame.onMouseClick(mouse: self.nsEventToMouseState(event))
+        
+        super.rightMouseDown(with: event)
+    }
+    
+    override func rightMouseUp(with event: NSEvent) {
+        self.currentGame.onMouseClick(mouse: self.nsEventToMouseState(event))
+        
+        super.rightMouseUp(with: event)
+    }
+    
+    override func rightMouseDragged(with event: NSEvent) {
+        self.currentGame.onMouseMove(mouse: self.nsEventToMouseState(event))
+        
+        super.rightMouseDragged(with: event)
     }
 }
 
@@ -92,6 +172,8 @@ extension MacMetalViewController: MTKViewDelegate {
         self.currentGame.screenSize = gameSize
         
         self.renderer.viewportWillChange(realSize: realSize, gameSize: gameSize)
+        
+        self.updateMouseTrackingArea(for: view)
     }
     
     func draw(in view: MTKView) {

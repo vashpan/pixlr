@@ -68,6 +68,8 @@ internal class PixlrMacApplication: NSApplication {
         let window = NSWindow(contentRect: rect, styleMask: [.titled, .closable, .miniaturizable, .resizable], backing: .buffered, defer: true)
         window.title = title
         window.contentView = view
+        window.ignoresMouseEvents = false
+        window.acceptsMouseMovedEvents = true
         window.makeKeyAndOrderFront(nil)
     }
 }
