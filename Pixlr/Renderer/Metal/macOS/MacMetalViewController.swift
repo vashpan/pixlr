@@ -8,9 +8,97 @@
 
 import MetalKit
 
+private protocol PixlrMTKViewInputDelegate: class {
+    func pixlrMouseMoved(with event: NSEvent)
+    func pixlrMouseDown(with event: NSEvent)
+    func pixlrMouseUp(with event: NSEvent)
+    func pixlrMouseDragged(with event: NSEvent)
+    func pixlrRightMouseDown(with event: NSEvent)
+    func pixlrRightMouseUp(with event: NSEvent)
+    func pixlrRightMouseDragged(with event: NSEvent)
+    
+    func pixlrKeyDown(with event: NSEvent)
+    func pixlrKeyUp(with event: NSEvent)
+}
+
+// MARK: Private Metal View with Input handling
+private class PixlrMTKView: MTKView {
+    // MARK: Properties
+    weak var inputDelegate: PixlrMTKViewInputDelegate?
+    
+    override var acceptsFirstResponder: Bool {
+        return true
+    }
+    
+    // MARK: Initialization
+    init(frame: NSRect, device: MTLDevice) {
+        super.init(frame: frame, device: device)
+    }
+    
+    required init(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+    
+    // MARK: Mouse input
+    override func mouseMoved(with event: NSEvent) {
+        self.inputDelegate?.pixlrMouseMoved(with: event)
+        
+        super.mouseMoved(with: event)
+    }
+    
+    override func mouseDown(with event: NSEvent) {
+        self.inputDelegate?.pixlrMouseDown(with: event)
+        
+        super.mouseDown(with: event)
+    }
+    
+    override func mouseUp(with event: NSEvent) {
+        self.inputDelegate?.pixlrMouseUp(with: event)
+        
+        super.mouseUp(with: event)
+    }
+    
+    override func mouseDragged(with event: NSEvent) {
+        self.inputDelegate?.pixlrMouseDragged(with: event)
+        
+        super.mouseDragged(with: event)
+    }
+    
+    override func rightMouseDown(with event: NSEvent) {
+        self.inputDelegate?.pixlrRightMouseDown(with: event)
+        
+        super.rightMouseDown(with: event)
+    }
+    
+    override func rightMouseUp(with event: NSEvent) {
+        self.inputDelegate?.pixlrRightMouseUp(with: event)
+        
+        super.rightMouseUp(with: event)
+    }
+    
+    override func rightMouseDragged(with event: NSEvent) {
+        self.inputDelegate?.pixlrRightMouseDragged(with: event)
+        
+        super.rightMouseDragged(with: event)
+    }
+    
+    // MARK: Keyboard input
+    override func keyDown(with event: NSEvent) {
+        self.inputDelegate?.pixlrKeyDown(with: event)
+        
+        super.keyDown(with: event)
+    }
+    
+    override func keyUp(with event: NSEvent) {
+        self.inputDelegate?.pixlrKeyUp(with: event)
+        
+        super.keyUp(with: event)
+    }
+}
+
 internal class MacMetalViewController: NSViewController {
     // MARK: Properties
-    private var metalView: MTKView!
+    private var metalView: PixlrMTKView!
     private var trackingArea: NSTrackingArea? // for mouse move tracking
     
     private let currentGame: Game
@@ -44,8 +132,9 @@ internal class MacMetalViewController: NSViewController {
         }
         
         let frame = NSRect(origin: .zero, size: mainWindow.frame.size)
-        self.metalView = MTKView(frame: frame, device: defaultMetalDevice)
+        self.metalView = PixlrMTKView(frame: frame, device: defaultMetalDevice)
         self.metalView.delegate = self
+        self.metalView.inputDelegate = self
         self.view = self.metalView
         
         guard let newRenderer = MetalRenderer(metalKitView: self.metalView, targetGameScreenSize: self.targetGameScreenSize) else {
@@ -63,41 +152,38 @@ internal class MacMetalViewController: NSViewController {
         self.graphics = Graphics(renderer: self.renderer)
         
         self.mtkView(self.metalView, drawableSizeWillChange: self.metalView.drawableSize)
-        self.updateMouseTrackingArea(for: self.metalView)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.metalView.becomeFirstResponder()
         
         // start game
         self.currentGame.start()
     }
     
     // MARK: Helpers
-    private func updateMouseTrackingArea(for view: NSView) {
-        if let oldTrackingArea = self.trackingArea {
-            view.removeTrackingArea(oldTrackingArea)
-        }
-        
-        let options: NSTrackingArea.Options = [.mouseEnteredAndExited, .mouseMoved, .activeInKeyWindow]
-        let newTrackingArea = NSTrackingArea(rect: self.view.bounds, options: options, owner: self, userInfo: nil)
-        
-        view.addTrackingArea(newTrackingArea)
-        
-        self.trackingArea = newTrackingArea
-    }
-    
-    private func nsEventToMouseState(_ event: NSEvent) -> Mouse {
+    private func nsEventToMouseState(_ event: NSEvent) -> Mouse? {
         let realSize = Size(cgSize: self.metalView.bounds.size)
         let gameSize = self.currentGame.screenSize
         let widthFactor = gameSize.width / realSize.width
         let heightFactor = gameSize.height / realSize.height
         
-        // scale & transform touch locations to target game resolution
         var uiPosition = event.locationInWindow
+        
+        // limit mouse tracking to our viewport
+        if uiPosition.x < 0.0 || uiPosition.x > self.metalView.bounds.width {
+            return nil
+        }
+        if uiPosition.y < 0.0 || uiPosition.y > self.metalView.bounds.height {
+            return nil
+        }
+        
+        // scale & transform touch locations to target game resolution
         uiPosition.x *= CGFloat(widthFactor)
         uiPosition.y *= CGFloat(heightFactor)
-
+        
         let position = Point(cgPoint: uiPosition)
         
         let buttonsState: [Mouse.Button: Mouse.ClickState] = [
@@ -108,47 +194,59 @@ internal class MacMetalViewController: NSViewController {
         return Mouse(position: position, state: buttonsState)
     }
     
-    // MARK: Handling touch input
-    override func mouseMoved(with event: NSEvent) {
-        self.currentGame.onMouseMove(mouse: self.nsEventToMouseState(event))
-        
-        super.mouseMoved(with: event)
+
+// MARK: - PixlrMTKViewInputDelegate functions
+extension MacMetalViewController: PixlrMTKViewInputDelegate {
+    // MARK: Handling mouse input
+    func pixlrMouseMoved(with event: NSEvent) {
+        if let mouseState = self.nsEventToMouseState(event) {
+            self.currentGame.onMouseMove(mouse: mouseState)
+        }
     }
     
-    override func mouseDown(with event: NSEvent) {
-        self.currentGame.onMouseClick(mouse: self.nsEventToMouseState(event))
-        
-        super.mouseDown(with: event)
+    func pixlrMouseDown(with event: NSEvent) {
+        if let mouseState = self.nsEventToMouseState(event) {
+            self.currentGame.onMouseClick(mouse: mouseState)
+        }
     }
     
-    override func mouseUp(with event: NSEvent) {
-        self.currentGame.onMouseClick(mouse: self.nsEventToMouseState(event))
-        
-        super.mouseUp(with: event)
+    func pixlrMouseUp(with event: NSEvent) {
+        if let mouseState = self.nsEventToMouseState(event) {
+            self.currentGame.onMouseClick(mouse: mouseState)
+        }
     }
     
-    override func mouseDragged(with event: NSEvent) {
-        self.currentGame.onMouseMove(mouse: self.nsEventToMouseState(event))
-        
-        super.mouseDragged(with: event)
+    func pixlrMouseDragged(with event: NSEvent) {
+        if let mouseState = self.nsEventToMouseState(event) {
+            self.currentGame.onMouseMove(mouse: mouseState)
+        }
     }
     
-    override func rightMouseDown(with event: NSEvent) {
-        self.currentGame.onMouseClick(mouse: self.nsEventToMouseState(event))
-        
-        super.rightMouseDown(with: event)
+    func pixlrRightMouseDown(with event: NSEvent) {
+        if let mouseState = self.nsEventToMouseState(event) {
+            self.currentGame.onMouseClick(mouse: mouseState)
+        }
     }
     
-    override func rightMouseUp(with event: NSEvent) {
-        self.currentGame.onMouseClick(mouse: self.nsEventToMouseState(event))
-        
-        super.rightMouseUp(with: event)
+    func pixlrRightMouseUp(with event: NSEvent) {
+        if let mouseState = self.nsEventToMouseState(event) {
+            self.currentGame.onMouseClick(mouse: mouseState)
+        }
     }
     
-    override func rightMouseDragged(with event: NSEvent) {
-        self.currentGame.onMouseMove(mouse: self.nsEventToMouseState(event))
-        
-        super.rightMouseDragged(with: event)
+    func pixlrRightMouseDragged(with event: NSEvent) {
+        if let mouseState = self.nsEventToMouseState(event) {
+            self.currentGame.onMouseMove(mouse: mouseState)
+        }
+    }
+    
+    // MARK: Handling keyboard input
+    func pixlrKeyDown(with event: NSEvent) {
+        // TODO
+    }
+    
+    func pixlrKeyUp(with event: NSEvent) {
+        // TODO
     }
 }
 
@@ -172,8 +270,6 @@ extension MacMetalViewController: MTKViewDelegate {
         self.currentGame.screenSize = gameSize
         
         self.renderer.viewportWillChange(realSize: realSize, gameSize: gameSize)
-        
-        self.updateMouseTrackingArea(for: view)
     }
     
     func draw(in view: MTKView) {
