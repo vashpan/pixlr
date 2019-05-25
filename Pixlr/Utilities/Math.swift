@@ -118,6 +118,10 @@ public struct Vector2 {
         return -self
     }
     
+    public var rounded: Vector2 {
+        return Vector2(self.x.rounded(), self.y.rounded())
+    }
+    
     // MARK: Initialization
     public init(x: Float, y: Float) {
         self.x = x
@@ -152,6 +156,11 @@ public struct Vector2 {
     
     public func cross(_ v: Vector2) -> Float {
         return self.x * v.y - self.y * v.x
+    }
+    
+    public mutating func round() {
+        self.x.round()
+        self.y.round()
     }
     
     public mutating func normalize() {
