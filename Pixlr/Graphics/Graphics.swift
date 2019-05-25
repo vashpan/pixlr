@@ -36,7 +36,7 @@ public class Graphics {
         let pivotInPoints = Vector2(x: pivot.x * size.width * scale.x, y: pivot.y * size.height * scale.y)
         
         // translate + rotation
-        var transform = Matrix3(translation: origin) * Matrix3(rotation: rotation)
+        var transform = Matrix3(translation: origin.rounded) * Matrix3(rotation: rotation)
         
         // move by pivot after rotation
         transform = transform * Matrix3(translation: -pivotInPoints)
