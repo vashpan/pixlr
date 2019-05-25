@@ -42,57 +42,39 @@ private class PixlrMTKView: MTKView {
     // MARK: Mouse input
     override func mouseMoved(with event: NSEvent) {
         self.inputDelegate?.pixlrMouseMoved(with: event)
-        
-        super.mouseMoved(with: event)
     }
     
     override func mouseDown(with event: NSEvent) {
         self.inputDelegate?.pixlrMouseDown(with: event)
-        
-        super.mouseDown(with: event)
     }
     
     override func mouseUp(with event: NSEvent) {
         self.inputDelegate?.pixlrMouseUp(with: event)
-        
-        super.mouseUp(with: event)
     }
     
     override func mouseDragged(with event: NSEvent) {
         self.inputDelegate?.pixlrMouseDragged(with: event)
-        
-        super.mouseDragged(with: event)
     }
     
     override func rightMouseDown(with event: NSEvent) {
         self.inputDelegate?.pixlrRightMouseDown(with: event)
-        
-        super.rightMouseDown(with: event)
     }
     
     override func rightMouseUp(with event: NSEvent) {
         self.inputDelegate?.pixlrRightMouseUp(with: event)
-        
-        super.rightMouseUp(with: event)
     }
     
     override func rightMouseDragged(with event: NSEvent) {
         self.inputDelegate?.pixlrRightMouseDragged(with: event)
-        
-        super.rightMouseDragged(with: event)
     }
     
     // MARK: Keyboard input
     override func keyDown(with event: NSEvent) {
         self.inputDelegate?.pixlrKeyDown(with: event)
-        
-        super.keyDown(with: event)
     }
     
     override func keyUp(with event: NSEvent) {
         self.inputDelegate?.pixlrKeyUp(with: event)
-        
-        super.keyUp(with: event)
     }
 }
 
