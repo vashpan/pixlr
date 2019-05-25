@@ -194,6 +194,35 @@ internal class MacMetalViewController: NSViewController {
         return Mouse(position: position, state: buttonsState)
     }
     
+    private func nsEventToKeyState(_ event: NSEvent, state: Key.State) -> Key {
+        // handle modifiers
+        var modifiers = [Key.Code]()
+
+        if event.modifierFlags.contains(.command) {
+            modifiers.append(.command)
+        }
+        if event.modifierFlags.contains(.control) {
+            modifiers.append(.control)
+        }
+        if event.modifierFlags.contains(.shift) {
+            modifiers.append(.shift)
+        }
+        if event.modifierFlags.contains(.option) {
+            modifiers.append(.alt)
+        }
+        if event.modifierFlags.contains(.capsLock) {
+            modifiers.append(.capsLock)
+        }
+        if event.modifierFlags.contains(.function) {
+            modifiers.append(.fn)
+        }
+
+        // handle main key scan code
+        let code = MacKeyMapping.macKeyCodeToPixlrKeyCode(macKeyCode: event.keyCode)
+        
+        return Key(code: code, modifiers: modifiers, state: state)
+    }
+}
 
 // MARK: - PixlrMTKViewInputDelegate functions
 extension MacMetalViewController: PixlrMTKViewInputDelegate {
@@ -242,11 +271,13 @@ extension MacMetalViewController: PixlrMTKViewInputDelegate {
     
     // MARK: Handling keyboard input
     func pixlrKeyDown(with event: NSEvent) {
-        // TODO
+        let key = nsEventToKeyState(event, state: .down)
+        self.currentGame.onKey(key: key)
     }
     
     func pixlrKeyUp(with event: NSEvent) {
-        // TODO
+        let key = nsEventToKeyState(event, state: .up)
+        self.currentGame.onKey(key: key)
     }
 }
 

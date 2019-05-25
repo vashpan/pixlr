@@ -39,6 +39,7 @@
 		7152A60E22873B76000F2DA1 /* Touch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7152A60C22873B76000F2DA1 /* Touch.swift */; };
 		7152A6102288347F000F2DA1 /* Mouse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7152A60F2288347F000F2DA1 /* Mouse.swift */; };
 		7152A6112288347F000F2DA1 /* Mouse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7152A60F2288347F000F2DA1 /* Mouse.swift */; };
+		71537BA822918ADA0067AEB4 /* MacKeyMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 71537BA722918ADA0067AEB4 /* MacKeyMapping.swift */; };
 		715FECD321713BEE009AE9B1 /* Game.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715FECD221713BEE009AE9B1 /* Game.swift */; };
 		715FECE521714A8F009AE9B1 /* Platform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715FECE421714A8F009AE9B1 /* Platform.swift */; };
 		715FECE721714B12009AE9B1 /* MacOSPlatform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715FECE621714B12009AE9B1 /* MacOSPlatform.swift */; };
@@ -91,6 +92,7 @@
 		7152A5AB227E1CF8000F2DA1 /* Pixlr.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pixlr.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7152A60C22873B76000F2DA1 /* Touch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Touch.swift; sourceTree = "<group>"; };
 		7152A60F2288347F000F2DA1 /* Mouse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mouse.swift; sourceTree = "<group>"; };
+		71537BA722918ADA0067AEB4 /* MacKeyMapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacKeyMapping.swift; sourceTree = "<group>"; };
 		715FECD221713BEE009AE9B1 /* Game.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Game.swift; sourceTree = "<group>"; };
 		715FECE421714A8F009AE9B1 /* Platform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Platform.swift; sourceTree = "<group>"; };
 		715FECE621714B12009AE9B1 /* MacOSPlatform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MacOSPlatform.swift; sourceTree = "<group>"; };
@@ -193,6 +195,7 @@
 				715FECEC21720797009AE9B1 /* PixlrMacApplication.swift */,
 				717356A7226B6DAF004995FF /* PixlrMacAppDelegate.swift */,
 				715FECE621714B12009AE9B1 /* MacOSPlatform.swift */,
+				71537BA722918ADA0067AEB4 /* MacKeyMapping.swift */,
 			);
 			path = macOS;
 			sourceTree = "<group>";
@@ -529,6 +532,7 @@
 				71CD215321B1A4540082E5B7 /* SpritesSheet.swift in Sources */,
 				71CD213C21A1C49A0082E5B7 /* Pixel.swift in Sources */,
 				715FECE521714A8F009AE9B1 /* Platform.swift in Sources */,
+				71537BA822918ADA0067AEB4 /* MacKeyMapping.swift in Sources */,
 				71CD213521A1AC000082E5B7 /* MetalRenderer.swift in Sources */,
 				71CD215121B1A38A0082E5B7 /* Resources.swift in Sources */,
 				71DF28EC21E40F9C00507A85 /* Color+Apple.swift in Sources */,
