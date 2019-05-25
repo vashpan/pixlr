@@ -52,7 +52,7 @@ open class Game: NSObject {
         
     }
     
-    open func onKey(keys: [Key]) {
+    open func onKey(key: Key) {
         
     }
     
