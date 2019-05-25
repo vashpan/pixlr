@@ -220,7 +220,7 @@ internal class MacMetalViewController: NSViewController {
         // handle main key scan code
         let code = MacKeyMapping.macKeyCodeToPixlrKeyCode(macKeyCode: event.keyCode)
         
-        return Key(code: code, modifiers: modifiers, state: state)
+        return Key(code: code, character: event.characters?.first, modifiers: modifiers, state: state)
     }
 }
 

@@ -33,12 +33,11 @@ public struct Key {
         case keypadZero, keypadOne, keypadTwo, keypadThree, keypadFour, keypadFive, keypadSix, keypadSeven, keypadEight, keypadNine
         
         case unknown
-        
-        // FIXME: add more (?)
     }
     
     // MARK: Properties
     public let code: Code
+    public let character: Character?
     public let modifiers: [Code]
     public let state: State
 }
