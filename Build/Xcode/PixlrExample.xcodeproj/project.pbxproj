@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		7120985E216EB3AA00D426FC /* Pixlr.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7120985D216EB3AA00D426FC /* Pixlr.framework */; };
+		715095D4229C76BB002539EE /* Pixlr.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7120985D216EB3AA00D426FC /* Pixlr.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		71513EC8222ACE9C00C5A990 /* press-start.json in Resources */ = {isa = PBXBuildFile; fileRef = 71513EC6222ACE9C00C5A990 /* press-start.json */; };
 		71513EC9222ACE9C00C5A990 /* press-start.png in Resources */ = {isa = PBXBuildFile; fileRef = 71513EC7222ACE9C00C5A990 /* press-start.png */; };
 		7152A5EC227E2193000F2DA1 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715FECD021713991009AE9B1 /* main.swift */; };
@@ -28,6 +29,17 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		715095D5229C76BB002539EE /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				715095D4229C76BB002539EE /* Pixlr.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7152A604227E25CC000F2DA1 /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
@@ -153,6 +165,7 @@
 				71209840216EB2CE00D426FC /* Sources */,
 				71209841216EB2CE00D426FC /* Frameworks */,
 				71209842216EB2CE00D426FC /* Resources */,
+				715095D5229C76BB002539EE /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
