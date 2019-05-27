@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		7120985E216EB3AA00D426FC /* Pixlr.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7120985D216EB3AA00D426FC /* Pixlr.framework */; };
 		715095D4229C76BB002539EE /* Pixlr.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 7120985D216EB3AA00D426FC /* Pixlr.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		715095DA229C86C6002539EE /* Resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715095D9229C86C6002539EE /* Resources.swift */; };
+		715095DB229C86C6002539EE /* Resources.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715095D9229C86C6002539EE /* Resources.swift */; };
 		71513EC8222ACE9C00C5A990 /* press-start.json in Resources */ = {isa = PBXBuildFile; fileRef = 71513EC6222ACE9C00C5A990 /* press-start.json */; };
 		71513EC9222ACE9C00C5A990 /* press-start.png in Resources */ = {isa = PBXBuildFile; fileRef = 71513EC7222ACE9C00C5A990 /* press-start.png */; };
 		7152A5EC227E2193000F2DA1 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715FECD021713991009AE9B1 /* main.swift */; };
@@ -58,6 +60,7 @@
 		71209855216EB2CF00D426FC /* Info-macOS.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Info-macOS.plist"; sourceTree = "<group>"; };
 		71209856216EB2CF00D426FC /* PixlrExample.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = PixlrExample.entitlements; sourceTree = "<group>"; };
 		7120985D216EB3AA00D426FC /* Pixlr.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pixlr.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		715095D9229C86C6002539EE /* Resources.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Resources.swift; sourceTree = "<group>"; };
 		71513EC6222ACE9C00C5A990 /* press-start.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "press-start.json"; sourceTree = "<group>"; };
 		71513EC7222ACE9C00C5A990 /* press-start.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "press-start.png"; sourceTree = "<group>"; };
 		7152A592227D9829000F2DA1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -113,14 +116,9 @@
 		71209846216EB2CE00D426FC /* PixlrExample */ = {
 			isa = PBXGroup;
 			children = (
-				7152A58B227A3E6B000F2DA1 /* iOS */,
-				7152A58A227A3E64000F2DA1 /* macOS */,
+				715095D7229C7EE0002539EE /* Sources */,
+				715095D6229C7DB2002539EE /* Resources */,
 				715FECD021713991009AE9B1 /* main.swift */,
-				716DDCCA21CD91D700762E47 /* sad-face.png */,
-				715EE461221E09EA001C4E12 /* happy-face.png */,
-				715EE463221E09F0001C4E12 /* dodger-face.png */,
-				71513EC6222ACE9C00C5A990 /* press-start.json */,
-				71513EC7222ACE9C00C5A990 /* press-start.png */,
 			);
 			name = PixlrExample;
 			path = ../../PixlrExample;
@@ -133,6 +131,36 @@
 				7120985D216EB3AA00D426FC /* Pixlr.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		715095D6229C7DB2002539EE /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				7152A58B227A3E6B000F2DA1 /* iOS */,
+				7152A58A227A3E64000F2DA1 /* macOS */,
+				716DDCCA21CD91D700762E47 /* sad-face.png */,
+				715EE461221E09EA001C4E12 /* happy-face.png */,
+				715EE463221E09F0001C4E12 /* dodger-face.png */,
+				71513EC6222ACE9C00C5A990 /* press-start.json */,
+				71513EC7222ACE9C00C5A990 /* press-start.png */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		715095D7229C7EE0002539EE /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				715095D8229C86A4002539EE /* Utilities */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		715095D8229C86A4002539EE /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				715095D9229C86C6002539EE /* Resources.swift */,
+			);
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 		7152A58A227A3E64000F2DA1 /* macOS */ = {
@@ -268,6 +296,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				715FECD121713991009AE9B1 /* main.swift in Sources */,
+				715095DA229C86C6002539EE /* Resources.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -276,6 +305,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7152A5EC227E2193000F2DA1 /* main.swift in Sources */,
+				715095DB229C86C6002539EE /* Resources.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -400,12 +430,12 @@
 		7120985A216EB2CF00D426FC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-3";
-				CODE_SIGN_ENTITLEMENTS = "$(SRCROOT)/../../PixlrExample/macOS/PixlrExample.entitlements";
+				ASSETCATALOG_COMPILER_APPICON_NAME = MacAppIcon;
+				CODE_SIGN_ENTITLEMENTS = "$(SRCROOT)/../../PixlrExample/Resources/macOS/PixlrExample.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 3DS5SGYDG6;
-				INFOPLIST_FILE = "$(SRCROOT)/../../PixlrExample/macOS/Info-macOS.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/../../PixlrExample/Resources/macOS/Info-macOS.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -419,12 +449,12 @@
 		7120985B216EB2CF00D426FC /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-3";
-				CODE_SIGN_ENTITLEMENTS = "$(SRCROOT)/../../PixlrExample/macOS/PixlrExample.entitlements";
+				ASSETCATALOG_COMPILER_APPICON_NAME = MacAppIcon;
+				CODE_SIGN_ENTITLEMENTS = "$(SRCROOT)/../../PixlrExample/Resources/macOS/PixlrExample.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 3DS5SGYDG6;
-				INFOPLIST_FILE = "$(SRCROOT)/../../PixlrExample/macOS/Info-macOS.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/../../PixlrExample/Resources/macOS/Info-macOS.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
@@ -442,7 +472,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3DS5SGYDG6;
-				INFOPLIST_FILE = "$(SRCROOT)/../../PixlrExample/iOS/Info-iOS.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/../../PixlrExample/Resources/iOS/Info-iOS.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -463,7 +493,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 3DS5SGYDG6;
-				INFOPLIST_FILE = "$(SRCROOT)/../../PixlrExample/iOS/Info-iOS.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/../../PixlrExample/Resources/iOS/Info-iOS.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
