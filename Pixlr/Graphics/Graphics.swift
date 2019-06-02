@@ -47,7 +47,7 @@ public class Graphics {
         return transform
     }
     
-    public func textSize(text: String, using fontId: FontId, scale: Vector2 = Vector2(1.0)) -> Size {
+    public static func textSize(text: String, using fontId: FontId, scale: Vector2 = Vector2(1.0)) -> Size {
         guard let font = Resources.shared.font(from: fontId) else {
             Log.graphics.error("Cannot find font \(fontId) ")
             return .zero

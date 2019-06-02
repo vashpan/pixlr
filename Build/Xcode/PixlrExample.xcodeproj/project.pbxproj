@@ -17,6 +17,8 @@
 		715095E2229DE6D4002539EE /* Director.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715095E0229DE6D4002539EE /* Director.swift */; };
 		715095E422A068B8002539EE /* MainScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715095E322A068B8002539EE /* MainScene.swift */; };
 		715095E522A068B8002539EE /* MainScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715095E322A068B8002539EE /* MainScene.swift */; };
+		715095E722A45731002539EE /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715095E622A45731002539EE /* Button.swift */; };
+		715095E822A45731002539EE /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715095E622A45731002539EE /* Button.swift */; };
 		71513EC8222ACE9C00C5A990 /* press-start.json in Resources */ = {isa = PBXBuildFile; fileRef = 71513EC6222ACE9C00C5A990 /* press-start.json */; };
 		71513EC9222ACE9C00C5A990 /* press-start.png in Resources */ = {isa = PBXBuildFile; fileRef = 71513EC7222ACE9C00C5A990 /* press-start.png */; };
 		7152A5EC227E2193000F2DA1 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715FECD021713991009AE9B1 /* main.swift */; };
@@ -70,6 +72,7 @@
 		715095DD229DE04C002539EE /* Scene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scene.swift; sourceTree = "<group>"; };
 		715095E0229DE6D4002539EE /* Director.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Director.swift; sourceTree = "<group>"; };
 		715095E322A068B8002539EE /* MainScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScene.swift; sourceTree = "<group>"; };
+		715095E622A45731002539EE /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
 		71513EC6222ACE9C00C5A990 /* press-start.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "press-start.json"; sourceTree = "<group>"; };
 		71513EC7222ACE9C00C5A990 /* press-start.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "press-start.png"; sourceTree = "<group>"; };
 		7152A592227D9829000F2DA1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -171,6 +174,7 @@
 			children = (
 				715095DD229DE04C002539EE /* Scene.swift */,
 				715095E0229DE6D4002539EE /* Director.swift */,
+				715095E622A45731002539EE /* Button.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -316,6 +320,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				715FECD121713991009AE9B1 /* main.swift in Sources */,
+				715095E722A45731002539EE /* Button.swift in Sources */,
 				715095E1229DE6D4002539EE /* Director.swift in Sources */,
 				715095DA229C86C6002539EE /* Resources.swift in Sources */,
 				715095E422A068B8002539EE /* MainScene.swift in Sources */,
@@ -328,6 +333,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7152A5EC227E2193000F2DA1 /* main.swift in Sources */,
+				715095E822A45731002539EE /* Button.swift in Sources */,
 				715095E2229DE6D4002539EE /* Director.swift in Sources */,
 				715095DB229C86C6002539EE /* Resources.swift in Sources */,
 				715095E522A068B8002539EE /* MainScene.swift in Sources */,
