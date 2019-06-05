@@ -15,12 +15,18 @@ import Pixlr
 
 final class Button {
     // MARK: Types
+    private enum State {
+        case normal, pressed
+    }
+    
     typealias ButtonEvent = (Button) -> Void
     
     // MARK: Properties
     private let position: Point
     private let size: Size
     private let text: String
+    
+    private var state: State
     
     var event: ButtonEvent?
     
@@ -29,6 +35,8 @@ final class Button {
         self.position = position
         self.text = text
         self.size = Graphics.textSize(text: self.text, using: FontIds.pressStart)
+        
+        self.state = .normal
     }
     
     // MARK: Helpers
@@ -42,26 +50,65 @@ final class Button {
         return false
     }
     
+    private func textColor(for state: State) -> Color {
+        return state == .normal ? .white : .black
+    }
+    
     // MARK: Drawing
     func draw(on gfx: Graphics) {
-        // box
-        let boxPosition = Point(x: self.position.x - 1.0, y: self.position.y - 1.0)
-        gfx.draw(image: SpriteIds.whiteBox, at: boxPosition, pivot: .zero, scale: Vector2(x: (self.size.width + 4.0) / 8.0, y: 1))
+        // box (if needed)
+        if self.state == .pressed {
+            let boxPosition = Point(x: self.position.x - 1.0, y: self.position.y - 1.0)
+            gfx.draw(image: SpriteIds.whiteBox, at: boxPosition, pivot: .zero, scale: Vector2(x: (self.size.width + 4.0) / 8.0, y: 1))
+        }
         
         // text
-        gfx.draw(text: self.text, using: FontIds.pressStart, at: self.position, color: .black)
+        gfx.draw(text: self.text, using: FontIds.pressStart, at: self.position, color: self.textColor(for: self.state))
     }
     
     // MARK: Input
     func onTouch(touch: Touch) {
         if self.hitTest(point: touch.position) {
-            self.event?(self)
+            switch touch.state {
+                case .began:
+                    self.state = .pressed
+                case .ended:
+                    if self.state == .pressed {
+                        self.event?(self)
+                        self.state = .normal
+                    }
+                default:
+                    break
+            }
+        } else {
+            self.state = .normal // cancel if we moved out of hit box
         }
     }
     
     func onMouseClick(mouse: Mouse) {
-        if mouse.clickState(for: .left) == .down && self.hitTest(point: mouse.position) {
-            self.event?(self)
+        if self.hitTest(point: mouse.position) {
+            switch mouse.clickState(for: .left) {
+                case .down:
+                    self.state = .pressed
+                case .up:
+                    if self.state == .pressed {
+                        self.event?(self)
+                        self.state = .normal
+                    }
+            }
+        } else {
+            self.state = .normal // cancel if we moved out of hit box
+        }
+    }
+    
+    func onMouseMove(mouse: Mouse) {
+        // cancel if we moved out of hit box
+        if mouse.clickState(for: .left) == .down {
+            if self.hitTest(point: mouse.position) {
+                self.state = .pressed
+            } else {
+                self.state = .normal
+            }
         }
     }
 }

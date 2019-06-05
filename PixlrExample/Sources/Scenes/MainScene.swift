@@ -78,4 +78,10 @@ final class MainScene: Scene {
             button.onMouseClick(mouse: mouse)
         }
     }
+    
+    override func onMouseMove(mouse: Mouse) {
+        for button in self.menu {
+            button.onMouseMove(mouse: mouse)
+        }
+    }
 }
