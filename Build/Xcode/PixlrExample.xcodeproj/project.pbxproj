@@ -19,6 +19,8 @@
 		715095E522A068B8002539EE /* MainScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715095E322A068B8002539EE /* MainScene.swift */; };
 		715095E722A45731002539EE /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715095E622A45731002539EE /* Button.swift */; };
 		715095E822A45731002539EE /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715095E622A45731002539EE /* Button.swift */; };
+		715095EA22A86648002539EE /* white-box.png in Resources */ = {isa = PBXBuildFile; fileRef = 715095E922A86648002539EE /* white-box.png */; };
+		715095EB22A86648002539EE /* white-box.png in Resources */ = {isa = PBXBuildFile; fileRef = 715095E922A86648002539EE /* white-box.png */; };
 		71513EC8222ACE9C00C5A990 /* press-start.json in Resources */ = {isa = PBXBuildFile; fileRef = 71513EC6222ACE9C00C5A990 /* press-start.json */; };
 		71513EC9222ACE9C00C5A990 /* press-start.png in Resources */ = {isa = PBXBuildFile; fileRef = 71513EC7222ACE9C00C5A990 /* press-start.png */; };
 		7152A5EC227E2193000F2DA1 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 715FECD021713991009AE9B1 /* main.swift */; };
@@ -73,6 +75,7 @@
 		715095E0229DE6D4002539EE /* Director.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Director.swift; sourceTree = "<group>"; };
 		715095E322A068B8002539EE /* MainScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScene.swift; sourceTree = "<group>"; };
 		715095E622A45731002539EE /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
+		715095E922A86648002539EE /* white-box.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "white-box.png"; sourceTree = "<group>"; };
 		71513EC6222ACE9C00C5A990 /* press-start.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "press-start.json"; sourceTree = "<group>"; };
 		71513EC7222ACE9C00C5A990 /* press-start.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "press-start.png"; sourceTree = "<group>"; };
 		7152A592227D9829000F2DA1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -153,6 +156,7 @@
 				716DDCCA21CD91D700762E47 /* sad-face.png */,
 				715EE461221E09EA001C4E12 /* happy-face.png */,
 				715EE463221E09F0001C4E12 /* dodger-face.png */,
+				715095E922A86648002539EE /* white-box.png */,
 				71513EC6222ACE9C00C5A990 /* press-start.json */,
 				71513EC7222ACE9C00C5A990 /* press-start.png */,
 			);
@@ -294,6 +298,7 @@
 				715FECE92171FE39009AE9B1 /* Assets.xcassets in Resources */,
 				716DDCCB21CD91D700762E47 /* sad-face.png in Resources */,
 				715EE464221E09F0001C4E12 /* dodger-face.png in Resources */,
+				715095EA22A86648002539EE /* white-box.png in Resources */,
 				71513EC9222ACE9C00C5A990 /* press-start.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -309,6 +314,7 @@
 				7152A5F3227E21B1000F2DA1 /* LaunchScreen.storyboard in Resources */,
 				7152A5F2227E21A8000F2DA1 /* Assets.xcassets in Resources */,
 				7152A5EF227E2199000F2DA1 /* dodger-face.png in Resources */,
+				715095EB22A86648002539EE /* white-box.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

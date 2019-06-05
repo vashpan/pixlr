@@ -44,7 +44,12 @@ final class Button {
     
     // MARK: Drawing
     func draw(on gfx: Graphics) {
-        gfx.draw(text: self.text, using: FontIds.pressStart, at: self.position)
+        // box
+        let boxPosition = Point(x: self.position.x - 1.0, y: self.position.y - 1.0)
+        gfx.draw(image: SpriteIds.whiteBox, at: boxPosition, pivot: .zero, scale: Vector2(x: (self.size.width + 4.0) / 8.0, y: 1))
+        
+        // text
+        gfx.draw(text: self.text, using: FontIds.pressStart, at: self.position, color: .black)
     }
     
     // MARK: Input

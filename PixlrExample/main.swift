@@ -28,6 +28,7 @@ final class PixlrExamples: Game {
         super.start()
 
         Resources.shared.loadFont(named: "press-start", into: FontIds.pressStart)
+        Resources.shared.loadImage(named: "white-box", into: SpriteIds.whiteBox)
         
         Director.shared.start(with: MainScene(), game: self)
     }

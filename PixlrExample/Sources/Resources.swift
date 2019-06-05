@@ -13,6 +13,7 @@ struct SpriteIds {
     static let sadFace = ImageId(0)
     static let happyFace = ImageId(1)
     static let dodgerFace = ImageId(2)
+    static let whiteBox = ImageId(3)
 }
 
 struct FontIds {
